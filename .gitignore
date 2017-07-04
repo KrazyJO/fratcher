@@ -1,3 +1,10 @@
 /target/
 /.classpath
 /.project
+
+# Generated webpack, npm and resource files.
+src/main/frontend/node_modules
+src/main/frontend/node
+src/main/frontend/etc
+src/main/frontend/bundle.*
+src/main/resources/public
