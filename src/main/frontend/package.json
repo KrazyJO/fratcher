@@ -24,6 +24,8 @@
     "i18next-xhr-backend": "^1.4.2",
     "react": "15.6.1",
     "react-dom": "15.6.1",
-    "react-i18next": "^4.6.2"
+    "react-i18next": "^4.6.2",
+    "react-router": "^4.1.1",
+    "react-router-dom": "^4.1.1"
   }
 }

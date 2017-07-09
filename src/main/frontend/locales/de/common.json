@@ -1,3 +1,4 @@
 {
-  "firstComp": "Dies ist die Standard Componente für den Ausgeloggten Zustand garnantiert mir Rechtschreibfehlern...!"
+  "firstComp": "Dies ist die Standard Componente für den Ausgeloggten Zustand garnantiert mir Rechtschreibfehlern...!",
+  "matcherComp" : "Dies ist die Matcher Componente"
 }
