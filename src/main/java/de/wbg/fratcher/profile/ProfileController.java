@@ -23,4 +23,9 @@ public class ProfileController {
 		profileService.addProfile(p);
 	}
 	
+	@RequestMapping(value = "/api/profile/{id}", method = RequestMethod.POST)
+	public void editProfile(@RequestBody Profile p)
+	{
+		
+	}
 }
