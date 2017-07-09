@@ -13,7 +13,7 @@ class Matcher extends React.Component {
     	const {t} = this.props;
 
     	return (
-    			<div>{t('matcherComp')} m</div>
+    			<div className="component">{t('matcherComp')} m</div>
     	);
     }
 }

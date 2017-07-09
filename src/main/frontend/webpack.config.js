@@ -13,8 +13,7 @@ module.exports = {
     },
     plugins: [
         new CopyWebpackPlugin([
-            {from: 'assets/**/*'},
-            {from: 'css/**/*'},
+            {from: 'resources/**/*'},
             {from: 'locales/**/*'},
             {from: 'index.html'}
         ])

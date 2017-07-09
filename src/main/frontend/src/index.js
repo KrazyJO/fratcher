@@ -12,41 +12,35 @@ import {Link} from "react-router-dom";
 //own component
 import LoggedOut from './components/LoggedOut';
 import Matcher from './components/Matcher';
+import Navigator from './components/Navigator';
 
-//class Root extends React.Component {
-//    constructor(props) {
-//        super(props);
-//        // Force initialization of the object.
-//    }
-//
-//    render() {
-//        return (
-//            <div>
-//				<hr/>
-//                <Switch>
-//                    <Route path="/matcher" component={Matcher}/>
-//
-//                    {/*Default route*/}
-//                    <Route path="/" component={LoggedOut}/>
-//                </Switch>
-//            </div>
-//        );
-//    }
-//}
+class Root extends React.Component {
+    constructor(props) {
+        super(props);
+        // Force initialization of the object.
+    }
+
+    render() {
+        return (
+            <div>
+	            <Navigator ref={(component) => {
+	                this.nav = component;
+	            }} />
+                <Switch>
+                    <Route path="/matcher" component={Matcher}/>
+
+                    {/*Default route*/}
+                    <Route path="/" component={LoggedOut}/>
+                </Switch>
+            </div>
+        );
+    }
+}
 
 ReactDOM.render(
 	<I18nextProvider i18n={i18n}>
 		<Router>
-			<div>
-				<nav>
-					<li><Link to="/">Home</Link></li>
-					<li><Link to="/matcher">Matcher</Link></li>
-				</nav>
-				<Switch>
-		            <Route path="/matcher" component={Matcher}/>
-		            <Route path="/" component={LoggedOut}/>
-		        </Switch>
-	        </div>
+			<Root />
 		</Router>
     </I18nextProvider>
     ,
