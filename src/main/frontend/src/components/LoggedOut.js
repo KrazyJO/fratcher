@@ -1,4 +1,5 @@
 import React from "react";
+import {translate} from "react-i18next";
 
 class LoggedOut extends React.Component {
     constructor(props) {
@@ -9,10 +10,12 @@ class LoggedOut extends React.Component {
     }
 
     render () {
+    	const {t} = this.props;
+
     	return (
-    			<div>This is the standard logged out component!</div>
+    			<div>{t('firstComp')}</div>
     	);
     }
 }
 
-export default LoggedOut;
+export default translate()(LoggedOut);
