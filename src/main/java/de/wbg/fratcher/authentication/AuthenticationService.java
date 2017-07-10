@@ -43,8 +43,8 @@ public class AuthenticationService {
      * @return a UserToken or null if the credentials are not valid
      */
     public UserToken login(String userName, String password) {
-//        String hashedPassword = hashPassword(password);
-        User user = userService.getUser(userName, password);
+        String hashedPassword = hashPassword(password);
+        User user = userService.getUser(userName, hashedPassword);
         if (user == null) {
             LOG.info("User unable to login. user={}", userName);
             return null;
