@@ -8,6 +8,6 @@ DELETE FROM USER_;
 
 
 -- Insert new users.
-INSERT INTO USER_ (id, email, PASSWORD) VALUES
+INSERT INTO USER_ (id, USER_NAME, PASSWORD) VALUES
   (1, 'bob', 'bar'), 
   (2, 'sally', 'foo');

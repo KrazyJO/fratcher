@@ -14,13 +14,13 @@ public class AuthenticationController {
 	@Autowired AuthenticationService authenticationService;
 	
 	public static class UserLogin {
-        public String email;
+        public String userName;
         public String password;
     }
 	
 	@RequestMapping(value = "/api/user/login", method = RequestMethod.POST)
     public ResponseEntity<AuthenticationService.UserToken> login(@RequestBody UserLogin userLogin) {
-        AuthenticationService.UserToken token = authenticationService.login(userLogin.email, userLogin.password);
+        AuthenticationService.UserToken token = authenticationService.login(userLogin.userName, userLogin.password);
 
         if (token == null) {
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
