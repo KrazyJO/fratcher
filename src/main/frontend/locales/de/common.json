@@ -1,4 +1,8 @@
 {
   "firstComp": "Dies ist die Standard Componente für den Ausgeloggten Zustand garnantiert mir Rechtschreibfehlern...!",
-  "matcherComp" : "Dies ist die Matcher Componente"
+  "matcherComp" : "Dies ist die Matcher Componente",
+  "signIn" : "Anmelden",
+  "signUp" : "Registrieren",
+  "teaser" : "fratcher (Friend mATCHER) hilft Ihnen, neue Bekanntschaften mit Ihren Bedürfnissen zu schließen. Registrieren Sie sich jetzt, um niveauvolle Menschen kennen zu lernen!" 
+  				
 }

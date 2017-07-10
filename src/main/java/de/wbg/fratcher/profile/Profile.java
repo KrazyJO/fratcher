@@ -28,6 +28,10 @@ public class Profile {
 	
 	private String hobbies;
 	
+	private String firstName;
+	
+	private String lastName;
+	
 	public Date getCreatedAt() {
 		return createdAt;
 	}
@@ -52,22 +56,43 @@ public class Profile {
 		return id;
 	}
 	
+	public String getFirstName() {
+		return firstName;
+	}
+	
+	public String getLastName() {
+		return lastName;
+	}
+	
 	public void setCreatedAt(Date createdAt) {
 		this.createdAt = createdAt;
 	}
+	
 	public void setDateOfBirth(Date dateOfBirth) {
 		this.dateOfBirth = dateOfBirth;
 	}
+	
 	public void setDescription(String description) {
 		this.description = description;
 	}
+	
 	public void setGender(Gender gender) {
 		this.gender = gender;
 	}
+	
 	public void setHobbies(String hobbies) {
 		this.hobbies = hobbies;
 	}
+	
 	public void setId(Long id) {
 		this.id = id;
+	}
+	
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+	
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
 	}
 }

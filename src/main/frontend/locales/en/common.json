@@ -1,4 +1,6 @@
 {
   "firstComp": "This is the standard logged out component!22",
-  "matcherComp" : "This is the Matcher Component"
+  "matcherComp" : "This is the Matcher Component",
+  "signIn" : "Sign In",
+  "signUp" : "Sign Up"
 }

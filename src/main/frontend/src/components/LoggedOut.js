@@ -13,7 +13,11 @@ class LoggedOut extends React.Component {
     	const {t} = this.props;
 
     	return (
-    			<div className="component">{t('firstComp')}</div>
+    			<div>
+    				<span className="teaser">{t('teaser')}</span>
+    				<button type="submit" className="btn btn-success btnSignUp">{t('signUp')}</button>
+    			</div>
+    			
     	);
     }
 }
