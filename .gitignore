@@ -8,3 +8,5 @@ src/main/frontend/node
 src/main/frontend/etc
 src/main/frontend/bundle.*
 src/main/resources/public
+/test.mv.db
+/test.trace.db
