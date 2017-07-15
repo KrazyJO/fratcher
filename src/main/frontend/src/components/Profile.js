@@ -25,6 +25,13 @@ class Profile extends React.Component {
         this.handleGenderChange = this.handleGenderChange.bind(this);
     }
     
+    componentWillMount() {
+    	axios.get("/api/profile/1")
+    	.then(({data, status}) => {
+    		console.log(data);
+        });
+    }
+    
     handleGenderChange (event) {
     	this.setState({gender : event.target.value});
     	console.log("handle gender");
