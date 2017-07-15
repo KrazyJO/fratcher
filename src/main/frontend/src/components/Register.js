@@ -3,6 +3,7 @@ import {translate} from "react-i18next";
 
 import axios from "axios";
 import User from "./../Util/User";
+import Events from "pubsub-js";
 
 class Register extends React.Component {
     constructor(props) {
@@ -18,6 +19,9 @@ class Register extends React.Component {
         this.handleuserNameChange = this.handleuserNameChange.bind(this);
         this.handlePasswordChange = this.handlePasswordChange.bind(this);
         this.handlePasswordRepeatChange = this.handlePasswordRepeatChange.bind(this);
+        Events.subscribe("hello", function() {
+        	console.log("hello world from hello event");
+        })
     }
 
     handleSubmit() {
@@ -70,6 +74,7 @@ class Register extends React.Component {
     }
     
     isSubmitActivated () {
+    	Events.publish("hello");
     	return this.state.password && this.state.password === this.state.passwordRepeat && this.state.userName;
     }
     
