@@ -3,6 +3,8 @@ import {translate} from "react-i18next";
 
 import axios from "axios";
 
+import User from "./../Util/User";
+
 class Login extends React.Component {
     constructor(props) {
     	super(props);
@@ -53,6 +55,8 @@ class Login extends React.Component {
                         
 //                        this.props.history.push("/");
                         
+                        User.set(data.user);
+                        this.forceUpdate();
                         
                         console.log("user login successful");
                         break;
@@ -75,20 +79,32 @@ class Login extends React.Component {
 
     render () {
     	const {t} = this.props;
-
+    	let component = null;
+    	if (User.isNotAuthenticated())
+    	{
+    		component = 
+        		<form className="navbar-form navbar-right" onSubmit={this.handleSubmit}>
+    			        <div className="form-group">
+    			        <input type="text" className="form-control" name="username" placeholder={t('user')} value={this.state.userName}
+    			        onChange={this.handleuserNameChange}></input>
+    			    </div>
+    			    <div className="form-group inputPasswd">
+    			        <input type="text" className="form-control" name="password" placeholder={t('password')} value={this.state.password}
+    			        onChange={this.handlePasswordChange}></input>
+    			    </div>
+    			    <button type="submit" className="btn btn-success btnSignIn">{t('signIn')}</button>
+    			</form>	
+    	}
+    	else
+    	{
+    		component = <button className="navbar-right btn btn-danger" >logout</button>
+    	}	
+    	
+    	
     	return (
-    			<form className="navbar-form navbar-right" onSubmit={this.handleSubmit}>
-	                <div className="form-group">
-	                    <input type="text" className="form-control" name="username" placeholder={t('user')} value={this.state.userName}
-	                    onChange={this.handleuserNameChange}></input>
-	                </div>
-	                <div className="form-group inputPasswd">
-	                    <input type="text" className="form-control" name="password" placeholder={t('password')} value={this.state.password}
-	                    onChange={this.handlePasswordChange}></input>
-	                </div>
-	                <button type="submit" className="btn btn-success btnSignIn">{t('signIn')}</button>
-	            </form>
-    			
+    			<div>
+    				{component}
+    			</div>
     	);
     }
 }

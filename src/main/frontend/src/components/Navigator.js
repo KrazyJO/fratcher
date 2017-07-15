@@ -1,5 +1,6 @@
 import React from "react";
 import {Link} from "react-router-dom";
+import User from "./../Util/User";
 
 import Login from "./Login";
 
@@ -41,7 +42,10 @@ class Navigator extends React.Component {
                             <li><Link to="/">Home</Link></li>
                             <li><Link to="/matcher">Matcher</Link></li>
                         </ul>
-                        <Login />
+                        {User.isNotAuthenticated() &&
+                        	<Login />	
+                        }
+                        
                     </div>
                 </div>
             </nav>
