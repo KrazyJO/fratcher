@@ -1,9 +1,13 @@
 package de.wbg.fratcher.user;
 
+import java.util.LinkedList;
+import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -15,6 +19,7 @@ public class User {
 	
 	public User() {
 		this.profile = new Profile();
+		this.friends = new LinkedList<>();
 	}
 	
 	@Id
@@ -29,6 +34,9 @@ public class User {
 	@JsonIgnore
 	private Profile profile;
 	
+	
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<User> friends;
 	
 	public Profile getProfile() {
 		return profile;

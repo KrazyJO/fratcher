@@ -66,17 +66,10 @@ class Login extends React.Component {
 //                        }, {path: '/'});
 
                         // Send event of updated login state.
-//                        this.props.updateAuthentication();
-
-                        // Redirect to front page.
-                        
-                        this.props.history.push("/");
                         User.set(data);
-//                        this.forceUpdate();
                         
                         Events.publish("loggedIn");
-                        
-                        console.log("user login successful");
+                        this.props.history.push("/");
                         break;
 
                     case 401:

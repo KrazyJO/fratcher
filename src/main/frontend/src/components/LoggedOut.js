@@ -22,6 +22,7 @@ class LoggedOut extends React.Component {
     }
     
     render () {
+    	console.log("render loggedout");
     	const {t} = this.props;
 
     	return (
@@ -30,8 +31,18 @@ class LoggedOut extends React.Component {
     					this.isInRegistration() && 
     					<span>Bevor Sie loslegen können, müssen Sie Ihr Profil einrichten.</span>
     				}
-    				<span className="teaser">{t('teaser')}</span>
-    				<button type="submit" onClick={this.onRegisterClicked} className="btn btn-success btnSignUp">{t('signUp')}</button>
+    				{
+    					User.isNotAuthenticated() &&
+    					<div>
+	    					<span className="teaser">{t('teaser')}</span>
+	        				<button type="submit" onClick={this.onRegisterClicked} className="btn btn-success btnSignUp">{t('signUp')}</button>
+    					</div>
+    				}
+    				{
+    					User.isAuthenticated() &&
+    					<span>leg los und finde neue Freunde...</span>
+    				}
+    				
     			</div>
     			
     	);
