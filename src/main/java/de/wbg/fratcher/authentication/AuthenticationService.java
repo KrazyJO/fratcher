@@ -1,6 +1,5 @@
 package de.wbg.fratcher.authentication;
 
-import org.apache.commons.codec.digest.DigestUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import de.wbg.fratcher.user.User;
 import de.wbg.fratcher.user.UserService;
+import de.wbg.fratcher.util.Util;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 
@@ -17,6 +17,8 @@ public class AuthenticationService {
 	
 	private static final Logger LOG = LoggerFactory.getLogger(AuthenticationService.class);
 
+	private Util util = new Util();
+	
     @Autowired
     private UserService userService;
 
@@ -43,7 +45,7 @@ public class AuthenticationService {
      * @return a UserToken or null if the credentials are not valid
      */
     public UserToken login(String userName, String password) {
-        String hashedPassword = hashPassword(password);
+        String hashedPassword = util.hashPassword(password);
         User user = userService.getUser(userName, hashedPassword);
         if (user == null) {
             LOG.info("User unable to login. user={}", userName);
@@ -77,21 +79,5 @@ public class AuthenticationService {
                 .setSigningKey(JWTSecret)
                 .parse(jwtToken)
                 .getBody();
-    }
-
-
-
-
-    /**
-     * Return (salt + password) hashed with SHA-512.
-     *
-     * The salt is configured in the property authenticationService.salt.
-     *
-     * @param password plain text password
-     * @return hashed password
-     */
-    private String hashPassword(String password) {
-        return DigestUtils.sha512Hex(salt + password);
-
     }
 }
