@@ -35,6 +35,7 @@ public class AuthenticationService {
     public static class UserToken {
         public User user;
         public String token;
+        public Long profileId;
     }
 
 
@@ -63,6 +64,7 @@ public class AuthenticationService {
         UserToken userToken = new UserToken();
         userToken.user = user;
         userToken.token = token;
+        userToken.profileId = user.getProfile().getId();
         return userToken;
     }
 

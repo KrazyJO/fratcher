@@ -6,6 +6,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import de.wbg.fratcher.profile.Profile;
 
 @Entity(name = "User_")
@@ -20,10 +22,13 @@ public class User {
 	private Long id;
 	
 	private String userName;
+	@JsonIgnore
 	private String password;
 	
 	@OneToOne(cascade = CascadeType.ALL)
+	@JsonIgnore
 	private Profile profile;
+	
 	
 	public Profile getProfile() {
 		return profile;
