@@ -17,7 +17,8 @@ import de.wbg.fratcher.util.Util;
 @RestController
 public class UserController {
 
-	private Util util = new Util();
+	@Autowired
+	private Util util;
 	
 	@Autowired
 	private UserService userService;
