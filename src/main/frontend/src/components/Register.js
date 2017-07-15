@@ -2,6 +2,7 @@ import React from "react";
 import {translate} from "react-i18next";
 
 import axios from "axios";
+import User from "./../Util/User";
 
 class Register extends React.Component {
     constructor(props) {
@@ -38,8 +39,9 @@ class Register extends React.Component {
         }).then(({data, status}) => {
            switch(status) {
 	           case 200:
-	        	   console.log("user created");
 	        	   this.setState({error : undefined});
+	        	   this.reset();
+	        	   User.set(data.user);
 	           		break;
 	           case 409:
 	        	   this.setState({error : "user alredy exist"});
