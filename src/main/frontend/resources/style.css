@@ -18,3 +18,9 @@ body {
     margin-top: 35px;
     text-align: center;
 }
+.btnSignIn {
+	margin-left: 5px;
+}
+.inputPasswd {
+	margin-left: 1px;
+}

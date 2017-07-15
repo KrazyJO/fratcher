@@ -82,11 +82,11 @@ class Login extends React.Component {
 	                    <input type="text" className="form-control" name="username" placeholder="Username" value={this.state.userName}
 	                    onChange={this.handleuserNameChange}></input>
 	                </div>
-	                <div className="form-group">
+	                <div className="form-group inputPasswd">
 	                    <input type="text" className="form-control" name="password" placeholder="Password" value={this.state.password}
 	                    onChange={this.handlePasswordChange}></input>
 	                </div>
-	                <button type="submit" className="btn btn-success">Sign In</button>
+	                <button type="submit" className="btn btn-success btnSignIn">Sign In</button>
 	            </form>
     			
     	);
