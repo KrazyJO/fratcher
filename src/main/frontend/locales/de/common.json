@@ -6,5 +6,6 @@
   "teaser" : "fratcher (Friend mATCHER) hilft Ihnen, neue Bekanntschaften mit Ihren Bedürfnissen zu schließen. Registrieren Sie sich jetzt, um niveauvolle Menschen kennen zu lernen!", 
   "user"	: "Benutzername",
   "password" : "Passwort",
+  "passwordRepeat" : "Passwort wiederholen",
   "sendSignIn" : "Registrierung Abschicken"
 }
