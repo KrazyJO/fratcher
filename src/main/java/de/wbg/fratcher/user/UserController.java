@@ -4,39 +4,44 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpServletResponseWrapper;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import de.wbg.fratcher.authentication.AuthenticationService;
 import de.wbg.fratcher.util.Util;
 
 @RestController
 public class UserController {
 
-	private class Message { 
-		public String message;
-	}
-	
 	private Util util = new Util();
 	
 	@Autowired
 	private UserService userService;
 	
+	@Autowired
+	private AuthenticationService authenticationService;
+	
 	@RequestMapping(value = "/api/user/create")
-	public ResponseEntity<Message> userCreate(@RequestBody User user, HttpServletResponseWrapper response) 
+	public ResponseEntity<AuthenticationService.UserToken> userCreate(@RequestBody User user, HttpServletResponseWrapper response) 
 	{
+		String unhashedPassword = user.getPassword();
+		user.setPassword(util.hashPassword(user.getPassword()));
 		boolean registered = userService.addUser(user);
-		Message m = new Message();
 		if (!registered)
 		{
-			m.message = "User already created";
-			ResponseEntity<Message> r = new ResponseEntity<Message>(m, HttpStatus.CONFLICT);
-			return r;
+			return new ResponseEntity<>(HttpStatus.CONFLICT);
 		}
-		user.setPassword(util.hashPassword(user.getPassword()));
-		m.message = "User created"; 
-		return ResponseEntity.ok(m);
+		AuthenticationService.UserToken token = authenticationService.login(user.getUserName(), unhashedPassword);
+		if (token == null) {
+			//should not happen...
+            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+        }
+		HttpHeaders headers = new HttpHeaders();
+        headers.add("Set-Cookie", "auth=bearer " + token.token);
+        return new ResponseEntity<>(token,  headers, HttpStatus.OK);
 	}
 }
