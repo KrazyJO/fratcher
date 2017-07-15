@@ -1,7 +1,8 @@
 import React from "react";
 import {Link} from "react-router-dom";
-import User from "./../Util/User";
+import Events from "pubsub-js";
 
+import User from "./../Util/User";
 import Login from "./Login";
 
 class Navigator extends React.Component {
@@ -13,17 +14,13 @@ class Navigator extends React.Component {
 	
 	constructor(props) {
         super(props);
-//        this.state = {
-//            email: '',
-//            password: '',
-//            error: undefined
-//        };
-//
-//        this.handleEmailChange = this.handleEmailChange.bind(this);
-//        this.handlePasswordChange = this.handlePasswordChange.bind(this);
-//        this.handleSubmit = this.handleSubmit.bind(this);
-//        this.handleLogout = this.handleLogout.bind(this);
-//        this.cookies = this.props.cookies;
+        this.state = {};
+    }
+	
+	componentDidMount() {
+    	Events.subscribe("loggedIn", function() {
+    		this.forceUpdate();
+    	}.bind(this));
     }
 	
     render() {
@@ -41,11 +38,12 @@ class Navigator extends React.Component {
                         <ul className="nav navbar-nav">
                             <li><Link to="/">Home</Link></li>
                             <li><Link to="/matcher">Matcher</Link></li>
-                            <li><Link to="/profile">Profil</Link></li>
+                            {User.isAuthenticated() && 
+                            	<li><Link to="/profile">Profil</Link></li>	
+                            }
+                            
                         </ul>
-                        {User.isNotAuthenticated() &&
-                        	<Login />	
-                        }
+                    	<Login />	
                         
                     </div>
                 </div>

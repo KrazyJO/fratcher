@@ -17,7 +17,8 @@ public class AuthenticationService {
 	
 	private static final Logger LOG = LoggerFactory.getLogger(AuthenticationService.class);
 
-	private Util util = new Util();
+	@Autowired
+	private Util util;
 	
     @Autowired
     private UserService userService;

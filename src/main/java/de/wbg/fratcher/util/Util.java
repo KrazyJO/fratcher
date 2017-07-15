@@ -2,7 +2,9 @@ package de.wbg.fratcher.util;
 
 import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Configuration;
 
+@Configuration 
 public class Util {
 
 	@Value("${authenticationService.salt}")

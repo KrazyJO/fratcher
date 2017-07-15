@@ -23,13 +23,14 @@ class Login extends React.Component {
     }
     
     componentDidMount() {
-    	Events.subscribe("loggedIn", function() {
+    	Events.subscribe("loggedInFromRegister", function() {
     		this.forceUpdate();
     	}.bind(this));
     }
     
     onLogoutButtonClicked() {
     	User.reset();
+    	Events.publish("loggedIn");
     	this.forceUpdate();
     }
     
@@ -72,6 +73,8 @@ class Login extends React.Component {
                         
                         User.set(data.user);
                         this.forceUpdate();
+                        
+                        Events.publish("loggedIn");
                         
                         console.log("user login successful");
                         break;
