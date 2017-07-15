@@ -1,10 +1,16 @@
 import React from "react";
 import {translate} from "react-i18next";
 
+import axios from "axios";
+
 class Register extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+        		userName : "",
+        		password : "",
+        		passwordRepeat : "",
+        		submitActivated : false,
         };
         
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -18,20 +24,33 @@ class Register extends React.Component {
     }
     
     handleuserNameChange(event) {
-    	
+    	this.setState({userName: event.target.value});
     }
     
     handlePasswordChange(event) {
-    	
+    	this.setState({password: event.target.value});
+		this.setState({submitActivated : this.isSubmitActivated()});
+		this.forceUpdate();
     }
     
     handlePasswordRepeatChange(event) {
-    	
+    	this.setState({passwordRepeat: event.target.value});
+    	this.setState({submitActivated : this.isSubmitActivated()});
+		this.forceUpdate();
+    }
+    
+    isSubmitActivated () {
+    	return this.state.password && this.state.password === this.state.passwordRepeat && this.state.userName;
     }
     
     render () {
     	const {t} = this.props;
 
+    	let btnSubmitClasses = "width500 btn";
+    	if (this.isSubmitActivated())
+    	{
+    		btnSubmitClasses += " btn-success";
+    	}
     	return (
     			<div className="center width500 main-login main-center">
 	    			<form className="form-horizontal" onSubmit={this.handleSubmit}>
@@ -47,7 +66,7 @@ class Register extends React.Component {
 						    <input className="form-control" type="text" type="password" placeholder={t('passwordRepeat')} value={this.state.passwordRepeat}
 					        	onChange={this.handlePasswordRepeatChange}></input>
 					    </div>
-					    <button type="submit" className="width500 btn btn-success">{t('sendSignIn')}</button>
+					    <button id="btnSendRegister" type="submit" className={btnSubmitClasses} >{t('sendSignIn')}</button>
 			    	</form>	
 			    </div>
     	);
