@@ -12,7 +12,8 @@ class Profile extends React.Component {
         		lastName : "",
         		year : "",
         		over : "",
-        		hobbies : ""        			
+        		hobbies : "",
+        		gender : "2"
         };
         
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -21,6 +22,12 @@ class Profile extends React.Component {
         this.handleYearChange = this.handleYearChange.bind(this);
         this.handleOverChange = this.handleOverChange.bind(this);
         this.handleHobbiesChange = this.handleHobbiesChange.bind(this);
+        this.handleGenderChange = this.handleGenderChange.bind(this);
+    }
+    
+    handleGenderChange (event) {
+    	this.setState({gender : event.target.value});
+    	console.log("handle gender");
     }
     
     handleHobbiesChange (event) {
@@ -58,7 +65,15 @@ class Profile extends React.Component {
     			<div className="width500 center">
     				<span>{User.getUserName()}</span>
     				<form className="form-horizontal" onSubmit={this.handleSubmit}>
-				        <div className="form-group">
+	    				<div className="form-group">
+				        	<label>{t('gender')}*</label>
+					        <select value={this.state.gender} onChange={this.handleGenderChange} className="form-control" type="text">
+					        	<option value="0">Mann</option>
+					        	<option value="1">Frau</option>
+					        	<option value="2">Ungewiss</option>
+					        </select>
+					    </div>
+    					<div className="form-group">
 				        	<label>{t('firstName')}*</label>
 					        <input className="form-control" type="text" value={this.state.firstName}
 					        	onChange={this.handleFirstNameChange}></input>
