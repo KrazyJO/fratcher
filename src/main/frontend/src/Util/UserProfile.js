@@ -13,6 +13,10 @@ class UserProfile {
         this.firstName = data.firstName;
         this.lastName = data.lastName;
         this.gender = data.gender;
+        if (this.gender === null)
+        {
+        	this.gender = 2;
+        }
         this.yearOfBirth = data.yearOfBirth;
         this.description = data.description;
         this.hobbies = data.hobbies;

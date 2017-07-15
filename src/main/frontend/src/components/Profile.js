@@ -102,6 +102,10 @@ class Profile extends React.Component {
     	
     	return (
     			<div className="width500 center">
+    				{
+    					User.isInRegistrationProcess() &&
+    					<span>Nur noch ein Schritt...</span>
+    				}
     				<span>{User.getUserName()}</span>
     				<form className="form-horizontal" onSubmit={this.handleSubmit}>
 	    				<div className="form-group">

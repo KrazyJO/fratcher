@@ -30,6 +30,11 @@ class User {
     	axios.defaults.headers.common['Authorization'] = ``;
         this.userName = undefined;
         this.id = -1;
+        this.inRegistrationProcess = false;
+    }
+    
+    isInRegistrationProcess () {
+    	return this.inRegistrationProcess;
     }
 
     isAuthenticated() {

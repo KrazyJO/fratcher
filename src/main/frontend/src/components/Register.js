@@ -44,7 +44,9 @@ class Register extends React.Component {
 	        	   	this.setState({error : undefined});
 	        	   	this.reset();
 	        	   	User.set(data);
+	        	   	User.inRegistrationProcess = true;
 	        	   	Events.publish("loggedInFromRegister");
+	        	   	this.props.history.push("/profile");
 	           		break;
 	           case 409:
 	        	   this.setState({error : "user alredy exist"});
