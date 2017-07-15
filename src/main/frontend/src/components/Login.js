@@ -47,6 +47,8 @@ class Login extends React.Component {
                     case 200:
 //                        User.setCookieCredentials(data);
                         this.setState({error: undefined});
+                        this.setState({userName : ""});
+                        this.setState({password : ""});
 
                         // Store authentication values even after refresh.
 //                        this.cookies.set('auth', {
@@ -95,7 +97,7 @@ class Login extends React.Component {
     			        onChange={this.handleuserNameChange}></input>
     			    </div>
     			    <div className="form-group inputPasswd">
-    			        <input type="text" className="form-control" name="password" placeholder={t('password')} value={this.state.password}
+    			        <input type="text" className="form-control" type="password" name="password" placeholder={t('password')} value={this.state.password}
     			        onChange={this.handlePasswordChange}></input>
     			    </div>
     			    <button type="submit" className="btn btn-success btnSignIn">{t('signIn')}</button>
