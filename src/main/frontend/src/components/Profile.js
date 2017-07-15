@@ -24,9 +24,22 @@ class Profile extends React.Component {
         this.handleOverChange = this.handleOverChange.bind(this);
         this.handleHobbiesChange = this.handleHobbiesChange.bind(this);
         this.handleGenderChange = this.handleGenderChange.bind(this);
+        this.reset = this.reset.bind(this);
+    }
+    
+    reset () {
+    	this.state = {
+        		firstName : "",
+        		lastName : "",
+        		yearOfBirth : "",
+        		description : "",
+        		hobbies : "",
+        		gender : "2"
+        };
     }
     
     componentWillMount() {
+    	this.reset();
     	let oThis = this; 
     	let iProfileId = User.profileId;
     	if (!iProfileId)
