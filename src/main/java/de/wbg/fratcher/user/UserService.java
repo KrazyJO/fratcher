@@ -15,8 +15,16 @@ public class UserService {
 		return user;
 	}
 	
-	public void addUser(User user)
+	public boolean addUser(User user)
 	{
+		String userName = userRepository.findByUserName(user.getUserName());
+		if (userName != null)
+		{
+			System.out.println("user already registerd");
+			return false;
+		}
+		
 		userRepository.save(user);
+		return true;
 	}
 }
