@@ -3,6 +3,7 @@ import {translate} from "react-i18next";
 
 import axios from "axios";
 import User from "./../Util/User";
+import UserProfile from "./../Util/UserProfile";
 
 class Profile extends React.Component {
     constructor(props) {
@@ -11,7 +12,7 @@ class Profile extends React.Component {
         		firstName : "",
         		lastName : "",
         		year : "",
-        		over : "",
+        		description : "",
         		hobbies : "",
         		gender : "2"
         };
@@ -29,6 +30,7 @@ class Profile extends React.Component {
     	axios.get("/api/profile/1")
     	.then(({data, status}) => {
     		console.log(data);
+    		UserProfile.set(data);
         });
     }
     
@@ -43,7 +45,7 @@ class Profile extends React.Component {
     }
     
     handleOverChange (event) {
-    	this.setState({over : event.target.value});
+    	this.setState({description : event.target.value});
     }
     
     handleYearChange(event) {
@@ -97,7 +99,7 @@ class Profile extends React.Component {
 					    </div>
 					    <div className="form-group">
 				    	<label>{t('overMe')}</label>
-						    <textarea className="textareHobby form-control" type="text" value={this.state.over}
+						    <textarea className="textareHobby form-control" type="text" value={this.state.description}
 					        	onChange={this.handleOverChange}></textarea>
 					    </div>
 					    <div className="form-group">
