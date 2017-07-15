@@ -14,4 +14,9 @@ public class UserService {
 		User user = userRepository.findByUserNameAndPassword(userName, password);
 		return user;
 	}
+	
+	public void addUser(User user)
+	{
+		userRepository.save(user);
+	}
 }
