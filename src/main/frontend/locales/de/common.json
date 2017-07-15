@@ -7,5 +7,6 @@
   "user"	: "Benutzername",
   "password" : "Passwort",
   "passwordRepeat" : "Passwort wiederholen",
-  "sendSignIn" : "Registrierung Abschicken"
+  "sendSignIn" : "Registrierung Abschicken",
+  "profile" : "Profil"
 }

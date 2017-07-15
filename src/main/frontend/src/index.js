@@ -14,6 +14,7 @@ import LoggedOut from './components/LoggedOut';
 import Matcher from './components/Matcher';
 import Navigator from './components/Navigator';
 import Register from './components/Register';
+import Profile from './components/Profile';
 
 class Root extends React.Component {
     constructor(props) {
@@ -31,6 +32,7 @@ class Root extends React.Component {
                     <Route path="/matcher" component={Matcher}/>
 
                     <Route path="/register" component={Register}/>
+                    <Route path="/profile" component={Profile}/>
                     {/*Default route*/}
                     <Route path="/" component={LoggedOut}/>
                 </Switch>

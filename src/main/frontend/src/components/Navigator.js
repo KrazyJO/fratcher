@@ -41,6 +41,7 @@ class Navigator extends React.Component {
                         <ul className="nav navbar-nav">
                             <li><Link to="/">Home</Link></li>
                             <li><Link to="/matcher">Matcher</Link></li>
+                            <li><Link to="/profile">Profil</Link></li>
                         </ul>
                         {User.isNotAuthenticated() &&
                         	<Login />	
