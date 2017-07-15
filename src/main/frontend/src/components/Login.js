@@ -71,7 +71,7 @@ class Login extends React.Component {
                         
 //                        this.props.history.push("/");
                         
-                        User.set(data.user);
+                        User.set(data);
                         this.forceUpdate();
                         
                         Events.publish("loggedIn");

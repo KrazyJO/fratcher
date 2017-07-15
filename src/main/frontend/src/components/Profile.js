@@ -28,7 +28,12 @@ class Profile extends React.Component {
     
     componentWillMount() {
     	let oThis = this; 
-    	axios.get("/api/profile/1")
+    	let iProfileId = User.profileId;
+    	if (!iProfileId)
+    	{
+    		return;
+    	}
+    	axios.get("/api/profile/" + iProfileId)
     	.then(({data, status}) => {
     		console.log(data);
     		UserProfile.set(data);

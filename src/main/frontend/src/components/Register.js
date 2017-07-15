@@ -43,7 +43,7 @@ class Register extends React.Component {
 	           case 200:
 	        	   	this.setState({error : undefined});
 	        	   	this.reset();
-	        	   	User.set(data.user);
+	        	   	User.set(data);
 	        	   	Events.publish("loggedInFromRegister");
 	           		break;
 	           case 409:

@@ -17,8 +17,9 @@ class User {
     }
 
     set(data) {
-        this.userName = data.userName;
-        this.id = data.id;
+        this.userName = data.user.userName;
+        this.id = data.user.id;
+        this.profileId = data.profileId;
     }
     
     getUserName() {
