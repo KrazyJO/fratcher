@@ -17,7 +17,13 @@ class Login extends React.Component {
         this.handleuserNameChange = this.handleuserNameChange.bind(this);
         this.handlePasswordChange = this.handlePasswordChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
-
+        this.onLogoutButtonClicked = this.onLogoutButtonClicked.bind(this);
+        
+    }
+    
+    onLogoutButtonClicked() {
+    	User.reset();
+    	this.forceUpdate();
     }
     
     handleSubmit(event) {
@@ -97,7 +103,7 @@ class Login extends React.Component {
     	}
     	else
     	{
-    		component = <button className="navbar-right btn btn-danger" >logout</button>
+    		component = <button className="navbar-right btn btn-danger" onClick={this.onLogoutButtonClicked}>logout</button>
     	}	
     	
     	

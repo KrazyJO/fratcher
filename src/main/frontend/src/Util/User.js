@@ -22,6 +22,7 @@ class User {
     }
 
     reset() {
+    	axios.defaults.headers.common['Authorization'] = ``;
         this.userName = undefined;
         this.id = -1;
     }
