@@ -24,3 +24,12 @@ body {
 .inputPasswd {
 	margin-left: 1px;
 }
+.center {
+	position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+}
+.width500 {
+	max-width: 500px;
+	width: 100%;
+}
