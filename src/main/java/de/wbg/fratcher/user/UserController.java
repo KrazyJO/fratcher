@@ -17,6 +17,11 @@ import de.wbg.fratcher.util.Util;
 @RestController
 public class UserController {
 
+	private static class UserCreate {
+		public String userName;
+		public String password;
+	}
+	
 	@Autowired
 	private Util util;
 	
@@ -27,16 +32,19 @@ public class UserController {
 	private AuthenticationService authenticationService;
 	
 	@RequestMapping(value = "/api/user/create")
-	public ResponseEntity<AuthenticationService.UserToken> userCreate(@RequestBody User user, HttpServletResponseWrapper response) 
+	public ResponseEntity<AuthenticationService.UserToken> userCreate(@RequestBody UserCreate user, HttpServletResponseWrapper response) 
 	{
-		String unhashedPassword = user.getPassword();
-		user.setPassword(util.hashPassword(user.getPassword()));
-		boolean registered = userService.addUser(user);
+		User u = new User();
+		
+		String unhashedPassword = user.password;
+		u.setPassword(util.hashPassword(unhashedPassword));
+		u.setUserName(user.userName);
+		boolean registered = userService.addUser(u);
 		if (!registered)
 		{
 			return new ResponseEntity<>(HttpStatus.CONFLICT);
 		}
-		AuthenticationService.UserToken token = authenticationService.login(user.getUserName(), unhashedPassword);
+		AuthenticationService.UserToken token = authenticationService.login(u.getUserName(), unhashedPassword);
 		if (token == null) {
 			//should not happen...
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);

@@ -32,7 +32,7 @@ class Login extends React.Component {
     	User.reset();
     	Events.publish("loggedIn");
     	this.props.history.push("/");
-    	this.forceUpdate();
+//    	this.forceUpdate();
     }
     
     handleSubmit(event) {
@@ -72,7 +72,7 @@ class Login extends React.Component {
                         
                         this.props.history.push("/");
                         User.set(data);
-                        this.forceUpdate();
+//                        this.forceUpdate();
                         
                         Events.publish("loggedIn");
                         
