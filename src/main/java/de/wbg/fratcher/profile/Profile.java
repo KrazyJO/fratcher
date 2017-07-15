@@ -24,7 +24,7 @@ public class Profile {
 	
 	private Gender gender;
 	
-	private Date dateOfBirth;
+	private String yearOfBirth;
 	
 	private String hobbies;
 	
@@ -36,8 +36,8 @@ public class Profile {
 		return createdAt;
 	}
 	
-	public Date getDateOfBirth() {
-		return dateOfBirth;
+	public String getDateOfBirth() {
+		return yearOfBirth;
 	}
 	
 	public String getDescription() {
@@ -68,8 +68,8 @@ public class Profile {
 		this.createdAt = createdAt;
 	}
 	
-	public void setDateOfBirth(Date dateOfBirth) {
-		this.dateOfBirth = dateOfBirth;
+	public void setDateOfBirth(String dateOfBirth) {
+		this.yearOfBirth = dateOfBirth;
 	}
 	
 	public void setDescription(String description) {
