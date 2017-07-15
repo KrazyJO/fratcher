@@ -20,7 +20,28 @@ class Register extends React.Component {
     }
 
     handleSubmit() {
+    	if (!this.isSubmitActivated())
+    	{
+    		return;
+    	}
     	console.log("handleSubmit register");
+    	
+    	let userData = {
+    		userName : this.state.userName,
+    		password : this.state.password 
+    	};
+    	
+    	axios.post("/api/user/create", userData, {
+            validateStatus: (status) => {
+                return (status >= 200 && status < 300)
+            }
+        })
+            .then(({data, status}) => {
+               if (status === 200)
+               {
+            	   console.log("user created");
+               }
+            });
     }
     
     handleuserNameChange(event) {
