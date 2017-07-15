@@ -11,7 +11,7 @@ class Profile extends React.Component {
         this.state = {
         		firstName : "",
         		lastName : "",
-        		year : "",
+        		yearOfBirth : "",
         		description : "",
         		hobbies : "",
         		gender : "2"
@@ -27,10 +27,13 @@ class Profile extends React.Component {
     }
     
     componentWillMount() {
+    	let oThis = this; 
     	axios.get("/api/profile/1")
     	.then(({data, status}) => {
     		console.log(data);
     		UserProfile.set(data);
+    		oThis.state = data;
+    		oThis.forceUpdate();
         });
     }
     
@@ -49,7 +52,7 @@ class Profile extends React.Component {
     }
     
     handleYearChange(event) {
-    	this.setState({year : event.target.value});
+    	this.setState({yearOfBirth : event.target.value});
     }
     
     handleLastNameChange (event) {
@@ -94,7 +97,7 @@ class Profile extends React.Component {
 					    </div>
 					    <div className="form-group">
 					    	<label>{t('yearOfBirth')}</label>
-						    <input className="form-control" type="text" value={this.state.year}
+						    <input className="form-control" type="text" value={this.state.yearOfBirth}
 					        	onChange={this.handleYearChange}></input>
 					    </div>
 					    <div className="form-group">
