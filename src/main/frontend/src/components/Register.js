@@ -21,7 +21,8 @@ class Register extends React.Component {
         this.handlePasswordRepeatChange = this.handlePasswordRepeatChange.bind(this);
     }
 
-    handleSubmit() {
+    handleSubmit(event) {
+    	event.preventDefault();
     	if (!this.isSubmitActivated())
     	{
     		return;
