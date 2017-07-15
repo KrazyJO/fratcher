@@ -10,7 +10,6 @@ class Register extends React.Component {
         		userName : "",
         		password : "",
         		passwordRepeat : "",
-        		submitActivated : false,
         };
         
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -35,13 +34,12 @@ class Register extends React.Component {
             validateStatus: (status) => {
                 return (status >= 200 && status < 300)
             }
-        })
-            .then(({data, status}) => {
-               if (status === 200)
-               {
-            	   console.log("user created");
-               }
-            });
+        }).then(({data, status}) => {
+           if (status === 200)
+           {
+        	   console.log("user created");
+           }
+        });
     }
     
     handleuserNameChange(event) {
@@ -50,18 +48,22 @@ class Register extends React.Component {
     
     handlePasswordChange(event) {
     	this.setState({password: event.target.value});
-		this.setState({submitActivated : this.isSubmitActivated()});
 		this.forceUpdate();
     }
     
     handlePasswordRepeatChange(event) {
     	this.setState({passwordRepeat: event.target.value});
-    	this.setState({submitActivated : this.isSubmitActivated()});
 		this.forceUpdate();
     }
     
     isSubmitActivated () {
     	return this.state.password && this.state.password === this.state.passwordRepeat && this.state.userName;
+    }
+    
+    reset() {
+    	this.setState({userName: ""});
+    	this.setState({password: ""});
+    	this.setState({passwordRepeat: ""});
     }
     
     render () {
