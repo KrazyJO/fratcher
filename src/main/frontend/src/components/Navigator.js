@@ -15,13 +15,22 @@ class Navigator extends React.Component {
 	constructor(props) {
         super(props);
         this.state = {};
+        
+        this.onLogoutButtonClicked = this.onLogoutButtonClicked.bind(this);
     }
+	
+	
 	
 	componentDidMount() {
     	Events.subscribe("loggedIn", function() {
     		this.forceUpdate();
     	}.bind(this));
     }
+	
+	onLogoutButtonClicked() {
+		User.reset();
+    	Events.publish("loggedIn");
+	}
 	
     render() {
         return (
@@ -43,7 +52,18 @@ class Navigator extends React.Component {
                             }
                             
                         </ul>
-                    	<Login />	
+                        {
+                        	User.isNotAuthenticated() &&
+                        	<Link className="btn btn-success navbar-right navbar-btn" to="/login">Anmelden</Link>
+                        }
+                        {
+                        	User.isAuthenticated() &&
+                        	<div className="navbar-right">
+	                        	<span className="navbar-text">{User.getUserName()}</span>
+	                        	<Link className="btn btn-danger navbar-btn" to="/login">Abmelden</Link>
+        					</div>
+                        }
+                        
                         
                     </div>
                 </div>

@@ -31,6 +31,7 @@ class Login extends React.Component {
     onLogoutButtonClicked() {
     	User.reset();
     	Events.publish("loggedIn");
+    	this.props.history.push("/");
     	this.forceUpdate();
     }
     
@@ -69,8 +70,7 @@ class Login extends React.Component {
 
                         // Redirect to front page.
                         
-//                        this.props.history.push("/");
-                        
+                        this.props.history.push("/");
                         User.set(data);
                         this.forceUpdate();
                         
@@ -101,7 +101,7 @@ class Login extends React.Component {
     	if (User.isNotAuthenticated())
     	{
     		component = 
-        		<form className="navbar-form" onSubmit={this.handleSubmit}>
+        		<form className="form-horizontal center" onSubmit={this.handleSubmit}>
     			        <div className="form-group">
     			        <input type="text" className="form-control" name="username" placeholder={t('user')} value={this.state.userName}
     			        onChange={this.handleuserNameChange}></input>
@@ -110,7 +110,7 @@ class Login extends React.Component {
     			        <input type="text" className="form-control" type="password" name="password" placeholder={t('password')} value={this.state.password}
     			        onChange={this.handlePasswordChange}></input>
     			    </div>
-    			    <button type="submit" className="btn btn-success btnSignIn">{t('signIn')}</button>
+    			    <button type="submit" className="btnRight btn btn-success btnSignIn">{t('signIn')}</button>
     			</form>	
     	}
     	else
@@ -118,14 +118,14 @@ class Login extends React.Component {
     		component = 
     				<div>
     					<span className="navbar-text">{User.getUserName()}</span>
-    					<button className="navbar-btn btn btn-danger" onClick={this.onLogoutButtonClicked}>logout</button>
+    					<button className="btn btn-danger" onClick={this.onLogoutButtonClicked}>logout</button>
     				</div>
     			
     	}	
     	
     	
     	return (
-    			<div className="nav navbar-right">
+    			<div className="center width500">
     				{component}
     			</div>
     	);

@@ -15,6 +15,7 @@ import Matcher from './components/Matcher';
 import Navigator from './components/Navigator';
 import Register from './components/Register';
 import Profile from './components/Profile';
+import Login from './components/Login';
 
 class Root extends React.Component {
     constructor(props) {
@@ -25,12 +26,11 @@ class Root extends React.Component {
     render() {
         return (
             <div>
-	            <Navigator ref={(component) => {
-	                this.nav = component;
-	            }} />
+	            <Navigator  />
                 <Switch>
                     <Route path="/matcher" component={Matcher}/>
 
+                    <Route path="/login" component={Login} />
                     <Route path="/register" component={Register}/>
                     <Route path="/profile" component={Profile}/>
                     {/*Default route*/}
@@ -43,7 +43,7 @@ class Root extends React.Component {
 
 ReactDOM.render(
 	<I18nextProvider i18n={i18n}>
-		<Router>
+		<Router history={history}>
 			<Root />
 		</Router>
     </I18nextProvider>
