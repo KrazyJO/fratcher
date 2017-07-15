@@ -3,6 +3,7 @@
   "matcherComp" : "Dies ist die Matcher Componente",
   "signIn" : "Anmelden",
   "signUp" : "Registrieren",
-  "teaser" : "fratcher (Friend mATCHER) hilft Ihnen, neue Bekanntschaften mit Ihren Bedürfnissen zu schließen. Registrieren Sie sich jetzt, um niveauvolle Menschen kennen zu lernen!" 
-  				
+  "teaser" : "fratcher (Friend mATCHER) hilft Ihnen, neue Bekanntschaften mit Ihren Bedürfnissen zu schließen. Registrieren Sie sich jetzt, um niveauvolle Menschen kennen zu lernen!", 
+  "user"	: "Benutzername",
+  "password" : "Passwort"
 }

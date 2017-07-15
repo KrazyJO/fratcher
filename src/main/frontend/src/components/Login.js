@@ -79,14 +79,14 @@ class Login extends React.Component {
     	return (
     			<form className="navbar-form navbar-right" onSubmit={this.handleSubmit}>
 	                <div className="form-group">
-	                    <input type="text" className="form-control" name="username" placeholder="Username" value={this.state.userName}
+	                    <input type="text" className="form-control" name="username" placeholder={t('user')} value={this.state.userName}
 	                    onChange={this.handleuserNameChange}></input>
 	                </div>
 	                <div className="form-group inputPasswd">
-	                    <input type="text" className="form-control" name="password" placeholder="Password" value={this.state.password}
+	                    <input type="text" className="form-control" name="password" placeholder={t('password')} value={this.state.password}
 	                    onChange={this.handlePasswordChange}></input>
 	                </div>
-	                <button type="submit" className="btn btn-success btnSignIn">Sign In</button>
+	                <button type="submit" className="btn btn-success btnSignIn">{t('signIn')}</button>
 	            </form>
     			
     	);
