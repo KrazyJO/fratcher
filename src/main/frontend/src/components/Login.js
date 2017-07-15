@@ -101,7 +101,7 @@ class Login extends React.Component {
     	if (User.isNotAuthenticated())
     	{
     		component = 
-        		<form className="navbar-form navbar-right" onSubmit={this.handleSubmit}>
+        		<form className="navbar-form" onSubmit={this.handleSubmit}>
     			        <div className="form-group">
     			        <input type="text" className="form-control" name="username" placeholder={t('user')} value={this.state.userName}
     			        onChange={this.handleuserNameChange}></input>
@@ -115,12 +115,14 @@ class Login extends React.Component {
     	}
     	else
     	{
-    		component = <button className="navbar-right btn btn-danger" onClick={this.onLogoutButtonClicked}>logout</button>
+    		component = 
+    				<button className="navbar-btn btn btn-danger" onClick={this.onLogoutButtonClicked}>logout</button>
+    			
     	}	
     	
     	
     	return (
-    			<div>
+    			<div className="nav navbar-right">
     				{component}
     			</div>
     	);
