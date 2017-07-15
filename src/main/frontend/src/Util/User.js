@@ -20,6 +20,10 @@ class User {
         this.userName = data.userName;
         this.id = data.id;
     }
+    
+    getUserName() {
+    	return this.userName;
+    }
 
     reset() {
     	axios.defaults.headers.common['Authorization'] = ``;

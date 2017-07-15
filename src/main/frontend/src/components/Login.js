@@ -116,7 +116,10 @@ class Login extends React.Component {
     	else
     	{
     		component = 
-    				<button className="navbar-btn btn btn-danger" onClick={this.onLogoutButtonClicked}>logout</button>
+    				<div>
+    					<span className="navbar-text">{User.getUserName()}</span>
+    					<button className="navbar-btn btn btn-danger" onClick={this.onLogoutButtonClicked}>logout</button>
+    				</div>
     			
     	}	
     	
