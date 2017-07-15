@@ -10,6 +10,7 @@ class Register extends React.Component {
         		userName : "",
         		password : "",
         		passwordRepeat : "",
+        		error : undefined
         };
         
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -32,13 +33,23 @@ class Register extends React.Component {
     	
     	axios.post("/api/user/create", userData, {
             validateStatus: (status) => {
-                return (status >= 200 && status < 300)
+                return (status >= 200 && status < 300 || status === 409 || status === 401)
             }
         }).then(({data, status}) => {
-           if (status === 200)
-           {
-        	   console.log("user created");
+           switch(status) {
+	           case 200:
+	        	   console.log("user created");
+	        	   this.setState({error : undefined});
+	           		break;
+	           case 409:
+	        	   this.setState({error : "user alredy exist"});
+	        	   break;
+	           case 401:
+	        	   this.setState({error : "already logged in as this user"});
+	        	   break;
            }
+           this.forceUpdate();
+            
         });
     }
     
@@ -74,6 +85,11 @@ class Register extends React.Component {
     	{
     		btnSubmitClasses += " btn-success";
     	}
+    	
+    	const errorStyle = {
+    		color : 'red'
+    	};
+    	
     	return (
     			<div className="center width500 main-login main-center">
 	    			<form className="form-horizontal" onSubmit={this.handleSubmit}>
@@ -91,6 +107,10 @@ class Register extends React.Component {
 					    </div>
 					    <button id="btnSendRegister" type="submit" className={btnSubmitClasses} >{t('sendSignIn')}</button>
 			    	</form>	
+			    	{	this.state.error &&
+			    		<div style={errorStyle}>{this.state.error}</div>
+			    	}
+			    	
 			    </div>
     	);
     }
