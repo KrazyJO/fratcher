@@ -37,6 +37,20 @@ class Profile extends React.Component {
         });
     }
     
+    handleSubmit(event) {
+    	axios.post("/api/profile/1", this.state)
+    	.then(({data, status}) => {
+    		if (status === 200)
+    		{
+    			console.log("update profile success");
+    		}
+    		else
+    		{
+    			console.log("update profile failed");
+    		}
+        })
+    }
+    
     handleGenderChange (event) {
     	this.setState({gender : event.target.value});
     	console.log("handle gender");
@@ -63,12 +77,6 @@ class Profile extends React.Component {
     	this.setState({firstName : event.target.value});
     }
 
-    handleSubmit(event) {
-    	console.log("submit profile");
-    }
-    
-    
-    
     render () {
     	const {t} = this.props;
 

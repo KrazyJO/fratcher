@@ -36,7 +36,7 @@ public class Profile {
 		return createdAt;
 	}
 	
-	public String getDateOfBirth() {
+	public String getYearOfBirth() {
 		return yearOfBirth;
 	}
 	
@@ -68,7 +68,7 @@ public class Profile {
 		this.createdAt = createdAt;
 	}
 	
-	public void setDateOfBirth(String dateOfBirth) {
+	public void setYearOfBirth(String dateOfBirth) {
 		this.yearOfBirth = dateOfBirth;
 	}
 	

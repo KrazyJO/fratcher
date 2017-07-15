@@ -22,4 +22,9 @@ public class ProfileService {
 	{
 		return profileRepository.findOne(id);
 	}
+	
+	public void editProfile(Profile p)
+	{
+		profileRepository.save(p);
+	}
 }
