@@ -2,6 +2,7 @@ import React from "react";
 import {translate} from "react-i18next";
 
 import axios from "axios";
+import Events from "pubsub-js";
 
 import User from "./../Util/User";
 
@@ -19,6 +20,12 @@ class Login extends React.Component {
         this.handleSubmit = this.handleSubmit.bind(this);
         this.onLogoutButtonClicked = this.onLogoutButtonClicked.bind(this);
         
+    }
+    
+    componentDidMount() {
+    	Events.subscribe("loggedIn", function() {
+    		this.forceUpdate();
+    	}.bind(this));
     }
     
     onLogoutButtonClicked() {

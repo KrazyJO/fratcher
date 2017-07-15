@@ -19,9 +19,6 @@ class Register extends React.Component {
         this.handleuserNameChange = this.handleuserNameChange.bind(this);
         this.handlePasswordChange = this.handlePasswordChange.bind(this);
         this.handlePasswordRepeatChange = this.handlePasswordRepeatChange.bind(this);
-        Events.subscribe("hello", function() {
-        	console.log("hello world from hello event");
-        })
     }
 
     handleSubmit() {
@@ -43,9 +40,10 @@ class Register extends React.Component {
         }).then(({data, status}) => {
            switch(status) {
 	           case 200:
-	        	   this.setState({error : undefined});
-	        	   this.reset();
-	        	   User.set(data.user);
+	        	   	this.setState({error : undefined});
+	        	   	this.reset();
+	        	   	User.set(data.user);
+	        	   	Events.publish("loggedIn");
 	           		break;
 	           case 409:
 	        	   this.setState({error : "user alredy exist"});
@@ -74,7 +72,6 @@ class Register extends React.Component {
     }
     
     isSubmitActivated () {
-    	Events.publish("hello");
     	return this.state.password && this.state.password === this.state.passwordRepeat && this.state.userName;
     }
     
