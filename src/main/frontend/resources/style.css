@@ -33,3 +33,13 @@ body {
 	max-width: 500px;
 	width: 100%;
 }
+.btnRight {
+	float: right;
+}
+.textareHobby {
+	min-height: 150px;
+}
+.profileStarDescription {
+	font-weight: bold;
+	margin-top: 50px;
+}

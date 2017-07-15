@@ -8,5 +8,12 @@
   "password" : "Passwort",
   "passwordRepeat" : "Passwort wiederholen",
   "sendSignIn" : "Registrierung Abschicken",
-  "profile" : "Profil"
+  "profile" : "Profil",
+  "firstName" : "Vorname",
+  "lastName" : "Nachname",
+  "yearOfBirth" : "Geburtsjahr",
+  "overMe" : "Über mich...",
+  "myHobbies" : "Meine Hobbies...",
+  "send" : "Abschicken",
+  "profileStars": "* Freiwillige Angaben"
 }
