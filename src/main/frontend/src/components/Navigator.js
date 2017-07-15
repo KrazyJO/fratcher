@@ -50,6 +50,9 @@ class Navigator extends React.Component {
                             {User.isAuthenticated() && 
                             	<li><Link to="/profile">Profil</Link></li>	
                             }
+                            {User.isAuthenticated() && 
+                            	<li><Link to="/friends">Friends</Link></li>	
+                            }
                             
                         </ul>
                         {

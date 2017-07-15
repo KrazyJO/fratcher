@@ -16,6 +16,7 @@ import Navigator from './components/Navigator';
 import Register from './components/Register';
 import Profile from './components/Profile';
 import Login from './components/Login';
+import Friends from './components/Friends';
 
 class Root extends React.Component {
     constructor(props) {
@@ -33,6 +34,7 @@ class Root extends React.Component {
                     <Route path="/login" component={Login} />
                     <Route path="/register" component={Register}/>
                     <Route path="/profile" component={Profile}/>
+                    <Route path="/friends" component={Friends} />
                     {/*Default route*/}
                     <Route path="/" component={LoggedOut}/>
                 </Switch>
