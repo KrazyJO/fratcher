@@ -1,6 +1,7 @@
 package de.wbg.fratcher.profile;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -18,9 +19,18 @@ public class ProfileController {
 	}
 	
 	@RequestMapping(value = "/api/profile/add", method = RequestMethod.POST)
-	public void addProfile(@RequestBody Profile p)
+	public String addProfile(@RequestBody Profile p)
 	{
 		profileService.addProfile(p);
+//		profileService.getProfile(id)
+		
+		return "localhost:8080/api/profile/"+p.getId();
+	}
+	
+	@RequestMapping(value = "/api/profile/{id}", method = RequestMethod.GET)
+	public Profile getProfile(@PathVariable Long id)
+	{
+		return profileService.getProfile(id);
 	}
 	
 	@RequestMapping(value = "/api/profile/{id}", method = RequestMethod.POST)
