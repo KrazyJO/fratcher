@@ -19,7 +19,8 @@ public class User {
 	
 	public User() {
 		this.profile = new Profile();
-		this.friends = new LinkedList<>();
+		this.liked = new LinkedList<>();
+		this.disliked = new LinkedList<>();
 	}
 	
 	@Id
@@ -36,7 +37,10 @@ public class User {
 	
 	
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-	private List<User> friends;
+	private List<User> liked;
+	
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<User> disliked;
 	
 	public Profile getProfile() {
 		return profile;
