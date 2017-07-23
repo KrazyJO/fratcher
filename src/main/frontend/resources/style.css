@@ -43,3 +43,18 @@ body {
 	font-weight: bold;
 	margin-top: 50px;
 }
+/*matcher thumbs*/
+.matcherThumbs {
+	width: 100%;
+	text-align: center;
+}
+.matcherThumbUp {
+	width: 50%;
+	float: left;
+	color: green;
+}
+.matcherThumbDown {
+	width: 50%;
+	float: right;
+	color: red;
+}

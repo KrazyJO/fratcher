@@ -4,15 +4,8 @@ import User from "./../Util/User";
 import axios from "axios";
 
 //react icons
-import FaThumbsOUp from "react-icons/lib/fa/thumbs-o-up"; 
-//var FaThumbsUp = require('react-icons/lib/fa/thumbs-o-up');
-//var oThumg = React.createClass({
-//    render: function() {
-//        return React.createElement('h3', null,
-//            ' Lets go for a ', React.createElement(FaThumbsUp, null), '? '
-//        );
-//    }
-//});
+import FaThumbsOUp from "react-icons/lib/fa/thumbs-o-up";
+import FaThumbsODown from "react-icons/lib/fa/thumbs-o-down"; 
 
 class Matcher extends React.Component {
     constructor(props) {
@@ -58,8 +51,13 @@ class Matcher extends React.Component {
     				<div>
     					{this.renderActualUnmatchedUser()}
     				</div>
-    				<div>
-    				<FaThumbsOUp />
+    				<div className="matcherThumbs">
+						<div className="matcherThumbUp">
+							<FaThumbsOUp size={50} />
+						</div>
+						<div className="matcherThumbDown">
+							<FaThumbsODown size={50} />
+						</div>
     				</div>
     			</div>
     	);
