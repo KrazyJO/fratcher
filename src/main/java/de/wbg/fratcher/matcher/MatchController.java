@@ -15,15 +15,13 @@ import de.wbg.fratcher.user.UserRepository;
 public class MatchController {
 
 	@Autowired
-	private UserRepository userRepository;
+	private MatchService service;
 	
 	@RequestMapping(value = "/api/matches/{id}")
 	public Iterable<User> getUsersMatched(@PathVariable Long id) {
-//		User u = userRepository.findUserByUserName("bob");
-		User u = userRepository.findUserById(id);
-		ArrayList<User> l = new ArrayList<User>(u.getLiked());
+		Iterable<User> userMatches = service.findUserMatches(id);
 		
-		return userRepository.findMatchesByUser(u.getId(), l);
+		return userMatches;
 	}
 	
 }
