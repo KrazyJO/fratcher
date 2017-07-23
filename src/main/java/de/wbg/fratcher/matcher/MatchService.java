@@ -65,4 +65,11 @@ public class MatchService {
 		userRepository.save(currentUser);
 	}
 	
+	public void dislikeUser(Long id)
+	{
+		User user = userRepository.findUserById(id);
+		User currentUser = userRepository.findUserById(userService.getCurrentUser().getId());
+		currentUser.getDisliked().add(user);
+		userRepository.save(currentUser);
+	}
 }

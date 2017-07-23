@@ -59,4 +59,15 @@ public class MatchController {
 		matchService.likeUser(id);
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
+	
+	@RequestMapping(value = "/api/dislike/{id}")
+	public ResponseEntity<Object> dislikeUser(@PathVariable Long id)
+	{
+		if (userService.isAnonymous())
+		{
+			return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+		}
+		matchService.dislikeUser(id);
+		return new ResponseEntity<>(HttpStatus.OK);
+	}
 }
