@@ -10,6 +10,9 @@ class Friends extends React.Component {
         };
     }
     
+    componentDidMount() {
+    	console.log("friends will mount");
+    }
     
     render () {
     	const {t} = this.props;
