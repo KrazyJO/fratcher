@@ -58,3 +58,6 @@ body {
 	float: right;
 	color: red;
 }
+.matcherThumbUp svg,  .matcherThumbDown svg{
+	cursor: pointer;
+}
