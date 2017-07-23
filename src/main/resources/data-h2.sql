@@ -32,7 +32,10 @@ INSERT INTO USER__LIKED (USER__ID, LIKED_ID) VALUES
 	(1, 2),
 	(1,3),
 	(5,6),
-	(2,1);
+	(2,1),
+	(3,5),
+	(5,3),
+	(6,5);
 	
 INSERT INTO USER__DISLIKED (USER__ID, DISLIKED_ID) VALUES
 	(3,1);

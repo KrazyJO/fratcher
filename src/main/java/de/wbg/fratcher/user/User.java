@@ -7,7 +7,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -36,11 +36,21 @@ public class User {
 	private Profile profile;
 	
 	
-	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+	@ManyToMany(cascade = CascadeType.ALL)
+	@JsonIgnore
 	private List<User> liked;
 	
-	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+	@ManyToMany(cascade = CascadeType.ALL)
+	@JsonIgnore
 	private List<User> disliked;
+	
+	public List<User> getDisliked() {
+		return disliked;
+	}
+	
+	public List<User> getLiked() {
+		return liked;
+	}
 	
 	public Profile getProfile() {
 		return profile;
@@ -67,5 +77,10 @@ public class User {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	
+	public void setLiked(List<User> liked) {
+		this.liked = liked;
+	}
+	public void setDisliked(List<User> disliked) {
+		this.disliked = disliked;
+	}
 }
