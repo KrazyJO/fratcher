@@ -3,6 +3,17 @@ import {translate} from "react-i18next";
 import User from "./../Util/User";
 import axios from "axios";
 
+//react icons
+import FaThumbsOUp from "react-icons/lib/fa/thumbs-o-up"; 
+//var FaThumbsUp = require('react-icons/lib/fa/thumbs-o-up');
+//var oThumg = React.createClass({
+//    render: function() {
+//        return React.createElement('h3', null,
+//            ' Lets go for a ', React.createElement(FaThumbsUp, null), '? '
+//        );
+//    }
+//});
+
 class Matcher extends React.Component {
     constructor(props) {
         super(props);
@@ -46,6 +57,9 @@ class Matcher extends React.Component {
     			<div className="component">{t('matcherComp')}
     				<div>
     					{this.renderActualUnmatchedUser()}
+    				</div>
+    				<div>
+    				<FaThumbsOUp />
     				</div>
     			</div>
     	);
