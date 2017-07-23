@@ -8,7 +8,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import de.wbg.fratcher.profile.Profile;
-import de.wbg.fratcher.user.User;
 import de.wbg.fratcher.user.UserService;
 
 @RestController
@@ -29,14 +28,22 @@ public class MatchController {
 		}
 		
 		Long userId = userService.getCurrentUser().getId();
-		Iterable<User> userMatches = matchService.findUserMatches(userId);
-		LinkedList<Profile> userProfiles = new LinkedList<>();
-		for (User u : userMatches)
-		{
-			userProfiles.push(u.getProfile());
-		}
+		LinkedList<Profile> userProfiles = matchService.findUserMatches(userId);
+		
 		
 		return ResponseEntity.ok(userProfiles);
 	}
 	
+	@RequestMapping(value = "/api/unmatched")
+	public ResponseEntity<LinkedList<Profile>> getUserUnmatched()
+	{
+		if (userService.isAnonymous())
+		{
+			return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+		}
+		
+		LinkedList<Profile> userProfiles = matchService.getUserUnmatched(userService.getCurrentUser().getId());
+		
+		return ResponseEntity.ok(userProfiles);
+	}
 }
