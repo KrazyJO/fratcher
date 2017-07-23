@@ -37,14 +37,14 @@ public class MatchController {
 	}
 	
 	@RequestMapping(value = "/api/unmatched", method = RequestMethod.GET)
-	public ResponseEntity<Iterable<Profile>> getUserUnmatched()
+	public ResponseEntity<Iterable<MatchService.UserWithProfile>> getUserUnmatched()
 	{
 		if (userService.isAnonymous())
 		{
 			return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
 		}
 		
-		Iterable<Profile> userProfiles = matchService.getUserUnmatched(userService.getCurrentUser().getId());
+		Iterable<MatchService.UserWithProfile> userProfiles = matchService.getUserUnmatched(userService.getCurrentUser().getId());
 		
 		return ResponseEntity.ok(userProfiles);
 	}

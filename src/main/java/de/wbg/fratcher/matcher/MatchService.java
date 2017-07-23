@@ -1,6 +1,7 @@
 package de.wbg.fratcher.matcher;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,6 +14,12 @@ import de.wbg.fratcher.user.UserService;
 @Service
 public class MatchService {
 
+	public class UserWithProfile {
+		public Long userId;
+		public String userName;
+		public Profile profile;
+	}
+	
 	@Autowired
 	private UserRepository userRepository;
 	
@@ -33,15 +40,25 @@ public class MatchService {
 	 * @param userId
 	 * @return profiles of unseen users
 	 */
-	public Iterable<Profile> getUserUnmatched(Long userId)
+	public Iterable<UserWithProfile> getUserUnmatched(Long userId)
 	{
 		User user = userRepository.findUserById(userId);
 		ArrayList<User> liked = new ArrayList<User>(user.getLiked());
 		ArrayList<User> disliked = new ArrayList<User>(user.getDisliked());
 		
-		Iterable<Profile> userMatches = userRepository.findUserUnmatched(user.getId(), liked, disliked);
+		Iterable<User> userUnmatched = userRepository.findUserUnmatched(user.getId(), liked, disliked);
+		LinkedList<UserWithProfile> unmatched = new LinkedList<>();
+		UserWithProfile userWithProfile;
+		for (User u : userUnmatched)
+		{
+			userWithProfile = new UserWithProfile();
+			userWithProfile.userId = u.getId();
+			userWithProfile.userName = u.getUserName();
+			userWithProfile.profile = u.getProfile();
+			unmatched.add(userWithProfile);
+		}
 		
-		return userMatches;
+		return unmatched;
 	}
 	
 	public void likeUser(Long id)
