@@ -12,6 +12,11 @@ class Friends extends React.Component {
     
     componentDidMount() {
     	console.log("friends will mount");
+    	axios.get("/api/matches")
+    	.then(({data, status}) => {
+    		console.log("matches: ");
+    		console.log(data);
+        });
     }
     
     render () {

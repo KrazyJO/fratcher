@@ -69,6 +69,7 @@ class Login extends React.Component {
                         User.set(data);
                         
                         Events.publish("loggedIn");
+                        axios.defaults.headers.common['Authorization'] = `Bearer ${data.token}`;
                         this.props.history.push("/");
                         break;
 
