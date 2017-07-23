@@ -7,16 +7,26 @@ class Friends extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+        		friends : []
         };
+        
+        this.renderFriends = this.renderFriends.bind(this);
     }
     
     componentDidMount() {
     	console.log("friends will mount");
     	axios.get("/api/matches")
     	.then(({data, status}) => {
-    		console.log("matches: ");
-    		console.log(data);
+    		this.setState({friends : data});
         });
+    }
+
+    renderFriends () {
+    	return this.state.friends.map((friend => {
+    		return (
+    				<div key={friend.userId}>{friend.firstName}</div>
+    		)
+    	}));
     }
     
     render () {
@@ -25,7 +35,7 @@ class Friends extends React.Component {
     	
     	return (
     			<div className="width500 center">
-    				Friends
+    				{this.renderFriends()}
     			</div>
     	);
     }
