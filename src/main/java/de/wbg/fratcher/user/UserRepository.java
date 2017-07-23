@@ -20,8 +20,8 @@ public interface UserRepository extends CrudRepository<User, Long> {
 	@Query("SELECT u from User_ u WHERE u.userName = :userName")
 	User findUserByUserName(@Param("userName") String userName);
 	
-	@Query("SELECT u.profile FROM User_ u JOIN u.liked l WHERE l.id = :userId and u in (:liked)")
-	List<Profile> findMatchesByUser(@Param("userId") Long userId, @Param("liked") ArrayList<User> liked);
+	@Query("SELECT u FROM User_ u JOIN u.liked l WHERE l.id = :userId and u in (:liked)")
+	List<User> findMatchesByUser(@Param("userId") Long userId, @Param("liked") ArrayList<User> liked);
 	
 	@Query("SELECT u from User_ u where u.id = :userId")
 	User findUserById(@Param("userId") Long userId);

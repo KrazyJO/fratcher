@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+
+import de.wbg.fratcher.matcher.MatchService.UserWithProfile;
 import de.wbg.fratcher.profile.Profile;
 import de.wbg.fratcher.user.UserService;
 
@@ -22,7 +24,7 @@ public class MatchController {
 	private UserService userService;
 	
 	@RequestMapping(value = "/api/matches", method = RequestMethod.GET)
-	public ResponseEntity<Iterable<Profile>> getUsersMatched() 
+	public ResponseEntity<Iterable<UserWithProfile>> getUsersMatched() 
 	{
 		if (userService.isAnonymous())
 		{
@@ -30,7 +32,7 @@ public class MatchController {
 		}
 		
 		Long userId = userService.getCurrentUser().getId();
-		Iterable<Profile> userProfiles = matchService.findUserMatches(userId);
+		Iterable<UserWithProfile> userProfiles = matchService.findUserMatches(userId);
 		
 		
 		return ResponseEntity.ok(userProfiles);
