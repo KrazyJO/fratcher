@@ -44,7 +44,7 @@ public class MatchService {
 	{
 		User user = userRepository.findUserById(userId);
 		ArrayList<User> liked = new ArrayList<User>(user.getLiked());
-		ArrayList<User> disliked = new ArrayList<User>(user.getLiked());
+		ArrayList<User> disliked = new ArrayList<User>(user.getDisliked());
 		
 		Iterable<User> userMatches = userRepository.findUserUnmatched(user.getId(), liked, disliked);
 		
