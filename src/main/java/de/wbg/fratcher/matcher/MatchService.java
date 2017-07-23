@@ -40,21 +40,15 @@ public class MatchService {
 	 * @param userId
 	 * @return profiles of unseen users
 	 */
-	public LinkedList<Profile> getUserUnmatched(Long userId)
+	public Iterable<Profile> getUserUnmatched(Long userId)
 	{
 		User user = userRepository.findUserById(userId);
 		ArrayList<User> liked = new ArrayList<User>(user.getLiked());
 		ArrayList<User> disliked = new ArrayList<User>(user.getDisliked());
 		
-		Iterable<User> userMatches = userRepository.findUserUnmatched(user.getId(), liked, disliked);
+		Iterable<Profile> userMatches = userRepository.findUserUnmatched(user.getId(), liked, disliked);
 		
-		LinkedList<Profile> userProfiles = new LinkedList<>();
-		for (User u : userMatches)
-		{
-			userProfiles.add(u.getProfile());
-		}
-		
-		return userProfiles;
+		return userMatches;
 	}
 	
 	public void likeUser(Long id)
