@@ -1,7 +1,6 @@
 package de.wbg.fratcher.matcher;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,19 +19,13 @@ public class MatchService {
 	@Autowired
 	private UserService userService;
 	
-	public LinkedList<Profile> findUserMatches(Long userId)	{
+	public Iterable<Profile> findUserMatches(Long userId)	{
 		User user = userRepository.findUserById(userId);
-		ArrayList<User> l = new ArrayList<User>(user.getLiked());
+		ArrayList<User> liked = new ArrayList<User>(user.getLiked());
 		
-		Iterable<User> userMatches = userRepository.findMatchesByUser(user.getId(), l);
+		Iterable<Profile> userMatches = userRepository.findMatchesByUser(user.getId(), liked);
 		
-		LinkedList<Profile> userProfiles = new LinkedList<>();
-		for (User u : userMatches)
-		{
-			userProfiles.push(u.getProfile());
-		}
-		
-		return userProfiles;
+		return userMatches;
 	}
 	
 	/**

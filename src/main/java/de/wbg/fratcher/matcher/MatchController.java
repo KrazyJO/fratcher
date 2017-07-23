@@ -22,7 +22,7 @@ public class MatchController {
 	private UserService userService;
 	
 	@RequestMapping(value = "/api/matches", method = RequestMethod.GET)
-	public ResponseEntity<LinkedList<Profile>> getUsersMatched() 
+	public ResponseEntity<Iterable<Profile>> getUsersMatched() 
 	{
 		if (userService.isAnonymous())
 		{
@@ -30,7 +30,7 @@ public class MatchController {
 		}
 		
 		Long userId = userService.getCurrentUser().getId();
-		LinkedList<Profile> userProfiles = matchService.findUserMatches(userId);
+		Iterable<Profile> userProfiles = matchService.findUserMatches(userId);
 		
 		
 		return ResponseEntity.ok(userProfiles);
