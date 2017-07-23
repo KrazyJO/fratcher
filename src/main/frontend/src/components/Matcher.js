@@ -34,10 +34,24 @@ class Matcher extends React.Component {
 
     onThumbDownClicked() {
     	console.log("thumb down clicked");
+    	let actual = this.state.actual + 1;
+    	if (actual === this.state.unmatched.length)
+    	{
+    		actual = 0;
+    	}
+    	
+    	this.setState({actual : actual});
     }
     
     onThumbUpClicked() {
     	console.log("thumb up clicked");
+    	let actual = this.state.actual + 1;
+    	if (actual === this.state.unmatched.length)
+    	{
+    		actual = 0;
+    	}
+    	
+    	this.setState({actual : actual});
     }
     
     renderActualUnmatchedUser() {
