@@ -5,7 +5,9 @@ import java.util.LinkedList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import de.wbg.fratcher.profile.Profile;
 import de.wbg.fratcher.user.UserService;
@@ -45,5 +47,16 @@ public class MatchController {
 		LinkedList<Profile> userProfiles = matchService.getUserUnmatched(userService.getCurrentUser().getId());
 		
 		return ResponseEntity.ok(userProfiles);
+	}
+	
+	@RequestMapping(value = "/api/like/{id}")
+	public ResponseEntity<Object> likeUser(@PathVariable Long id)
+	{
+		if (userService.isAnonymous())
+		{
+			return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+		}
+		matchService.likeUser(id);
+		return new ResponseEntity<>(HttpStatus.OK);
 	}
 }
