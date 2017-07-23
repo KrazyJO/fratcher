@@ -14,7 +14,9 @@ class Matcher extends React.Component {
         		unmatched : [],
         		actual : 0
         };
-
+        
+        this.onThumbUpClicked = this.onThumbUpClicked.bind(this);
+        this.onThumbDownClicked = this.onThumbDownClicked.bind(this);
     }
     
     componentDidMount() {
@@ -30,6 +32,14 @@ class Matcher extends React.Component {
     	}
     }
 
+    onThumbDownClicked() {
+    	console.log("thumb down clicked");
+    }
+    
+    onThumbUpClicked() {
+    	console.log("thumb up clicked");
+    }
+    
     renderActualUnmatchedUser() {
     	let unmatched = this.state.unmatched[this.state.actual];
     	if (!unmatched)
@@ -53,10 +63,10 @@ class Matcher extends React.Component {
     				</div>
     				<div className="matcherThumbs">
 						<div className="matcherThumbUp">
-							<FaThumbsOUp size={50} />
+							<FaThumbsOUp size={50} onClick={this.onThumbUpClicked} />
 						</div>
 						<div className="matcherThumbDown">
-							<FaThumbsODown size={50} />
+							<FaThumbsODown size={50} onClick={this.onThumbDownClicked}/>
 						</div>
     				</div>
     			</div>
