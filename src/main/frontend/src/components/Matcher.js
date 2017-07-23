@@ -12,11 +12,11 @@ class Matcher extends React.Component {
         super(props);
         this.state = {
         		unmatched : [],
-        		actual : 0
         };
         
         this.onThumbUpClicked = this.onThumbUpClicked.bind(this);
         this.onThumbDownClicked = this.onThumbDownClicked.bind(this);
+        this.removeFirstUnmatched = this.removeFirstUnmatched.bind(this);
     }
     
     componentDidMount() {
@@ -33,37 +33,51 @@ class Matcher extends React.Component {
     }
 
     onThumbDownClicked() {
-    	console.log("thumb down clicked");
-    	let actual = this.state.actual + 1;
-    	if (actual === this.state.unmatched.length)
-    	{
-    		actual = 0;
-    	}
-    	
-    	this.setState({actual : actual});
+    	let profileForAction = this.removeFirstUnmatched();
+    	axios.patch("/api/dislike/" + profileForAction.userId)
+    	.then(({data, status}) => {
+    		if (status === 200)
+    		{
+    			console.log("disliked " + profileForAction.userName);
+    		}
+        });
     }
     
     onThumbUpClicked() {
-    	console.log("thumb up clicked");
-    	let actual = this.state.actual + 1;
-    	if (actual === this.state.unmatched.length)
+    	let profileForAction = this.removeFirstUnmatched();
+    	axios.patch("/api/like/" + profileForAction.userId)
+    	.then(({data, status}) => {
+    		if (status === 200)
+    		{
+    			console.log("disliked " + profileForAction.userName);
+    		}
+        });
+    }
+    
+    removeFirstUnmatched () {
+    	let profile = undefined;
+    	if (this.state.unmatched.length)
     	{
-    		actual = 0;
+    		let unmatched = this.state.unmatched;
+    		profile = unmatched[0];
+    		unmatched = unmatched.slice(1);
+    		this.setState({unmatched : unmatched});
     	}
     	
-    	this.setState({actual : actual});
+    	return profile;
     }
     
     renderActualUnmatchedUser() {
-    	let unmatched = this.state.unmatched[this.state.actual];
+    	let unmatched = this.state.unmatched[0];
     	if (!unmatched)
     	{
     		return;
     	}
     	return (
     			<div>
-    				{unmatched.description}
+    				{unmatched.userName}
     			</div>
+    			
     	)
     }   
     
