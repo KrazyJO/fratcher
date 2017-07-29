@@ -44,7 +44,6 @@ class Chat extends React.Component {
     }
     
     onSocketMessageReceived (message, data) {
-    	console.log("socketMessageReceived");
     	let wsmessage = JSON.parse(data);
     	if (wsmessage && wsmessage.id && wsmessage.message)
     	{
@@ -52,7 +51,6 @@ class Chat extends React.Component {
     		this.state.chatHistory.push(wsmessage);
     		this.forceUpdate();
     	}
-    	console.log(data);
     } 
     
     onSubmitMessageChange(oEvent) {
@@ -62,27 +60,28 @@ class Chat extends React.Component {
     submitMessage (oEvent) {
     	oEvent.preventDefault();
     	let message = this.state.submitMessage;
-    	console.log("submit message :): " + message);
-//    	let oSocket = User.getWebSocketConnection();
     	let oMessage = {
     		message : message,
     		read : false,
     		userIdFrom : User.id,
     		userIdTo : this.props.match.params.chatPartner
     	};
-//    	oSocket.send(JSON.stringify(oMessage));
     	axios.post("/api/chatmessage", oMessage)
     	.then(({data, status}) => {
-    		this.state.chatHistory.push(oMessage);
+    		this.state.chatHistory.push(data);
     		this.forceUpdate();
     	});
+    }
+    
+    convertToLocaleString(iValue) {
+    	return new Date(iValue).toLocaleString();
     }
     
     renderMessages () {
     	return this.state.chatHistory.map((message => {
     		return (
     				<div key={message.id}>
-    					<div>{message.userIdFrom}, {message.message}</div>
+    					<div>{message.userIdFrom}, {this.convertToLocaleString(message.createdAt)}: {message.message}</div>
 					</div>
     		)
     	}));

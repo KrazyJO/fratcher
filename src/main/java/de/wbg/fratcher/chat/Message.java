@@ -1,10 +1,11 @@
 package de.wbg.fratcher.chat;
 
-import java.sql.Date;
+import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.PrePersist;
 
 @Entity
 public class Message {
@@ -56,4 +57,8 @@ public class Message {
 		return read;
 	}
 	
+	@PrePersist
+    public void prePersist() {
+        createdAt = new Date();
+    }
 }

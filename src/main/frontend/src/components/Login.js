@@ -46,16 +46,6 @@ class Login extends React.Component {
     	};
     	
     	oSocket.onmessage = function(oEvent) {
-//    		if (typeof oEvent.data === "string")
-//    		{
-//    			console.log("websocket received message: " + oEvent.data);	
-//    		}
-//    		else
-//    		{
-//    			console.log("websocket received message: ");
-//    			console.log(oEvent.data);
-//    		}
-//    		console.log(oEvent.data);
     		Events.publish("socketMessage", oEvent.data);
     	}
     	
