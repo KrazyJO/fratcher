@@ -24,10 +24,16 @@ class Friends extends React.Component {
     onChatClicked (oEvent) {
     	console.log("onChatClicked");
     	let chatPartnerId = oEvent.target.parentElement.parentElement.dataset.user;
+    	let chatPartnerName = oEvent.target.parentElement.parentElement.dataset.userName;
     	if (!chatPartnerId)
     	{
     		chatPartnerId = oEvent.target.dataset.user;
     	}
+    	if (!chatPartnerName)
+    	{
+    		chatPartnerName = oEvent.target.dataset.userName;
+    	}
+    	User.setChatPartnerName(chatPartnerName);
     	this.props.history.push("/chat/"+chatPartnerId);
     }
     
@@ -89,7 +95,7 @@ class Friends extends React.Component {
     		return (
     				<div key={friend.userId}>
     					<div>{friend.userName}, {friend.profile.description}
-    						<FaThumbsOUp size={24} data-user={friend.userId} className={classOnlineStatus} onClick={this.onChatClicked}/>
+    						<FaThumbsOUp size={24} data-user={friend.userId} data-userName={friend.userName} className={classOnlineStatus} onClick={this.onChatClicked}/>
     					</div>
 					</div>
     		)

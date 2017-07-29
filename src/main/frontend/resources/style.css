@@ -67,3 +67,20 @@ body {
 .isOffline {
 	color: red;
 }
+.message {
+	margin-top: 15px;
+}
+.messageRight {
+	text-align: right;
+}
+.messageText {
+	padding: 5px 10px;
+	background-color: lightblue;
+	border-radius: 5px;	
+}
+.messageRight .messageText {
+	background-color: lightgreen;
+}
+.chatMessages {
+	max-height: calc(100% - 90px);
+    overflow-y: scroll;

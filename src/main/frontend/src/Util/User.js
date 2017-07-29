@@ -30,10 +30,22 @@ class User {
     	return this.oWebSocketConnection;
     }
     
+    getId() {
+    	return this.id;
+    }
+    
     getUserName() {
     	return this.userName;
     }
 
+    setChatPartnerName(sValue) {
+    	this.chatPartnerName = sValue;
+    }
+    
+    getChatPartnerName() {
+    	return this.chatPartnerName;
+    }
+    
     reset() {
     	axios.defaults.headers.common['Authorization'] = ``;
         this.userName = undefined;

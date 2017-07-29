@@ -80,9 +80,13 @@ class Chat extends React.Component {
     
     renderMessages () {
     	return this.state.chatHistory.map((message => {
+    		let bMe = message.userIdFrom === User.getId();
+    		let sClassName = bMe ? 'message messageRight' : 'message messageLeft';
+    		let userName = bMe ? 'Ich' : User.getChatPartnerName();
     		return (
-    				<div key={message.id}>
-    					<div>{message.userIdFrom}, {this.convertToLocaleString(message.createdAt)}: {message.message}</div>
+    				<div key={message.id} className={sClassName} >
+    					<div className="messageTime">{userName}, {this.convertToLocaleString(message.createdAt)}</div>
+    					<div className="messageText">{message.message}</div>
 					</div>
     		)
     	}));
@@ -93,10 +97,11 @@ class Chat extends React.Component {
 
     	
     	return (
-    			<div className="width500 center">
-    				This is the chat component!
-    				{this.renderMessages()}
-    				<div>
+    			<div className="width500 center chat">
+    				<div className="chatMessages">
+    					{this.renderMessages()}
+    				</div>
+    				<div className="chatSend">
     					<form onSubmit={this.submitMessage}>
     						<input type="text" name="message" value={this.state.submitMessage} onChange={this.onSubmitMessageChange}></input>
     						<button type="submit">Abschicken</button>
