@@ -46,9 +46,8 @@ class Navigator extends React.Component {
                     <div id="navbar" className="collapse navbar-collapse">
                         <ul className="nav navbar-nav">
                             <li><Link to="/">Home</Link></li>
-                            <li><Link to="/matcher">Matcher</Link></li>
                             {User.isAuthenticated() && 
-                            	<li><Link to="/profile">Profil</Link></li>	
+                            	<li><Link to="/matcher">Matcher</Link></li>
                             }
                             {User.isAuthenticated() && 
                             	<li><Link to="/friends">Friends</Link></li>	
@@ -62,7 +61,7 @@ class Navigator extends React.Component {
                         {
                         	User.isAuthenticated() &&
                         	<div className="navbar-right">
-	                        	<span className="navbar-text">{User.getUserName()}</span>
+	                        	<Link className="navbar-text" to="/profile">{User.getUserName()}</Link>
 	                        	<Link className="btn btn-danger navbar-btn" to="/login">Abmelden</Link>
         					</div>
                         }
