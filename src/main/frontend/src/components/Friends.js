@@ -20,6 +20,10 @@ class Friends extends React.Component {
     onChatClicked (oEvent) {
     	console.log("onChatClicked");
     	let chatPartnerId = oEvent.target.parentElement.parentElement.dataset.user;
+    	if (!chatPartnerId)
+    	{
+    		chatPartnerId = oEvent.target.dataset.user;
+    	}
     	this.props.history.push("/chat/"+chatPartnerId);
     }
     
