@@ -19,6 +19,7 @@ class Login extends React.Component {
         this.handlePasswordChange = this.handlePasswordChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.onLogoutButtonClicked = this.onLogoutButtonClicked.bind(this);
+        this.openWebSocket = this.openWebSocket.bind(this);
         
     }
     
@@ -33,6 +34,26 @@ class Login extends React.Component {
     	Events.publish("loggedIn");
     	this.props.history.push("/");
 //    	this.forceUpdate();
+    }
+    
+    openWebSocket() {
+    	var oSocket = new WebSocket("ws://localhost:8080/api/chat");
+    	
+    	oSocket.onopen = function() {
+    		console.log("websocket is now open");
+    	};
+    	
+    	oSocket.onmessage = function(oEvent) {
+    		console.log("websocket received message");
+    	}
+    	
+    	oSocket.onerror = function(oEvent) {
+    		console.log("websocket has an error...");
+    	}
+    	
+    	oSocket.onclose = function() {
+    		console.log("websocket is closed now");
+    	}
     }
     
     handleSubmit(event) {
@@ -70,6 +91,9 @@ class Login extends React.Component {
                         
                         Events.publish("loggedIn");
                         axios.defaults.headers.common['Authorization'] = `Bearer ${data.token}`;
+                        
+                        this.openWebSocket(); 
+                        
                         this.props.history.push("/");
                         break;
 
