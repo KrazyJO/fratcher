@@ -8,6 +8,7 @@ DELETE FROM USER__DISLIKED;
 DELETE FROM USER__LIKED;
 DELETE FROM USER_;
 DELETE FROM PROFILE;
+DELETE FROM MESSAGE;
 
 
 
@@ -40,3 +41,7 @@ INSERT INTO USER__LIKED (USER__ID, LIKED_ID) VALUES
 	
 INSERT INTO USER__DISLIKED (USER__ID, DISLIKED_ID) VALUES
 	(3,1);
+	
+INSERT INTO MESSAGE (ID, CREATED_AT, MESSAGE, READ, USER_ID_FROM, USER_ID_TO) VALUES
+	(1, parsedatetime('2017-05-20 05:01', 'yyyy-MM-dd HH:mm'), 'message from bob to sally', true, 1, 2),
+	(2, parsedatetime('2017-05-20 05:03', 'yyyy-MM-dd HH:mm'), 'message from sally to bob', false, 2, 1);
