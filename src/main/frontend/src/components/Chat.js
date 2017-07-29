@@ -3,6 +3,8 @@ import {translate} from "react-i18next";
 import User from "./../Util/User";
 import axios from 'axios';
 
+import Events from "pubsub-js";
+
 class Chat extends React.Component {
     constructor(props) {
         super(props);
@@ -13,10 +15,12 @@ class Chat extends React.Component {
         
         this.submitMessage = this.submitMessage.bind(this);
         this.onSubmitMessageChange = this.onSubmitMessageChange.bind(this);
+        this.onSocketMessageReceived = this.onSocketMessageReceived.bind(this);
     }
     
     componentWillUnmount () {
     	console.log("leaving chat");
+    	Events.unsubscribe("socketMessage", this.onSocketMessageReceived);
     }
     
     componentDidMount() {
@@ -25,6 +29,9 @@ class Chat extends React.Component {
     		this.props.history.push("/");
     		return;
     	}
+    	
+    	Events.subscribe("socketMessage", this.onSocketMessageReceived);
+    	
     	this.setState({chatHistory : [], submitMessage : ""});
     	let sChatPartnerId = this.props.match.params.chatPartner;
     	User.id
@@ -35,7 +42,19 @@ class Chat extends React.Component {
     		this.setState({chatHistory : data});
         });
     }
-
+    
+    onSocketMessageReceived (message, data) {
+    	console.log("socketMessageReceived");
+    	let wsmessage = JSON.parse(data);
+    	if (wsmessage && wsmessage.id && wsmessage.message)
+    	{
+    		//this is surely a message object
+    		this.state.chatHistory.push(wsmessage);
+    		this.forceUpdate();
+    	}
+    	console.log(data);
+    } 
+    
     onSubmitMessageChange(oEvent) {
     	this.setState({submitMessage: oEvent.target.value});
     }
