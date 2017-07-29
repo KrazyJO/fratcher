@@ -41,10 +41,11 @@ class Friends extends React.Component {
 
     renderFriends () {
     	return this.state.friends.map((friend => {
+    		let classOnlineStatus = friend.online ? 'isOnline' : 'isOffline';
     		return (
     				<div key={friend.userId}>
     					<div>{friend.userName}, {friend.profile.description}
-    						<FaThumbsOUp size={50} data-user={friend.userId} onClick={this.onChatClicked}/>
+    						<FaThumbsOUp size={24} data-user={friend.userId} className={classOnlineStatus} onClick={this.onChatClicked}/>
     					</div>
 					</div>
     		)

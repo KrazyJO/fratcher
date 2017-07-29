@@ -61,3 +61,9 @@ body {
 .matcherThumbUp svg,  .matcherThumbDown svg{
 	cursor: pointer;
 }
+.isOnline {
+	color: green;
+}
+.isOffline {
+	color: red;
+}

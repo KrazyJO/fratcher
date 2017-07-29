@@ -6,6 +6,8 @@ import java.util.LinkedList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import de.wbg.fratcher.chat.ChatHandler;
+import de.wbg.fratcher.chat.ChatService;
 import de.wbg.fratcher.profile.Profile;
 import de.wbg.fratcher.user.User;
 import de.wbg.fratcher.user.UserRepository;
@@ -18,6 +20,7 @@ public class MatchService {
 		public Long userId;
 		public String userName;
 		public Profile profile;
+		public boolean online;
 	}
 	
 	@Autowired
@@ -26,6 +29,9 @@ public class MatchService {
 	@Autowired
 	private UserService userService;
 	
+	@Autowired
+	private ChatService chatService;
+	
 	public Iterable<UserWithProfile> findUserMatches(Long userId)	{
 		User user = userRepository.findUserById(userId);
 		ArrayList<User> liked = new ArrayList<User>(user.getLiked());
@@ -33,8 +39,6 @@ public class MatchService {
 		Iterable<User> userMatches = userRepository.findMatchesByUser(user.getId(), liked);
 		
 		return this.createUserWithProfiles(userMatches);
-		
-//		return userMatches;
 	}
 	
 	/**
@@ -49,18 +53,6 @@ public class MatchService {
 		ArrayList<User> disliked = new ArrayList<User>(user.getDisliked());
 		
 		Iterable<User> userUnmatched = userRepository.findUserUnmatched(user.getId(), liked, disliked);
-//		LinkedList<UserWithProfile> unmatched = new LinkedList<>();
-//		UserWithProfile userWithProfile;
-//		for (User u : userUnmatched)
-//		{
-//			userWithProfile = new UserWithProfile();
-//			userWithProfile.userId = u.getId();
-//			userWithProfile.userName = u.getUserName();
-//			userWithProfile.profile = u.getProfile();
-//			unmatched.add(userWithProfile);
-//		}
-//		
-//		return unmatched;
 		
 		return this.createUserWithProfiles(userUnmatched);
 	}
@@ -91,6 +83,7 @@ public class MatchService {
 			userWithProfile.userId = u.getId();
 			userWithProfile.userName = u.getUserName();
 			userWithProfile.profile = u.getProfile();
+			userWithProfile.online = chatService.isUserOnline(u);
 			profiles.add(userWithProfile);
 		}
 		

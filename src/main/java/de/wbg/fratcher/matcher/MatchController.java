@@ -23,6 +23,8 @@ public class MatchController {
 	@Autowired
 	private UserService userService;
 	
+	
+	
 	@RequestMapping(value = "/api/matches", method = RequestMethod.GET)
 	public ResponseEntity<Iterable<UserWithProfile>> getUsersMatched() 
 	{
@@ -33,7 +35,6 @@ public class MatchController {
 		
 		Long userId = userService.getCurrentUser().getId();
 		Iterable<UserWithProfile> userProfiles = matchService.findUserMatches(userId);
-		
 		
 		return ResponseEntity.ok(userProfiles);
 	}

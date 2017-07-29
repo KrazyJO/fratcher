@@ -11,6 +11,8 @@ import org.springframework.web.socket.handler.TextWebSocketHandler;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import de.wbg.fratcher.user.User;
+
 public class ChatHandler extends TextWebSocketHandler {
 	
 	
@@ -21,11 +23,16 @@ public class ChatHandler extends TextWebSocketHandler {
 	private ConcurrentLinkedQueue<WebSocketSession> clients;
 	
 	private ConcurrentHashMap<Long, String> userToSession = new ConcurrentHashMap<>();
+	private ConcurrentHashMap<String, Long> sessionToUser= new ConcurrentHashMap<>();
 	
     public ChatHandler() {
         clients = new ConcurrentLinkedQueue<>();
     }
 
+    public boolean isUserOnline(User user) {
+    	return userToSession.containsKey(user.getId());
+    }
+    
     public WebSocketSession getSessionForUser(Long Id) {
     	String sessionId = userToSession.get(Id);
     	if (sessionId == null)
@@ -57,6 +64,7 @@ public class ChatHandler extends TextWebSocketHandler {
         	{
         		userId = mapper.readValue(message.getPayload(), UserId.class);	
         		userToSession.put(Long.valueOf(userId.user), session.getId());
+        		sessionToUser.put(session.getId(), Long.valueOf(userId.user));
              	System.out.println(userId);
         	}
         	catch (Exception e)
@@ -65,17 +73,6 @@ public class ChatHandler extends TextWebSocketHandler {
         	}
         	
         }
-        
-//    	Iterator<WebSocketSession> it = clients.iterator();
-//        while (it.hasNext()) {
-//            WebSocketSession chatPartner = it.next();
-////            if (chatPartner.equals(session)) {
-////                // Do not send messages to yourself.
-////                continue;
-////            }
-//
-//            chatPartner.sendMessage(message);
-//        }
     }
 
     @Override
@@ -86,7 +83,10 @@ public class ChatHandler extends TextWebSocketHandler {
 
     @Override
     public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
-        clients.remove(session);
+        Long userId = sessionToUser.get(session.getId());
+        sessionToUser.remove(session.getId());
+        userToSession.remove(userId);
+    	clients.remove(session);
     }
 	
 }

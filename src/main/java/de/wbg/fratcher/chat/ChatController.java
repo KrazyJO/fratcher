@@ -25,20 +25,12 @@ import de.wbg.fratcher.user.UserService;
 @Configuration
 @EnableWebSocket
 @RestController
-public class ChatController implements WebSocketConfigurer {
+public class ChatController {
 
 	@Autowired
 	private ChatService chatService;
 	@Autowired
 	private UserService userService;
-	
-	private ChatHandler chatHandler;
-	
-	@Override
-	public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
-		this.chatHandler = new ChatHandler();
-		registry.addHandler(this.chatHandler, "/api/chat");
-	}
 	
 	@RequestMapping(value = "/api/chatmessage", method = RequestMethod.POST)
 	public ResponseEntity<Message> postMessage(@RequestBody Message message) {
@@ -49,22 +41,6 @@ public class ChatController implements WebSocketConfigurer {
 		}
 		
 		chatService.newMessage(message);
-		
-		WebSocketSession session = chatHandler.getSessionForUser(message.getUserIdTo());
-		if (session != null)
-		{
-			try {
-				ObjectMapper mapper = new ObjectMapper();
-				session.sendMessage(new TextMessage(mapper.writeValueAsString(message)));
-			} catch (IOException e) {
-				System.out.println("error in sendMessage");
-				e.printStackTrace();
-			}
-		}
-		else
-		{
-			System.out.println("no session found");
-		}
 		
 		return ResponseEntity.ok(message);
 	}
