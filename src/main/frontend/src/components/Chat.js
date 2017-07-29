@@ -15,6 +15,9 @@ class Chat extends React.Component {
         this.onSubmitMessageChange = this.onSubmitMessageChange.bind(this);
     }
     
+    componentWillUnmount () {
+    	console.log("leaving chat");
+    }
     
     componentDidMount() {
     	if (User.isNotAuthenticated())
