@@ -18,6 +18,7 @@ class Friends extends React.Component {
         this.renderFriends = this.renderFriends.bind(this);
         this.onChatClicked = this.onChatClicked.bind(this);
         this.onSocketMessageReceived = this.onSocketMessageReceived.bind(this);
+        this.setOnlineStatus = this.setOnlineStatus.bind(this);
     }
     
     onChatClicked (oEvent) {
@@ -58,37 +59,29 @@ class Friends extends React.Component {
     	if (wsmessage && wsmessage.online)
     	{
     		let userId = wsmessage.online;
-    		let bForceUpdate = false;
-    		this.state.friends.forEach((user) => {
-    			if (user.userId == userId)
-    			{
-    				user.online = true;
-    				bForceUpdate = true;
-    			}
-    		});
-    		if (bForceUpdate)
-    		{
-    			this.forceUpdate();
-    		}
-    		
+    		this.setOnlineStatus(userId, true);
     	}
     	if (wsmessage && wsmessage.offline)
     	{
     		let userId = wsmessage.offline;
-    		let bForceUpdate = false;
-    		this.state.friends.forEach((user) => {
-    			if (user.userId == userId)
-    			{
-    				user.online = false;
-    				bForceUpdate = true;
-    			}
-    		});
-    		if (bForceUpdate)
-    		{
-    			this.forceUpdate();
-    		}
+    		this.setOnlineStatus(userId, false);
     	}
     } 
+    
+    setOnlineStatus(userId, bOnline) {
+    	let bForceUpdate = false;
+		this.state.friends.forEach((user) => {
+			if (user.userId == userId)
+			{
+				user.online = bOnline;
+				bForceUpdate = true;
+			}
+		});
+		if (bForceUpdate)
+		{
+			this.forceUpdate();
+		}
+    }
     
     renderFriends () {
     	return this.state.friends.map((friend => {
