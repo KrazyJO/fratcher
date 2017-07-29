@@ -98,6 +98,10 @@ class Chat extends React.Component {
     	
     	return (
     			<div className="center chat">
+    				<div className="chatPartnerName">
+    					<div className="onlineStatus"/>
+    					<div className="chatPartnerNameText">{User.getChatPartnerName()}</div>
+    				</div>
     				<div className="chatMessages">
     					{this.renderMessages()}
     				</div>
