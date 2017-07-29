@@ -45,6 +45,7 @@ class Chat extends React.Component {
     
     onSocketMessageReceived (message, data) {
     	let wsmessage = JSON.parse(data);
+    	console.log(wsmessage);
     	if (wsmessage && wsmessage.id && wsmessage.message)
     	{
     		//this is surely a message object
