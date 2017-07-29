@@ -19,6 +19,7 @@ class Friends extends React.Component {
     
     onChatClicked (oEvent) {
     	console.log("onChatClicked");
+    	this.props.history.push("/chat");
     }
     
     componentDidMount() {
