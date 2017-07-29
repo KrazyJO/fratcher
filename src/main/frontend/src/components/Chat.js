@@ -1,20 +1,28 @@
 import React from "react";
 import {translate} from "react-i18next";
-
-
-//icons
+import User from "./../Util/User";
+import axios from 'axios';
 
 class Chat extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+        		chatHistory : []
         };
         
     }
     
     
     componentDidMount() {
-    	console.log("chat will mount");
+    	this.setState({chatHistory : []});
+    	let sChatPartnerId = this.props.match.params.chatPartner;
+    	User.id
+    	let sUrl = "/api/chat/"+User.id+"/"+sChatPartnerId; 
+    	axios.get(sUrl)
+    	.then(({data, status}) => {
+    		console.log(data);
+    		this.setState({chatHistory : data});
+        });
     }
 
 //    renderFriends () {

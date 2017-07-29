@@ -36,7 +36,7 @@ class Root extends React.Component {
                     <Route path="/register" component={Register}/>
                     <Route path="/profile" component={Profile}/>
                     <Route path="/friends" component={Friends} />
-                    <Route path="/chat"	component={Chat} />
+                    <Route path="/chat/:chatPartner" component={Chat} />
                     {/*Default route*/}
                     <Route path="/" component={LoggedOut}/>
                 </Switch>

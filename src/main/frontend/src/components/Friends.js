@@ -19,11 +19,11 @@ class Friends extends React.Component {
     
     onChatClicked (oEvent) {
     	console.log("onChatClicked");
-    	this.props.history.push("/chat");
+    	let chatPartnerId = oEvent.target.parentElement.parentElement.dataset.user;
+    	this.props.history.push("/chat/"+chatPartnerId);
     }
     
     componentDidMount() {
-    	console.log("friends will mount");
     	axios.get("/api/matches")
     	.then(({data, status}) => {
     		this.setState({friends : data});
@@ -35,7 +35,7 @@ class Friends extends React.Component {
     		return (
     				<div key={friend.userId}>
     					<div>{friend.userName}, {friend.profile.description}
-    						<FaThumbsOUp size={50} data-fratcher-chat-user={friend.userId} onClick={this.onChatClicked}/>
+    						<FaThumbsOUp size={50} data-user={friend.userId} onClick={this.onChatClicked}/>
     					</div>
 					</div>
     		)
