@@ -34,6 +34,7 @@ public class ChatHandler extends TextWebSocketHandler {
     @Override
     public void afterConnectionEstablished(WebSocketSession session) throws Exception {
         clients.add(session);
+        session.sendMessage(new TextMessage("say hello to the server :)"));
     }
 
     @Override

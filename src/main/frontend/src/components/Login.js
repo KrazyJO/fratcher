@@ -44,7 +44,7 @@ class Login extends React.Component {
     	};
     	
     	oSocket.onmessage = function(oEvent) {
-    		console.log("websocket received message");
+    		console.log("websocket received message: " + oEvent.data);
     	}
     	
     	oSocket.onerror = function(oEvent) {
