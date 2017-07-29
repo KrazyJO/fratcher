@@ -7,14 +7,17 @@ class Chat extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-        		chatHistory : []
+        		chatHistory : [],
+        		submitMessage : ""
         };
         
+        this.submitMessage = this.submitMessage.bind(this);
+        this.onSubmitMessageChange = this.onSubmitMessageChange.bind(this);
     }
     
     
     componentDidMount() {
-    	this.setState({chatHistory : []});
+    	this.setState({chatHistory : [], submitMessage : ""});
     	let sChatPartnerId = this.props.match.params.chatPartner;
     	User.id
     	let sUrl = "/api/chat/"+User.id+"/"+sChatPartnerId; 
@@ -25,6 +28,16 @@ class Chat extends React.Component {
         });
     }
 
+    onSubmitMessageChange(oEvent) {
+    	this.setState({submitMessage: oEvent.target.value});
+    }
+    
+    submitMessage (oEvent) {
+    	oEvent.preventDefault();
+    	let message = this.state.submitMessage;
+    	console.log("submit message :): " + message);
+    }
+    
     renderMessages () {
     	return this.state.chatHistory.map((message => {
     		return (
@@ -43,6 +56,12 @@ class Chat extends React.Component {
     			<div className="width500 center">
     				This is the chat component!
     				{this.renderMessages()}
+    				<div>
+    					<form onSubmit={this.submitMessage}>
+    						<input type="text" name="message" value={this.state.submitMessage} onChange={this.onSubmitMessageChange}></input>
+    						<button type="submit">Abschicken</button>
+    					</form>
+    				</div>
     			</div>
     	);
     }
