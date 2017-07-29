@@ -3,6 +3,9 @@ import {translate} from "react-i18next";
 
 import axios from "axios";
 
+//icons
+import FaThumbsOUp from "react-icons/lib/fa/wechat";
+
 class Friends extends React.Component {
     constructor(props) {
         super(props);
@@ -11,6 +14,11 @@ class Friends extends React.Component {
         };
         
         this.renderFriends = this.renderFriends.bind(this);
+        this.onChatClicked = this.onChatClicked.bind(this);
+    }
+    
+    onChatClicked (oEvent) {
+    	console.log("onChatClicked");
     }
     
     componentDidMount() {
@@ -24,7 +32,11 @@ class Friends extends React.Component {
     renderFriends () {
     	return this.state.friends.map((friend => {
     		return (
-    				<div key={friend.userId}>{friend.userName}, {friend.profile.description}</div>
+    				<div key={friend.userId}>
+    					<div>{friend.userName}, {friend.profile.description}
+    						<FaThumbsOUp size={50} data-fratcher-chat-user={friend.userId} onClick={this.onChatClicked}/>
+    					</div>
+					</div>
     		)
     	}));
     }
