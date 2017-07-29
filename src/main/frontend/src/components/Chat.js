@@ -97,14 +97,14 @@ class Chat extends React.Component {
 
     	
     	return (
-    			<div className="width500 center chat">
+    			<div className="center chat">
     				<div className="chatMessages">
     					{this.renderMessages()}
     				</div>
     				<div className="chatSend">
-    					<form onSubmit={this.submitMessage}>
-    						<input type="text" name="message" value={this.state.submitMessage} onChange={this.onSubmitMessageChange}></input>
-    						<button type="submit">Abschicken</button>
+    					<form className="form-horizontal center chatSubmitContainer" onSubmit={this.submitMessage}>
+    						<input className="form-control" type="text" name="message" value={this.state.submitMessage} onChange={this.onSubmitMessageChange}></input>
+    						<button className="btnRight btn btn-success btnSignIn" type="submit">Abschicken</button>
     					</form>
     				</div>
     			</div>
