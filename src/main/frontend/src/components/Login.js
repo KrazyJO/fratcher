@@ -42,10 +42,20 @@ class Login extends React.Component {
     	
     	oSocket.onopen = function() {
     		console.log("websocket is now open");
+    		oSocket.send('{"user":"' +User.id+ '"}');
     	};
     	
     	oSocket.onmessage = function(oEvent) {
-    		console.log("websocket received message: " + oEvent.data);
+    		if (typeof oEvent.data === "string")
+    		{
+    			console.log("websocket received message: " + oEvent.data);	
+    		}
+    		else
+    		{
+    			console.log("websocket received message: ");
+    			console.log(oEvent.data);
+    		}
+    		console.log(oEvent.data);
     	}
     	
     	oSocket.onerror = function(oEvent) {

@@ -44,6 +44,19 @@ class Chat extends React.Component {
     	oEvent.preventDefault();
     	let message = this.state.submitMessage;
     	console.log("submit message :): " + message);
+//    	let oSocket = User.getWebSocketConnection();
+    	let oMessage = {
+    		message : message,
+    		read : false,
+    		userIdFrom : User.id,
+    		userIdTo : this.props.match.params.chatPartner
+    	};
+//    	oSocket.send(JSON.stringify(oMessage));
+    	axios.post("/api/chatmessage", oMessage)
+    	.then(({data, status}) => {
+    		this.state.chatHistory.push(oMessage);
+    		this.forceUpdate();
+    	});
     }
     
     renderMessages () {

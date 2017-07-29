@@ -14,4 +14,7 @@ public class ChatService {
 		return messageRepository.findMessagesForUser(1L, 2L);
 	}
 	
+	public void newMessage(Message message) {
+		this.messageRepository.save(message);
+	}
 }
