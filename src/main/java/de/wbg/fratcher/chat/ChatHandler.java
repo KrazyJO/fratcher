@@ -65,7 +65,16 @@ public class ChatHandler extends TextWebSocketHandler {
         		userId = mapper.readValue(message.getPayload(), UserId.class);	
         		userToSession.put(Long.valueOf(userId.user), session.getId());
         		sessionToUser.put(session.getId(), Long.valueOf(userId.user));
-             	System.out.println(userId);
+        		
+        		//say hello
+                Iterator<WebSocketSession> it = clients.iterator();
+            	while (it.hasNext()) {
+            		WebSocketSession chatPartner = it.next();
+            		if(chatPartner.isOpen())
+            		{
+            			chatPartner.sendMessage(new TextMessage("{\"online\":\"" +userId.user+ "\"}"));
+            		}
+            	}
         	}
         	catch (Exception e)
         	{
@@ -86,6 +95,17 @@ public class ChatHandler extends TextWebSocketHandler {
         Long userId = sessionToUser.get(session.getId());
         sessionToUser.remove(session.getId());
         userToSession.remove(userId);
+        
+        //say goodbye
+        Iterator<WebSocketSession> it = clients.iterator();
+    	while (it.hasNext()) {
+    		WebSocketSession chatPartner = it.next();
+    		if(chatPartner.isOpen())
+    		{
+    			chatPartner.sendMessage(new TextMessage("{\"offline\":\"" +userId+ "\"}"));
+    		}
+    	}
+        
     	clients.remove(session);
     }
 	
