@@ -22,6 +22,14 @@ class User {
         this.profileId = data.profileId;
     }
     
+    setWebSocketConnection(oWebSocketConnection) {
+    	this.oWebSocketConnection = oWebSocketConnection;
+    }
+    
+    getWebSocketConnection() {
+    	return this.oWebSocketConnection;
+    }
+    
     getUserName() {
     	return this.userName;
     }
@@ -31,6 +39,11 @@ class User {
         this.userName = undefined;
         this.id = -1;
         this.inRegistrationProcess = false;
+        var oWs = this.getWebSocketConnection();
+        if (oWs)
+        {
+        	oWs.close();
+        }
     }
     
     isInRegistrationProcess () {

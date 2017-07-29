@@ -38,6 +38,7 @@ class Login extends React.Component {
     
     openWebSocket() {
     	var oSocket = new WebSocket("ws://localhost:8080/api/chat");
+    	User.setWebSocketConnection(oSocket);
     	
     	oSocket.onopen = function() {
     		console.log("websocket is now open");
