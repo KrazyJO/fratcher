@@ -1,6 +1,6 @@
 import React from "react";
 import {translate} from "react-i18next";
-
+import User from "./../Util/User";
 import axios from "axios";
 
 //icons
@@ -24,6 +24,11 @@ class Friends extends React.Component {
     }
     
     componentDidMount() {
+    	if (User.isNotAuthenticated())
+    	{
+    		this.props.history.push("/");
+    		return;
+    	}
     	axios.get("/api/matches")
     	.then(({data, status}) => {
     		this.setState({friends : data});

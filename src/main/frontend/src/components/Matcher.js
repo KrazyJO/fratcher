@@ -20,7 +20,11 @@ class Matcher extends React.Component {
     }
     
     componentDidMount() {
-    	console.log("matcher component did mount");
+    	if (User.isNotAuthenticated())
+    	{
+    		this.props.history.push("/");
+    		return;
+    	}
     	if (User.isAuthenticated())
     	{
     		axios.get("/api/unmatched")
