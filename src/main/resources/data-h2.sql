@@ -44,4 +44,7 @@ INSERT INTO USER__DISLIKED (USER__ID, DISLIKED_ID) VALUES
 	
 INSERT INTO MESSAGE (ID, CREATED_AT, MESSAGE, READ, USER_ID_FROM, USER_ID_TO) VALUES
 	(1, parsedatetime('2017-05-20 05:01', 'yyyy-MM-dd HH:mm'), 'message from bob to sally', true, 1, 2),
-	(2, parsedatetime('2017-05-20 05:03', 'yyyy-MM-dd HH:mm'), 'message from sally to bob', false, 2, 1);
+	(2, parsedatetime('2017-05-20 05:03', 'yyyy-MM-dd HH:mm'), 'message from sally to bob 2', false, 2, 1),
+	(3, parsedatetime('2017-05-20 05:02', 'yyyy-MM-dd HH:mm'), 'message from sally to bob 1', false, 2, 1),
+	(4, parsedatetime('2017-05-20 05:03', 'yyyy-MM-dd HH:mm'), 'message from bob to kai', false, 1, 3),
+	(5, parsedatetime('2017-05-20 05:03', 'yyyy-MM-dd HH:mm'), 'message from kai to sally', false, 3, 2);
