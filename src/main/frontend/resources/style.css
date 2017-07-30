@@ -76,7 +76,10 @@ body {
 .messageText {
 	padding: 5px 10px;
 	background-color: lightblue;
-	border-radius: 5px;	
+	border-radius: 5px;
+	font-size: 17px;
+    max-width: 100%;
+    word-break: break-all;
 }
 .messageRight .messageText {
 	background-color: lightgreen;
@@ -147,4 +150,7 @@ body {
 }
 .chatPartnerNameText {
 	padding-left: 30px;
+}
+.messageTime {
+	font-size: 13px;
 }

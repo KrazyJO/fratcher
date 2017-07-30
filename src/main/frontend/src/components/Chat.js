@@ -87,7 +87,7 @@ class Chat extends React.Component {
     		let userName = bMe ? 'Ich' : User.getChatPartnerName();
     		return (
     				<div key={message.id} className={sClassName} >
-    					<div className="messageTime">{userName}, {this.convertToLocaleString(message.createdAt)}</div>
+    					<div className="messageTime">{userName} ● {this.convertToLocaleString(message.createdAt)}</div>
     					<div className="messageText">{message.message}</div>
 					</div>
     		)
