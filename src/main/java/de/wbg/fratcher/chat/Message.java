@@ -2,6 +2,7 @@ package de.wbg.fratcher.chat;
 
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -10,9 +11,12 @@ import javax.persistence.PrePersist;
 @Entity
 public class Message {
 
+	public static final int MESSAGE_LENGTH = 65536;
+	
 	@Id
 	@GeneratedValue
 	private Long id;
+	@Column(length = Message.MESSAGE_LENGTH)
 	private String message;
 	private Date createdAt;
 	private Long userIdFrom;
