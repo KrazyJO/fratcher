@@ -67,6 +67,8 @@ class Chat extends React.Component {
     		userIdFrom : User.id,
     		userIdTo : this.props.match.params.chatPartner
     	};
+    	//delete message in form input
+    	this.state.submitMessage = "";
     	axios.post("/api/chatmessage", oMessage)
     	.then(({data, status}) => {
     		this.state.chatHistory.push(data);
