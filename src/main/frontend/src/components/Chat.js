@@ -66,7 +66,8 @@ class Chat extends React.Component {
     	{
     		//this is surely a message object
     		this.state.chatHistory.push(wsmessage);
-    		this.forceUpdate();
+    		this.setState({submitted : true});
+//    		this.forceUpdate();
     	}
     	if (wsmessage && wsmessage.online)
     	{
@@ -100,11 +101,12 @@ class Chat extends React.Component {
     		userIdTo : this.props.match.params.chatPartner
     	};
     	//delete message in form input
-    	this.state.submitMessage = "";
+    	this.setState({submitMessage : ""});
     	axios.post("/api/chatmessage", oMessage)
     	.then(({data, status}) => {
     		this.state.chatHistory.push(data);
-    		this.forceUpdate();
+//    		this.forceUpdate();
+    		this.setState({submitted : true});
     	});
     }
     
