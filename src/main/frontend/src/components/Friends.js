@@ -19,6 +19,7 @@ class Friends extends React.Component {
         this.onChatClicked = this.onChatClicked.bind(this);
         this.onSocketMessageReceived = this.onSocketMessageReceived.bind(this);
         this.setOnlineStatus = this.setOnlineStatus.bind(this);
+        this.setChatPartnerOnlineStatusInUser = this.setChatPartnerOnlineStatusInUser.bind(this);
     }
     
     onChatClicked (oEvent) {
@@ -29,12 +30,25 @@ class Friends extends React.Component {
     	{
     		chatPartnerId = oEvent.target.dataset.user;
     	}
+    	this.setChatPartnerOnlineStatusInUser(chatPartnerId);
     	if (!chatPartnerName)
     	{
     		chatPartnerName = oEvent.target.dataset.userName;
     	}
     	User.setChatPartnerName(chatPartnerName);
     	this.props.history.push("/chat/"+chatPartnerId);
+    }
+    
+    setChatPartnerOnlineStatusInUser (partnerId) {
+    	let bIsOnline = false; 
+    	this.state.friends.forEach((friend) => {
+    		if (friend.userId == partnerId)
+    		{
+    			bIsOnline = friend.online;
+    			return false; //break
+    		}
+    	});
+    	User.setChatPartnerOnlineStatus(bIsOnline);
     }
     
     componentDidMount() {

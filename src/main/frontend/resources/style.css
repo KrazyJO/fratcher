@@ -154,3 +154,6 @@ body {
 .messageTime {
 	font-size: 13px;
 }
+.onlineStatus.isOnline {
+	background-color: green;
+}

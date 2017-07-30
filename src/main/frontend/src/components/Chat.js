@@ -10,7 +10,8 @@ class Chat extends React.Component {
         super(props);
         this.state = {
         		chatHistory : [],
-        		submitMessage : ""
+        		submitMessage : "",
+        		partnerIsOnline : false
         };
         
         this.submitMessage = this.submitMessage.bind(this);
@@ -41,6 +42,8 @@ class Chat extends React.Component {
     		console.log(data);
     		this.setState({chatHistory : data});
         });
+    	
+    	this.state.partnerIsOnline = User.getChatPartnerOnlineStatus();
     }
     
     onSocketMessageReceived (message, data) {
@@ -51,6 +54,22 @@ class Chat extends React.Component {
     		//this is surely a message object
     		this.state.chatHistory.push(wsmessage);
     		this.forceUpdate();
+    	}
+    	if (wsmessage && wsmessage.online)
+    	{
+    		let userId = wsmessage.online;
+    		if (userId == this.props.match.params.chatPartner)
+    		{
+    			this.setState({partnerIsOnline: true});
+    		}
+    	}
+    	if (wsmessage && wsmessage.offline)
+    	{
+    		let userId = wsmessage.offline;
+    		if (userId == this.props.match.params.chatPartner)
+    		{
+    			this.setState({partnerIsOnline: false});
+    		}
     	}
     } 
     
@@ -96,12 +115,17 @@ class Chat extends React.Component {
     
     render () {
     	const {t} = this.props;
-
+    	let sOnlineClass = 'onlineStatus';
+    	if (this.state.partnerIsOnline)
+    	{
+    		sOnlineClass += " isOnline";
+    	}
+    	
     	
     	return (
     			<div className="center chat">
     				<div className="chatPartnerName">
-    					<div className="onlineStatus"/>
+    					<div className={sOnlineClass} />
     					<div className="chatPartnerNameText">{User.getChatPartnerName()}</div>
     				</div>
     				<div className="chatMessages">

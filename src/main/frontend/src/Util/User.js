@@ -22,6 +22,14 @@ class User {
         this.profileId = data.profileId;
     }
     
+    setChatPartnerOnlineStatus(bValue) {
+    	this.chatPartnerOnlineStatus = bValue;
+    }
+    
+    getChatPartnerOnlineStatus() {
+    	return this.chatPartnerOnlineStatus;
+    }
+    
     setWebSocketConnection(oWebSocketConnection) {
     	this.oWebSocketConnection = oWebSocketConnection;
     }
