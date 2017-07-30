@@ -65,9 +65,12 @@ class Chat extends React.Component {
     	if (wsmessage && wsmessage.id && wsmessage.message)
     	{
     		//this is surely a message object
-    		this.state.chatHistory.push(wsmessage);
-    		this.setState({submitted : true});
-//    		this.forceUpdate();
+    		if (wsmessage.userIdFrom == this.props.match.params.chatPartner)
+    		{ 
+    			//this is my chat partner
+    			this.state.chatHistory.push(wsmessage);
+        		this.setState({submitted : true});
+    		}
     	}
     	if (wsmessage && wsmessage.online)
     	{
