@@ -11,7 +11,8 @@ class Chat extends React.Component {
         this.state = {
         		chatHistory : [],
         		submitMessage : "",
-        		partnerIsOnline : false
+        		partnerIsOnline : false,
+        		submitted : false
         };
         
         this.submitMessage = this.submitMessage.bind(this);
@@ -41,9 +42,21 @@ class Chat extends React.Component {
     	.then(({data, status}) => {
     		console.log(data);
     		this.setState({chatHistory : data});
+    		this.setState({submitted : true});
         });
     	
     	this.state.partnerIsOnline = User.getChatPartnerOnlineStatus();
+    }
+    
+    /**
+     * for new messages scroll down.
+     */
+    componentDidUpdate() {
+    	if (this.state.submitted) {
+    		let eChat = document.getElementById("chat");
+    		eChat.scrollTop = eChat.scrollHeight;
+    		this.setState({submitted:false});
+    	}
     }
     
     onSocketMessageReceived (message, data) {
@@ -128,7 +141,7 @@ class Chat extends React.Component {
     					<div className={sOnlineClass} />
     					<div className="chatPartnerNameText">{User.getChatPartnerName()}</div>
     				</div>
-    				<div className="chatMessages">
+    				<div id="chat" className="chatMessages">
     					{this.renderMessages()}
     				</div>
     				<div className="chatSend">
