@@ -16,5 +16,8 @@ public interface MessageRepository extends CrudRepository<Message, Long>{
 	List<Message> findMessagesForUserByList(@Param("userList") ArrayList<Long> userList);
 	
 	@Query("SELECT COUNT(m) FROM Message m WHERE m.userIdTo = :userId and m.userIdFrom = :userIdFrom and m.read = false")
-	int findUserUnreadMessages(@Param("userId") Long userId, @Param("userIdFrom") Long userIdFrom);
+	int countUserUnreadMessages(@Param("userId") Long userId, @Param("userIdFrom") Long userIdFrom);
+	
+	@Query("SELECT m FROM Message m WHERE m.userIdTo = :userId and m.userIdFrom = :userIdFrom and m.read = false")
+	List<Message> findUserUnreadMessages(@Param("userId") Long userId, @Param("userIdFrom") Long userIdFrom);
 }

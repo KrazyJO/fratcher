@@ -50,7 +50,7 @@ public class ChatController {
 		
 	}
 	
-	@RequestMapping(value = "api/chat/notification/{userId}")
+	@RequestMapping(value = "/api/chat/notification/{userId}", method = RequestMethod.GET)
 	public ResponseEntity<Iterable<Notification>> getUserNotifications(@PathVariable Long userId) {
 		if (userService.isAnonymous())
 		{
@@ -62,4 +62,16 @@ public class ChatController {
 		return ResponseEntity.ok(notifications);
 	}
 
+	@RequestMapping(value = "/api/chat/messagesRead/{userId}", method = RequestMethod.GET)
+	public ResponseEntity<Object> triggerMessagesRead(@PathVariable Long userId) {
+		if (userService.isAnonymous())
+		{
+			return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+		}
+		
+		chatService.triggerMessagesRead(userId);
+		
+		return ResponseEntity.ok(null);
+	}
+	
 }
