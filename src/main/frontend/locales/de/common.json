@@ -20,5 +20,8 @@
   "stayOnline" : "Angemeldet bleiben",
   "cancel" : "Abbrechen",
   "logoutText" : "Sind Sie sicher das Sie sich abmelden möchten? Sie können sich jederzeit wieder anmelden",
-  "logout" : "Abmelden"
+  "logout" : "Abmelden",
+  "userSays" : " schreibt über sich:",
+  "noMatchesPossible" : "Es gibt aktuell keine User mehr für dich! Warte, bis der Bestand gewachsen ist.",
+  "yourAnswer" : "Gefällt dir der Text?"
 }

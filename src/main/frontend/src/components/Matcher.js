@@ -75,9 +75,15 @@ class Matcher extends React.Component {
     	{
     		return;
     	}
+    	const {t} = this.props;
     	return (
     			<div>
-    				{unmatched.userName}
+    				<div style={{textAlign: "center", fontSize: "16px"}}>{unmatched.userName}{t('userSays')}</div>
+    				<div>
+    					<pre style={{marginTop: "5px", textAlign: "center", minHeight: "150px", fontSize: "16px"}}>
+    						{unmatched.profile.description}
+    					</pre>
+    				</div>
     			</div>
     			
     	)
@@ -90,18 +96,19 @@ class Matcher extends React.Component {
     	if (!this.state.unmatched[0])
     	{
     		component = 
-    			<div>
-				 Es gibt aktuell keine User mehr für dich! Warte, bis der Bestand gewachsen ist.
-				</div>
+    			<div>{t('noMatchesPossible')}</div>
     	}
     	else
     	{
     		component =
-    		<div className="component">
+    		<div className="component width500 center">
 				<div>
 					{this.renderActualUnmatchedUser()}
 				</div>
-				<div className="matcherThumbs">
+				<div style={{marginTop: "25px"}} className="matcherThumbs">
+					<div style={{display: "block", marginBottom: "25px", fontWeight: "bold", fontSize: "17px"}}>
+						{t('yourAnswer')}
+					</div>
 					<div className="matcherThumbUp">
 						<FaThumbsOUp size={50} onClick={this.onThumbUpClicked} />
 					</div>
