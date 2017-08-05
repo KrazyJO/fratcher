@@ -70,9 +70,8 @@ class User {
     	var oSocket = new WebSocket("ws://localhost:8080/api/chat");
     	this.setWebSocketConnection(oSocket);
     	oSocket.onopen = function() {
-    		console.log("websocket is now open");
-    		oSocket.send('{"user":"' +User.id+ '"}');
-    	};
+    		oSocket.send('{"user":"' +this.id+ '"}');
+    	}.bind(this);
     	
     	oSocket.onmessage = function(oEvent) {
     		Events.publish("socketMessage", oEvent.data)
@@ -83,7 +82,6 @@ class User {
     	}
     	
     	oSocket.onclose = function() {
-    		console.log("websocket is closed now");
     		this.setWebSocketConnection(undefined);
     	}.bind(this);
     }
