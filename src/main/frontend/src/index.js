@@ -11,7 +11,7 @@ import {HashRouter as Router, Route, Switch} from "react-router-dom";
 import {Link} from "react-router-dom";
 
 //own component
-import LoggedOut from './components/LoggedOut';
+import Home from './components/Home';
 import Matcher from './components/Matcher';
 import Navigator from './components/Navigator';
 import Register from './components/Register';
@@ -39,7 +39,7 @@ class Root extends React.Component {
                     <Route path="/friends" component={Friends} />
                     <Route path="/chat/:chatPartner" component={Chat} />
                     {/*Default route*/}
-                    <Route path="/" component={LoggedOut}/>
+                    <Route path="/" component={Home}/>
                 </Switch>
             </div>
         );

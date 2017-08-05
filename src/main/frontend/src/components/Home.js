@@ -6,7 +6,7 @@ import Events from 'pubsub-js';
 import User from "./../Util/User";
 import UserProfile from './../Util/UserProfile';
 
-class LoggedOut extends React.Component {
+class Home extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -66,4 +66,4 @@ class LoggedOut extends React.Component {
     }
 }
 
-export default translate()(LoggedOut);
+export default translate()(Home);
