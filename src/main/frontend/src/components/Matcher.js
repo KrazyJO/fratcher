@@ -29,8 +29,6 @@ class Matcher extends React.Component {
     	{
     		axios.get("/api/unmatched")
     		.then(({data, status}) => {
-	    		console.log("unmatched: ");
-	    		console.log(data);
 	    		this.setState({unmatched : data});
 	        });
     	}
@@ -38,24 +36,24 @@ class Matcher extends React.Component {
 
     onThumbDownClicked() {
     	let profileForAction = this.removeFirstUnmatched();
-    	axios.patch("/api/dislike/" + profileForAction.userId)
-    	.then(({data, status}) => {
-    		if (status === 200)
-    		{
-    			console.log("disliked " + profileForAction.userName);
-    		}
-        });
+    	axios.patch("/api/dislike/" + profileForAction.userId);
+//    	.then(({data, status}) => {
+//    		if (status === 200)
+//    		{
+//    			console.log("disliked " + profileForAction.userName);
+//    		}
+//        });
     }
     
     onThumbUpClicked() {
     	let profileForAction = this.removeFirstUnmatched();
-    	axios.patch("/api/like/" + profileForAction.userId)
-    	.then(({data, status}) => {
-    		if (status === 200)
-    		{
-    			console.log("disliked " + profileForAction.userName);
-    		}
-        });
+    	axios.patch("/api/like/" + profileForAction.userId);
+//    	.then(({data, status}) => {
+//    		if (status === 200)
+//    		{
+//    			console.log("disliked " + profileForAction.userName);
+//    		}
+//        });
     }
     
     removeFirstUnmatched () {

@@ -17,16 +17,13 @@ class User {
 
     //is called after refresh
     setCookieCredentials(credentials) {
-    	console.log("setCookieCredentials");
         axios.defaults.headers.common['Authorization'] = `Bearer ${credentials.token}`;
         axios.get("/api/profile/" + credentials.profileId)
     	.then(({data, status}) => {
     		if (status === 200)
     		{
     			this.set(credentials);
-    			console.log(data);
         		UserProfile.set(data);
-        		this.openWebSocket();
     		}
     		else
     		{

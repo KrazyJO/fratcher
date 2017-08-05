@@ -16,7 +16,6 @@ class LoggedOut extends React.Component {
     }
 
     onRegisterClicked() {
-    	console.log("onRegisterClicked");
     	this.props.history.push("/register");
     }
     
@@ -39,7 +38,6 @@ class LoggedOut extends React.Component {
     }
     
     render () {
-    	console.log("render loggedout");
     	const {t} = this.props;
 
     	return (

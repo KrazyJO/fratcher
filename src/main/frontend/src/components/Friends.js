@@ -95,7 +95,7 @@ class Friends extends React.Component {
      */
     onSocketMessageReceived (message, data) {
     	let wsmessage = JSON.parse(data);
-    	console.log(wsmessage);
+//    	console.log(wsmessage);
     	if (wsmessage && wsmessage.online)
     	{
     		let userId = wsmessage.online;

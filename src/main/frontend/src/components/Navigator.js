@@ -36,7 +36,6 @@ class Navigator extends React.Component {
     	}.bind(this));
     	
     	Events.subscribe("newNotifications", () => {
-    		console.log("event newNotifications");
     		let count = Notifications.getTotalCount();
     		if (this.state.notificationCount !== count)
     		{
@@ -50,8 +49,6 @@ class Navigator extends React.Component {
 		let userId = User.getId();
 		axios.get("/api/chat/notification")
 		.then(({data, status}) => {
-			console.log("notification:");
-			console.log(data);
 			Notifications.set(data);
         });
 	}

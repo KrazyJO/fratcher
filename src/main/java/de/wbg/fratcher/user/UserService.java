@@ -65,7 +65,6 @@ public class UserService {
      */
     public void setCurrentUser(Long id, String userName) {
 //        LOG.debug("Setting user context. id={}, user={}", id, userName);
-    	System.out.println("setCurrentUser");
         User user = new User();
         user.setId(id);
         user.setUserName(userName);

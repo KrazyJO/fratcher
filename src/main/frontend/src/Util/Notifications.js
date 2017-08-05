@@ -4,7 +4,6 @@ import User from './User';
 
 class Notifications {
     constructor() {
-    	console.log("constructor Notifications");
         this.reset();
         this.onNewSocketMessage = this.onNewSocketMessage.bind(this);
         Events.subscribe("socketMessage", this.onNewSocketMessage);
@@ -86,7 +85,6 @@ class Notifications {
     	
     	if (!bFound)
     	{
-    		console.log("notifications object not found");
     		this.notifications.push({
     			count : 1,
     			userId : data.userIdFrom
@@ -97,8 +95,6 @@ class Notifications {
     }
     
     onNewSocketMessage (sName, sMessage) {
-    	console.log("new NotifMessage:");
-    	console.log(sMessage);
     	if (!sMessage)
     	{
     		return;

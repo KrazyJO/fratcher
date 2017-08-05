@@ -55,7 +55,6 @@ public class ChatHandler extends TextWebSocketHandler {
     
     @Override
     public void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
-        System.out.println(message.getPayload());
         if (message.getPayload().startsWith("{\"user\":\""))
         {
         	ObjectMapper mapper = new ObjectMapper();
@@ -87,7 +86,6 @@ public class ChatHandler extends TextWebSocketHandler {
     @Override
     public void afterConnectionEstablished(WebSocketSession session) throws Exception {
         clients.add(session);
-        session.sendMessage(new TextMessage("say hello to the server :)"));
     }
 
     @Override
