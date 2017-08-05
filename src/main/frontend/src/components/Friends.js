@@ -113,7 +113,8 @@ class Friends extends React.Component {
     
     renderFriends () {
     	return this.state.friends.map((friend => {
-    		let classOnlineStatus = friend.online ? 'isOnline' : 'isOffline';
+    		let classOnlineStatus = 'chatIcon ';
+    		classOnlineStatus += friend.online ? 'isOnline' : 'isOffline';
     		return (
     				<div key={friend.userId}>
     					<div>{friend.userName}, {friend.profile.description}

@@ -157,3 +157,6 @@ body {
 .onlineStatus.isOnline {
 	background-color: green;
 }
+.chatIcon {
+	cursor: pointer;	
+}
