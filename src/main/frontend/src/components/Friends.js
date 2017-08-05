@@ -21,6 +21,7 @@ class Friends extends React.Component {
         this.onSocketMessageReceived = this.onSocketMessageReceived.bind(this);
         this.setOnlineStatus = this.setOnlineStatus.bind(this);
         this.setChatPartnerOnlineStatusInUser = this.setChatPartnerOnlineStatusInUser.bind(this);
+        this.onNewNotifications = this.onNewNotifications.bind(this);
     }
     
     onChatClicked (oEvent) {
@@ -69,6 +70,10 @@ class Friends extends React.Component {
     	
     	this.subscription = Events.subscribe("socketMessage", this.onSocketMessageReceived);
     	
+    	this.notificationSubscription = Events.subscribe("newNotifications", () => {
+        	this.forceUpdate();
+        });
+    	
     	axios.get("/api/matches")
     	.then(({data, status}) => {
     		this.setState({friends : data});
@@ -76,10 +81,13 @@ class Friends extends React.Component {
     }
     
     componentWillUnmount () {
-    	if (this.subscription)
-    	{
+    	if (this.subscription) {
     		Events.unsubscribe(this.subscription);
     	}
+    	if (this.notificationSubscription) {
+    		Events.unsubscribe(this.notificationSubscription);
+    	}
+    		
     }
 
     /**
@@ -113,6 +121,10 @@ class Friends extends React.Component {
 		{
 			this.forceUpdate();
 		}
+    }
+    
+    onNewNotifications() {
+    	this.forceUpdate();
     }
     
     renderFriends () {
