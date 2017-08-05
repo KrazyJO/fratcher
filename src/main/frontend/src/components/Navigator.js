@@ -26,7 +26,11 @@ class Navigator extends React.Component {
 	
 	componentDidMount() {
     	Events.subscribe("loggedIn", function() {
-    		this.getNotifications();
+    		if (User.isAuthenticated())
+    		{
+    			this.getNotifications();
+    		}
+    		
     		this.forceUpdate();
     	}.bind(this));
     	
