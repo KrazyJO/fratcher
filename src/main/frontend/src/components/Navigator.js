@@ -1,6 +1,7 @@
 import React from "react";
 import {Link} from "react-router-dom";
 import Events from "pubsub-js";
+import axios from 'axios';
 
 import User from "./../Util/User";
 import Login from "./Login";
@@ -17,15 +18,25 @@ class Navigator extends React.Component {
         this.state = {};
         
         this.onLogoutButtonClicked = this.onLogoutButtonClicked.bind(this);
+        this.getNotification = this.getNotifications.bind(this);
     }
-	
-	
 	
 	componentDidMount() {
     	Events.subscribe("loggedIn", function() {
+    		this.getNotifications();
     		this.forceUpdate();
     	}.bind(this));
     }
+
+	getNotifications () {
+		let userId = User.getId();
+		axios.get("/api/chat/notification/"+userId)
+		.then(({data, status}) => {
+			console.log("notification:");
+			console.log(data);
+
+        });
+	}
 	
 	onLogoutButtonClicked() {
 		User.reset();
