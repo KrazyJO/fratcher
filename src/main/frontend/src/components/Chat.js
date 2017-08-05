@@ -23,7 +23,11 @@ class Chat extends React.Component {
     
     componentWillUnmount () {
     	console.log("leaving chat");
-    	Events.unsubscribe("socketMessage", this.onSocketMessageReceived);
+    	if (this.subscription)
+    	{
+    		Events.unsubscribe(this.subscription);	
+    	}
+    	
     }
     
     componentDidMount() {
@@ -33,7 +37,7 @@ class Chat extends React.Component {
     		return;
     	}
     	
-    	Events.subscribe("socketMessage", this.onSocketMessageReceived);
+    	this.subscription = Events.subscribe("socketMessage", this.onSocketMessageReceived);
     	
     	this.setState({chatHistory : [], submitMessage : ""});
     	let sChatPartnerId = this.props.match.params.chatPartner;

@@ -67,7 +67,7 @@ class Friends extends React.Component {
     		return;
     	}
     	
-    	Events.subscribe("socketMessage", this.onSocketMessageReceived);
+    	this.subscription = Events.subscribe("socketMessage", this.onSocketMessageReceived);
     	
     	axios.get("/api/matches")
     	.then(({data, status}) => {
@@ -76,7 +76,10 @@ class Friends extends React.Component {
     }
     
     componentWillUnmount () {
-    	Events.unsubscribe("socketMessage", this.onSocketMessageReceived);
+    	if (this.subscription)
+    	{
+    		Events.unsubscribe(this.subscription);
+    	}
     }
 
     /**

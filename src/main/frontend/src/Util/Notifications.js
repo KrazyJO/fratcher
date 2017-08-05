@@ -4,6 +4,7 @@ import User from './User';
 
 class Notifications {
     constructor() {
+    	console.log("constructor Notifications");
         this.reset();
         this.onNewSocketMessage = this.onNewSocketMessage.bind(this);
         Events.subscribe("socketMessage", this.onNewSocketMessage);
@@ -71,11 +72,42 @@ class Notifications {
     	return count;
     }
     
-    onNewSocketMessage (oMessage) {
-    	if (oMessage && oMessage.count)
+    increaseCount(data) {
+    	let bFound = false;
+    	
+    	this.notifications.forEach((notification) => {
+    		if (notification.userId === data.userIdFrom)
+    		{
+    			notification.count = notification.count + 1;
+    			bFound = true;
+    			return false; //break
+    		}
+    	});
+    	
+    	if (!bFound)
+    	{
+    		console.log("notifications object not found");
+    		this.notifications.push({
+    			count : 1,
+    			userId : data.userIdFrom
+    		});
+    		
+    	}
+    	Events.publish("newNotifications");
+    }
+    
+    onNewSocketMessage (sName, sMessage) {
+    	console.log("new NotifMessage:");
+    	console.log(sMessage);
+    	if (!sMessage)
+    	{
+    		return;
+    	}
+    	let oMessage = JSON.parse(sMessage);
+    	if (oMessage && oMessage.message)
     	{
     		//yes, it is a chatmessage
-    		
+    		this.increaseCount(oMessage);
     	}
     }
     
