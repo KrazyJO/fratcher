@@ -6,7 +6,8 @@ import Events from 'pubsub-js';
 
 class User {
     constructor() {
-        this.reset();
+        this.setWebSocketConnection = this.setWebSocketConnection.bind(this);
+    	this.reset();
         const cookies = new Cookies();
         const auth = cookies.get('auth');
         if (auth) {
@@ -25,6 +26,7 @@ class User {
     			this.set(credentials);
     			console.log(data);
         		UserProfile.set(data);
+        		this.openWebSocket();
     		}
     		else
     		{
@@ -38,6 +40,8 @@ class User {
     	
     }
 
+    
+    
     //is called by loginbutton
     set(userData) {
         axios.get("/api/profile/" + userData.profileId)
@@ -48,6 +52,7 @@ class User {
     	        this.id = userData.user.id;
     	        this.profileId = userData.profileId;
     	        UserProfile.set(data);
+    	        this.openWebSocket();
     		}
     		else
     		{
@@ -55,6 +60,32 @@ class User {
     		}
     		Events.publish("loggedIn"); //reset views
         });
+    }
+    
+    openWebSocket() {
+    	if (this.getWebSocketConnection())
+    	{
+    		return;
+    	}
+    	var oSocket = new WebSocket("ws://localhost:8080/api/chat");
+    	this.setWebSocketConnection(oSocket);
+    	oSocket.onopen = function() {
+    		console.log("websocket is now open");
+    		oSocket.send('{"user":"' +User.id+ '"}');
+    	};
+    	
+    	oSocket.onmessage = function(oEvent) {
+    		Events.publish("socketMessage", oEvent.data)
+    	}
+    	
+    	oSocket.onerror = function(oEvent) {
+    		console.log("websocket has an error...");
+    	}
+    	
+    	oSocket.onclose = function() {
+    		console.log("websocket is closed now");
+    		this.setWebSocketConnection(undefined);
+    	}.bind(this);
     }
     
     setChatPartnerOnlineStatus(bValue) {

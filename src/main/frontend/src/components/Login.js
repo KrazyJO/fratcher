@@ -20,7 +20,7 @@ class Login extends React.Component {
         this.handlePasswordChange = this.handlePasswordChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.onLogoutButtonClicked = this.onLogoutButtonClicked.bind(this);
-        this.openWebSocket = this.openWebSocket.bind(this);
+//        this.openWebSocket = this.openWebSocket.bind(this);
         
     }
     
@@ -38,27 +38,27 @@ class Login extends React.Component {
 //    	this.forceUpdate();
     }
     
-    openWebSocket() {
-    	var oSocket = new WebSocket("ws://localhost:8080/api/chat");
-    	User.setWebSocketConnection(oSocket);
-    	
-    	oSocket.onopen = function() {
-    		console.log("websocket is now open");
-    		oSocket.send('{"user":"' +User.id+ '"}');
-    	};
-    	
-    	oSocket.onmessage = function(oEvent) {
-    		Events.publish("socketMessage", oEvent.data)
-    	}
-    	
-    	oSocket.onerror = function(oEvent) {
-    		console.log("websocket has an error...");
-    	}
-    	
-    	oSocket.onclose = function() {
-    		console.log("websocket is closed now");
-    	}
-    }
+//    openWebSocket() {
+//    	var oSocket = new WebSocket("ws://localhost:8080/api/chat");
+//    	User.setWebSocketConnection(oSocket);
+//    	
+//    	oSocket.onopen = function() {
+//    		console.log("websocket is now open");
+//    		oSocket.send('{"user":"' +User.id+ '"}');
+//    	};
+//    	
+//    	oSocket.onmessage = function(oEvent) {
+//    		Events.publish("socketMessage", oEvent.data)
+//    	}
+//    	
+//    	oSocket.onerror = function(oEvent) {
+//    		console.log("websocket has an error...");
+//    	}
+//    	
+//    	oSocket.onclose = function() {
+//    		console.log("websocket is closed now");
+//    	}
+//    }
     
     handleSubmit(event) {
 		event.preventDefault();
@@ -94,7 +94,7 @@ class Login extends React.Component {
                         Events.publish("loggedIn");
                         axios.defaults.headers.common['Authorization'] = `Bearer ${data.token}`;
                         
-                        this.openWebSocket(); 
+//                        this.openWebSocket(); 
                         
                         this.props.history.push("/");
                         break;
