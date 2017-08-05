@@ -61,6 +61,11 @@ class Navigator extends React.Component {
 	}
 	
     render() {
+    	let notificationBadge = "";
+    	if (this.state.notificationCount)
+    	{
+    		notificationBadge = <span className="badge badgeRed">{this.state.notificationCount}</span>;
+    	}
         return (
             <nav className="navbar navbar-inverse navbar-fixed-top">
                 <div className="container">
@@ -78,7 +83,7 @@ class Navigator extends React.Component {
                             	<li><Link to="/matcher">Matcher</Link></li>
                             }
                             {User.isAuthenticated() && 
-                            	<li><Link to="/friends">Friends {this.state.notificationCount}</Link></li>	
+                            	<li><Link to="/friends">Friends {notificationBadge}</Link></li>	
                             }
                             
                         </ul>

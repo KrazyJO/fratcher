@@ -160,3 +160,6 @@ body {
 .chatIcon {
 	cursor: pointer;	
 }
+.badge.badgeRed {
+	background-color: red;
+}
