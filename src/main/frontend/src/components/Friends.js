@@ -24,17 +24,25 @@ class Friends extends React.Component {
     
     onChatClicked (oEvent) {
     	console.log("onChatClicked");
-    	let chatPartnerId = oEvent.target.parentElement.parentElement.dataset.user;
-    	let chatPartnerName = oEvent.target.parentElement.parentElement.dataset.userName;
-    	if (!chatPartnerId)
+    	let chatPartnerId = null;
+    	try
+    	{
+    		chatPartnerId = oEvent.target.parentElement.parentElement.dataset.user;
+    	}
+    	catch (e)
     	{
     		chatPartnerId = oEvent.target.dataset.user;
     	}
-    	this.setChatPartnerOnlineStatusInUser(chatPartnerId);
-    	if (!chatPartnerName)
+    	let chatPartnerName = null;
+    	try
+    	{
+    		chatPartnerName = oEvent.target.parentElement.parentElement.dataset.userName;
+    	}
+    	catch(e)
     	{
     		chatPartnerName = oEvent.target.dataset.userName;
     	}
+    	this.setChatPartnerOnlineStatusInUser(chatPartnerId);
     	User.setChatPartnerName(chatPartnerName);
     	this.props.history.push("/chat/"+chatPartnerId);
     }

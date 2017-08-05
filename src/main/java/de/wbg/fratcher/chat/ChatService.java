@@ -1,6 +1,7 @@
 package de.wbg.fratcher.chat;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,7 +30,12 @@ public class ChatService implements WebSocketConfigurer {
 	private MessageRepository messageRepository;
 	
 	Iterable<Message> getAllChatEntriesForUsers(@PathVariable Long userIdOne, @PathVariable Long userIdTwo) {
-		return messageRepository.findMessagesForUser(1L, 2L);
+		
+		ArrayList<Long> userList = new ArrayList<>();
+		userList.add(userIdTwo);
+		userList.add(userIdOne);
+		return messageRepository.findMessagesForUserByList(userList);
+//		return messageRepository.findMessagesForUser(1L, 2L);
 	}
 	
 	public void newMessage(Message message) {
