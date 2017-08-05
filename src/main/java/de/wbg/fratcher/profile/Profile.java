@@ -2,22 +2,21 @@ package de.wbg.fratcher.profile;
 
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import de.wbg.fratcher.util.Gender;
 
 @Entity
 public class Profile {
 
+	public static final int DESCRIPTION_LENGTH = 65536;
 	@Id
-//    @JsonIgnore
     @GeneratedValue
 	private Long id;
-	
+	@Column(length = DESCRIPTION_LENGTH)
 	private String description;
 	
 	private Date createdAt;
