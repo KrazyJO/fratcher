@@ -4,6 +4,7 @@ import Events from "pubsub-js";
 import axios from 'axios';
 
 import User from "./../Util/User";
+import Notifications from './../Util/Notifications';
 import Login from "./Login";
 
 class Navigator extends React.Component {
@@ -15,7 +16,9 @@ class Navigator extends React.Component {
 	
 	constructor(props) {
         super(props);
-        this.state = {};
+        this.state = {
+        		notificationCount : 0
+        };
         
         this.onLogoutButtonClicked = this.onLogoutButtonClicked.bind(this);
         this.getNotification = this.getNotifications.bind(this);
@@ -26,6 +29,16 @@ class Navigator extends React.Component {
     		this.getNotifications();
     		this.forceUpdate();
     	}.bind(this));
+    	
+    	Events.subscribe("newNotifications", () => {
+    		console.log("event newNotifications");
+    		let count = Notifications.getTotalCount();
+    		if (this.state.notificationCount !== count)
+    		{
+    			this.setState({notificationCount : count});
+    		}
+    		
+    	});
     }
 
 	getNotifications () {
@@ -34,7 +47,7 @@ class Navigator extends React.Component {
 		.then(({data, status}) => {
 			console.log("notification:");
 			console.log(data);
-
+			Notifications.set(data);
         });
 	}
 	
@@ -61,7 +74,7 @@ class Navigator extends React.Component {
                             	<li><Link to="/matcher">Matcher</Link></li>
                             }
                             {User.isAuthenticated() && 
-                            	<li><Link to="/friends">Friends</Link></li>	
+                            	<li><Link to="/friends">Friends {this.state.notificationCount}</Link></li>	
                             }
                             
                         </ul>
