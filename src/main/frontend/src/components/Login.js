@@ -34,6 +34,7 @@ class Login extends React.Component {
     	User.reset();
     	Events.publish("loggedIn");
     	this.props.history.push("/");
+    	this.props.cookies.remove("auth");
 //    	this.forceUpdate();
     }
     
