@@ -17,5 +17,8 @@
   "send" : "Abschicken",
   "profileStars": "* Freiwillige Angaben",
   "gender" : "Geschlecht",
-  "stayOnline" : "Angemeldet bleiben"
+  "stayOnline" : "Angemeldet bleiben",
+  "cancel" : "Abbrechen",
+  "logoutText" : "Sind Sie sicher das Sie sich abmelden möchten? Sie können sich jederzeit wieder anmelden",
+  "logout" : "Abmelden"
 }

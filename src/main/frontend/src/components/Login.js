@@ -22,6 +22,7 @@ class Login extends React.Component {
         this.handleSubmit = this.handleSubmit.bind(this);
         this.onLogoutButtonClicked = this.onLogoutButtonClicked.bind(this);
         this.handleStayOnlineChange = this.handleStayOnlineChange.bind(this);
+        this.onButtonCancelClicked = this.onButtonCancelClicked.bind(this); 
 //        this.openWebSocket = this.openWebSocket.bind(this);
         
     }
@@ -61,6 +62,10 @@ class Login extends React.Component {
 //    		console.log("websocket is closed now");
 //    	}
 //    }
+    
+    onButtonCancelClicked () {
+    	this.props.history.push("/");
+    }
     
     handleSubmit(event) {
 		event.preventDefault();
@@ -145,14 +150,16 @@ class Login extends React.Component {
     			    	<label><input type="checkbox" value={this.state.stayOnline} onChange={this.handleStayOnlineChange} />{t('stayOnline')}</label>
     			    </div>
     			    <button type="submit" className="btnRight btn btn-success btnSignIn">{t('signIn')}</button>
+    			    <button className="btn btnRight btn-danger" onClick={this.onButtonCancelClicked}>{t('cancel')}</button>
     			</form>	
     	}
     	else
     	{
     		component = 
     				<div>
-    					<span className="navbar-text">{User.getUserName()}</span>
-    					<button className="btn btn-danger" onClick={this.onLogoutButtonClicked}>logout</button>
+    					<span style={{display : "block", marginBottom: "15px"}}>{t('logoutText')}</span>
+    					<button className="btn btnRight btn-success btnSignIn" onClick={this.onButtonCancelClicked}>{t('cancel')}</button>
+    					<button className="btn btnRight btn-danger" onClick={this.onLogoutButtonClicked}>{t('logout')}</button>
     				</div>
     			
     	}	
