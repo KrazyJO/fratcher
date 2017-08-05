@@ -1,7 +1,10 @@
 import React from "react";
 import {translate} from "react-i18next";
+import {Link} from 'react-router-dom';
+import Events from 'pubsub-js';
 
 import User from "./../Util/User";
+import UserProfile from './../Util/UserProfile';
 
 class LoggedOut extends React.Component {
     constructor(props) {
@@ -18,7 +21,21 @@ class LoggedOut extends React.Component {
     }
     
     isInRegistration() {
-    	return User.isAuthenticated() && User.isInRegistrationProcess()
+    	return User.isAuthenticated() && !UserProfile.isValidForSubmit();
+    }
+    
+    componentWillUnmount () {
+    	if (this.subscription)
+    	{
+    		Events.unsubscribe(this.subscription);	
+    	}
+    	
+    }
+    
+    componentDidMount() {
+    	this.subscription = Events.subscribe("loggedIn", ()=>{
+    		this.forceUpdate();
+    	});
     }
     
     render () {
@@ -27,9 +44,11 @@ class LoggedOut extends React.Component {
 
     	return (
     			<div>
+
+            		<img style={{display: "block"}} className="center" src="./../resources/fratcher-logo.png" />
     				{
     					this.isInRegistration() && 
-    					<span>Bevor Sie loslegen können, müssen Sie Ihr Profil einrichten.</span>
+    					<span>Bevor Sie loslegen können, müssen Sie Ihr <Link to="/profile">Profil</Link> einrichten.</span>
     				}
     				{
     					User.isNotAuthenticated() &&
@@ -39,7 +58,7 @@ class LoggedOut extends React.Component {
     					</div>
     				}
     				{
-    					User.isAuthenticated() &&
+    					User.isAuthenticated() && UserProfile.isValidForSubmit() &&
     					<span>leg los und finde neue Freunde...</span>
     				}
     				

@@ -1,6 +1,8 @@
-import axios from "axios";
+import axios from "axios"; 
 import Cookies from "universal-cookie";
 import Notifications from './Notifications';
+import UserProfile from './UserProfile';
+import Events from 'pubsub-js';
 
 class User {
     constructor() {
@@ -12,15 +14,47 @@ class User {
         }
     }
 
+    //is called after refresh
     setCookieCredentials(credentials) {
+    	console.log("setCookieCredentials");
         axios.defaults.headers.common['Authorization'] = `Bearer ${credentials.token}`;
-        this.set(credentials);
+        axios.get("/api/profile/" + credentials.profileId)
+    	.then(({data, status}) => {
+    		if (status === 200)
+    		{
+    			this.set(credentials);
+    			console.log(data);
+        		UserProfile.set(data);
+    		}
+    		else
+    		{
+    			this.reset();
+    		}
+    		Events.publish("loggedIn"); //reset views
+        });
+    }
+    
+    fetchProfile() {
+    	
     }
 
-    set(data) {
-        this.userName = data.user.userName;
-        this.id = data.user.id;
-        this.profileId = data.profileId;
+    //is called by loginbutton
+    set(userData) {
+        axios.get("/api/profile/" + userData.profileId)
+    	.then(({data, status}) => {
+    		if (status === 200)
+    		{
+    			this.userName = userData.user.userName;
+    	        this.id = userData.user.id;
+    	        this.profileId = userData.profileId;
+    	        UserProfile.set(data);
+    		}
+    		else
+    		{
+    			this.reset();
+    		}
+    		Events.publish("loggedIn"); //reset views
+        });
     }
     
     setChatPartnerOnlineStatus(bValue) {
@@ -66,6 +100,7 @@ class User {
         	oWs.close();
         }
         Notifications.reset();
+        UserProfile.reset();
     }
     
     isInRegistrationProcess () {

@@ -48,7 +48,7 @@ class Login extends React.Component {
     	};
     	
     	oSocket.onmessage = function(oEvent) {
-    		Events.publish("socketMessage", oEvent.data);
+    		Events.publish("socketMessage", oEvent.data)
     	}
     	
     	oSocket.onerror = function(oEvent) {

@@ -4,6 +4,7 @@ import Events from "pubsub-js";
 import axios from 'axios';
 
 import User from "./../Util/User";
+import UserProfile from './../Util/UserProfile';
 import Notifications from './../Util/Notifications';
 import Login from "./Login";
 
@@ -79,10 +80,10 @@ class Navigator extends React.Component {
                     <div id="navbar" className="collapse navbar-collapse">
                         <ul className="nav navbar-nav">
                             <li><Link to="/">Home</Link></li>
-                            {User.isAuthenticated() && 
+                            {User.isAuthenticated() && UserProfile.isValidForSubmit() &&
                             	<li><Link to="/matcher">Matcher</Link></li>
                             }
-                            {User.isAuthenticated() && 
+                            {User.isAuthenticated() && UserProfile.isValidForSubmit() && 
                             	<li><Link to="/friends">Friends {notificationBadge}</Link></li>	
                             }
                             
