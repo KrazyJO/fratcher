@@ -1,6 +1,7 @@
 import React from "react";
 import {translate} from "react-i18next";
 import User from "./../Util/User";
+import Notifications from './../Util/Notifications';
 import axios from "axios";
 
 import Events from 'pubsub-js';
@@ -115,9 +116,10 @@ class Friends extends React.Component {
     	return this.state.friends.map((friend => {
     		let classOnlineStatus = 'chatIcon ';
     		classOnlineStatus += friend.online ? 'isOnline' : 'isOffline';
+    		let unreadCount = Notifications.getNotifcationCountForUser(friend.userName);
     		return (
     				<div key={friend.userId}>
-    					<div>{friend.userName}, {friend.profile.description}
+    					<div>{friend.userName}, {friend.profile.description}, {unreadCount}
     						<FaThumbsOUp size={24} data-user={friend.userId} data-userName={friend.userName} className={classOnlineStatus} onClick={this.onChatClicked}/>
     					</div>
 					</div>
