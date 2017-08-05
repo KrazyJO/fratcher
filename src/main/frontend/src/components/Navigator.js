@@ -17,7 +17,7 @@ class Navigator extends React.Component {
 	constructor(props) {
         super(props);
         this.state = {
-        		notificationCount : 0
+        		notificationCount : Notifications.getTotalCount()
         };
         
         this.onLogoutButtonClicked = this.onLogoutButtonClicked.bind(this);

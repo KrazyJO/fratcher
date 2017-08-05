@@ -1,5 +1,6 @@
 import axios from "axios";
 import Cookies from "universal-cookie";
+import Notifications from './Notifications';
 
 class User {
     constructor() {
@@ -64,6 +65,7 @@ class User {
         {
         	oWs.close();
         }
+        Notifications.reset();
     }
     
     isInRegistrationProcess () {

@@ -1,5 +1,6 @@
 import Events from "pubsub-js";
 import axios from 'axios';
+import User from './User';
 
 class Notifications {
     constructor() {
@@ -12,7 +13,18 @@ class Notifications {
     }
     
     getTotalCount() {
+    	console.log("getTotalCOunt");
     	if (!this.notifications) {
+    		console.log("no notifications");
+    		if (User.isAuthenticated())
+    		{
+    			let userId = User.getId();
+    			axios.get("/api/chat/notification/"+userId)
+    			.then(({data, status}) => {
+    				console.log("get new notifications");
+    				this.set(data);
+    	        });
+    		}
     		return 0;
     	}
     	let count = 0;
