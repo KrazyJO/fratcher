@@ -24,10 +24,12 @@
     "i18next-xhr-backend": "^1.4.2",
     "pubsub-js": "^1.5.7",
     "react": "15.6.1",
+    "react-cookie": "^2.0.8",
     "react-dom": "15.6.1",
     "react-i18next": "^4.6.2",
     "react-icons": "^2.2.5",
     "react-router": "^4.1.1",
-    "react-router-dom": "^4.1.1"
+    "react-router-dom": "^4.1.1",
+    "universal-cookie": "^2.0.8"
   }
 }

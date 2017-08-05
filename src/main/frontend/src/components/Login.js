@@ -1,5 +1,6 @@
 import React from "react";
 import {translate} from "react-i18next";
+import {withCookies} from "react-cookie";
 
 import axios from "axios";
 import Events from "pubsub-js";
@@ -83,10 +84,8 @@ class Login extends React.Component {
                         this.setState({password : ""});
 
                         // Store authentication values even after refresh.
-//                        this.cookies.set('auth', {
-//                            token: data.token,
-//                            user: User
-//                        }, {path: '/'});
+                        this.props.cookies.set('auth', data, {path : '/'});
+                        
 
                         // Send event of updated login state.
                         User.set(data);
@@ -152,4 +151,4 @@ class Login extends React.Component {
     }
 }
 
-export default translate()(Login);
+export default withCookies(translate()(Login));

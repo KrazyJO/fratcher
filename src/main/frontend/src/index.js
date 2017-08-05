@@ -1,5 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import {CookiesProvider} from 'react-cookie';
 
 //Internatiolalisation
 import {I18nextProvider} from "react-i18next";
@@ -46,11 +47,13 @@ class Root extends React.Component {
 }
 
 ReactDOM.render(
-	<I18nextProvider i18n={i18n}>
-		<Router history={history}>
-			<Root />
-		</Router>
-    </I18nextProvider>
+	<CookiesProvider>
+		<I18nextProvider i18n={i18n}>
+			<Router history={history}>
+				<Root />
+			</Router>
+	    </I18nextProvider>
+    </CookiesProvider>
     ,
     document.getElementById('root'));
 
