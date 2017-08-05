@@ -13,6 +13,7 @@ class Home extends React.Component {
         };
         
         this.onRegisterClicked = this.onRegisterClicked.bind(this);
+        this.renderHowItWorks = this.renderHowItWorks.bind(this);
     }
 
     onRegisterClicked() {
@@ -37,11 +38,23 @@ class Home extends React.Component {
     	});
     }
     
+    renderHowItWorks () {
+    	const {t} = this.props;
+    	return (
+    			<div>
+    				<h2 style={{textAlign: "center"}}>{t('howItWorksTitle')}</h2>
+    				<h3 style={{textAlign: "center"}}>{t('howItWorksSubtitle')}</h3>
+    				<img className="boxShadow" src="./../../resources/matcher-shot.png" />
+    				<span style={{textAlign: "center"}}>{t('howItWorksDescription')}</span>
+    			</div>
+    	)
+    }
+    
     render () {
     	const {t} = this.props;
 
     	return (
-    			<div>
+    			<div className="width500 center">
 
             		<img style={{display: "block"}} className="center" src="./../resources/fratcher-logo.png" />
     				{
@@ -59,7 +72,7 @@ class Home extends React.Component {
     					User.isAuthenticated() && UserProfile.isValidForSubmit() &&
     					<span>leg los und finde neue Freunde...</span>
     				}
-    				
+    				{this.renderHowItWorks()}
     			</div>
     			
     	);
