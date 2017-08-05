@@ -5,6 +5,8 @@ import User from './User';
 class Notifications {
     constructor() {
         this.reset();
+        this.onNewSocketMessage = this.onNewSocketMessage.bind(this);
+        Events.subscribe("socketMessage", this.onNewSocketMessage);
     }
 
     set(data) {
@@ -16,7 +18,6 @@ class Notifications {
     	if (!this.notifications) {
     		if (User.isAuthenticated())
     		{
-    			let userId = User.getId();
     			axios.get("/api/chat/notification")
     			.then(({data, status}) => {
     				this.set(data);
@@ -31,11 +32,11 @@ class Notifications {
     	return count;
     }
     
-    setMessagesRead(userName, sUserId) {
+    setMessagesRead(userId) {
     	if (this.notifications) {
     		let bUpdateServer = false;
     		this.notifications.forEach((notification) => {
-    			if (notification.userName === userName) {
+    			if (notification.userId == userId) {
     				if (notification.count != 0)
     				{
     					bUpdateServer = true;
@@ -49,7 +50,7 @@ class Notifications {
     		Events.publish("newNotifications");
         	
         	if (bUpdateServer) {
-        		axios.post("/api/chat/messagesRead/"+sUserId);
+        		axios.post("/api/chat/messagesRead/"+userId);
         	}
     	}
     	
@@ -68,6 +69,14 @@ class Notifications {
     		}
     	});
     	return count;
+    }
+    
+    onNewSocketMessage (oMessage) {
+    	if (oMessage && oMessage.count)
+    	{
+    		//yes, it is a chatmessage
+    		
+    	}
     }
     
     reset() {

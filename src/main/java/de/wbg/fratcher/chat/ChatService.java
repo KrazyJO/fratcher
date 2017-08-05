@@ -26,6 +26,7 @@ public class ChatService implements WebSocketConfigurer {
 	public static class Notification {
 		public String userName;
 		public int count;
+		public Long userId;
 	}
 	
 	private ChatHandler chatHandler;
@@ -84,6 +85,7 @@ public class ChatService implements WebSocketConfigurer {
 				notification = new Notification();
 				notification.count = count;
 				notification.userName = u.userName;
+				notification.userId = u.userId;
 				notifications.add(notification);
 			}
 		}

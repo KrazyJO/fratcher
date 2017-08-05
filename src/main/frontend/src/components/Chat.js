@@ -47,7 +47,7 @@ class Chat extends React.Component {
         });
     	
     	this.state.partnerIsOnline = User.getChatPartnerOnlineStatus();
-    	Notifications.setMessagesRead(User.getChatPartnerName(), sChatPartnerId);
+    	Notifications.setMessagesRead(sChatPartnerId);
     }
     
     /**
@@ -113,7 +113,7 @@ class Chat extends React.Component {
 //    		this.forceUpdate();
     		this.setState({submitted : true});
     	});
-    	Notifications.setMessagesRead(User.getChatPartnerName(), this.props.match.params.chatPartner);
+    	Notifications.setMessagesRead(this.props.match.params.chatPartner);
     }
     
     convertToLocaleString(iValue) {
