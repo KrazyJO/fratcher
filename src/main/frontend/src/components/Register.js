@@ -19,8 +19,14 @@ class Register extends React.Component {
         this.handleuserNameChange = this.handleuserNameChange.bind(this);
         this.handlePasswordChange = this.handlePasswordChange.bind(this);
         this.handlePasswordRepeatChange = this.handlePasswordRepeatChange.bind(this);
+        this.onButtonCancelClicked = this.onButtonCancelClicked.bind(this);
     }
 
+    
+    onButtonCancelClicked() {
+    	this.props.history.push("/");
+    }
+    
     handleSubmit(event) {
     	event.preventDefault();
     	if (!this.isSubmitActivated())
@@ -113,6 +119,7 @@ class Register extends React.Component {
 					        	onChange={this.handlePasswordRepeatChange}></input>
 					    </div>
 					    <button id="btnSendRegister" type="submit" className={btnSubmitClasses} >{t('sendSignIn')}</button>
+					    <button className="btn btn-danger width500" onClick={this.onButtonCancelClicked}>{t('cancel')}</button> 
 			    	</form>	
 			    	{	this.state.error &&
 			    		<div style={errorStyle}>{this.state.error}</div>
