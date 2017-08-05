@@ -38,7 +38,7 @@ class Chat extends React.Component {
     	this.setState({chatHistory : [], submitMessage : ""});
     	let sChatPartnerId = this.props.match.params.chatPartner;
     	User.id
-    	let sUrl = "/api/chat/"+User.id+"/"+sChatPartnerId; 
+    	let sUrl = "/api/chat/"+sChatPartnerId; 
     	axios.get(sUrl)
     	.then(({data, status}) => {
     		console.log(data);

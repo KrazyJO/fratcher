@@ -37,13 +37,14 @@ public class ChatController {
 		return ResponseEntity.ok(message);
 	}
 	
-	@RequestMapping(value = "/api/chat/{userIdOne}/{userIdTwo}", method = RequestMethod.GET)
-	public ResponseEntity<Iterable<Message>> getChatMessages(@PathVariable Long userIdOne, @PathVariable Long userIdTwo) {
-		
+	@RequestMapping(value = "/api/chat/{userIdTwo}", method = RequestMethod.GET)
+	public ResponseEntity<Iterable<Message>> getChatMessages(@PathVariable Long userIdTwo) {
+
 		if (userService.isAnonymous())
 		{
 			return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
 		}
+		Long userIdOne = userService.getCurrentUser().getId();
 		Iterable<Message> messages = chatService.getAllChatEntriesForUsers(userIdOne, userIdTwo);
 		
 		return ResponseEntity.ok(messages);
