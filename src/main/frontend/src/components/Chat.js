@@ -1,6 +1,7 @@
 import React from "react";
 import {translate} from "react-i18next";
 import User from "./../Util/User";
+import Notifications from './../Util/Notifications';
 import axios from 'axios';
 
 import Events from "pubsub-js";
@@ -46,6 +47,7 @@ class Chat extends React.Component {
         });
     	
     	this.state.partnerIsOnline = User.getChatPartnerOnlineStatus();
+    	Notifications.setMessagesRead(User.getChatPartnerName(), sChatPartnerId);
     }
     
     /**
@@ -111,6 +113,7 @@ class Chat extends React.Component {
 //    		this.forceUpdate();
     		this.setState({submitted : true});
     	});
+    	Notifications.setMessagesRead(User.getChatPartnerName(), this.props.match.params.chatPartner);
     }
     
     convertToLocaleString(iValue) {

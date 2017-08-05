@@ -1,4 +1,5 @@
 import Events from "pubsub-js";
+import axios from 'axios';
 
 class Notifications {
     constructor() {
@@ -19,6 +20,30 @@ class Notifications {
 			count += notification.count;
     	});
     	return count;
+    }
+    
+    setMessagesRead(userName, sUserId) {
+    	if (this.notifications) {
+    		let bUpdateServer = false;
+    		this.notifications.forEach((notification) => {
+    			if (notification.userName === userName) {
+    				if (notification.count != 0)
+    				{
+    					bUpdateServer = true;
+    					notification.count = 0;
+    				}
+    				
+    				return false; //break
+    			}
+        	});
+    		
+    		Events.publish("newNotifications");
+        	
+        	if (bUpdateServer) {
+        		axios.post("/api/chat/messagesRead/"+sUserId);
+        	}
+    	}
+    	
     }
     
     getNotifcationCountForUser(userName) {

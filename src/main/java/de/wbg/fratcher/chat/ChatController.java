@@ -62,7 +62,7 @@ public class ChatController {
 		return ResponseEntity.ok(notifications);
 	}
 
-	@RequestMapping(value = "/api/chat/messagesRead/{userId}", method = RequestMethod.GET)
+	@RequestMapping(value = "/api/chat/messagesRead/{userId}", method = RequestMethod.POST)
 	public ResponseEntity<Object> triggerMessagesRead(@PathVariable Long userId) {
 		if (userService.isAnonymous())
 		{
