@@ -2,6 +2,8 @@ package de.wbg.fratcher.chat;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,11 +15,18 @@ import org.springframework.web.socket.config.annotation.WebSocketHandlerRegistry
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import de.wbg.fratcher.matcher.MatchService;
+import de.wbg.fratcher.matcher.MatchService.UserWithProfile;
 import de.wbg.fratcher.user.User;
 
 @Service
 public class ChatService implements WebSocketConfigurer {
 
+	public static class Notification {
+		public String userName;
+		public int count;
+	}
+	
 	private ChatHandler chatHandler;
 	
 	@Override
@@ -28,6 +37,8 @@ public class ChatService implements WebSocketConfigurer {
 	
 	@Autowired
 	private MessageRepository messageRepository;
+	@Autowired
+	private MatchService matchService;
 	
 	Iterable<Message> getAllChatEntriesForUsers(@PathVariable Long userIdOne, @PathVariable Long userIdTwo) {
 		
@@ -56,6 +67,25 @@ public class ChatService implements WebSocketConfigurer {
 		{
 			System.out.println("no session found");
 		}
+	}
+	
+	public Iterable<Notification> getUserNotifications(Long id) {
+		Iterable<UserWithProfile> friends = matchService.findUserMatches(id);
+		LinkedList<Notification> notifications = new LinkedList<>();
+		int count;
+		Notification notification;
+		for (UserWithProfile u : friends) {
+			count = messageRepository.findUserUnreadMessages(id, u.userId);
+			if (count > 0)
+			{
+				notification = new Notification();
+				notification.count = count;
+				notification.userName = u.userName;
+				notifications.add(notification);
+			}
+		}
+		
+		return notifications;
 	}
 	
 	public boolean isUserOnline(User user) {

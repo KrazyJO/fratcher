@@ -1,7 +1,5 @@
 package de.wbg.fratcher.chat;
 
-import java.io.IOException;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpStatus;
@@ -11,15 +9,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.socket.TextMessage;
-import org.springframework.web.socket.WebSocketMessage;
-import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.config.annotation.EnableWebSocket;
-import org.springframework.web.socket.config.annotation.WebSocketConfigurer;
-import org.springframework.web.socket.config.annotation.WebSocketHandlerRegistry;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-
+import de.wbg.fratcher.chat.ChatService.Notification;
 import de.wbg.fratcher.user.UserService;
 
 @Configuration
@@ -56,6 +48,18 @@ public class ChatController {
 		
 		return ResponseEntity.ok(messages);
 		
+	}
+	
+	@RequestMapping(value = "api/chat/notification/{userId}")
+	public ResponseEntity<Iterable<Notification>> getUserNotifications(@PathVariable Long userId) {
+		if (userService.isAnonymous())
+		{
+			return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+		}
+		
+		Iterable<Notification> notifications = chatService.getUserNotifications(userId);
+		
+		return ResponseEntity.ok(notifications);
 	}
 
 }
