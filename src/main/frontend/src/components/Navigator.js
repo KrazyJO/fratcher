@@ -58,6 +58,24 @@ class Navigator extends React.Component {
     	Events.publish("loggedIn");
 	}
 	
+	renderLoginArea() {
+		if (User.isAuthenticated())
+		{
+			return (
+					<div className="navbar-right">
+                	<Link className="navbar-text" to="/profile">{User.getUserName()}</Link>
+                	<Link className="btn btn-danger navbar-btn" to="/login">Abmelden</Link>
+				</div>		
+			);
+		}
+		else
+		{
+			return (
+					<Link className="btn btn-success navbar-right navbar-btn" to="/login">Anmelden</Link>
+			);
+		}
+	}
+	
     render() {
     	let notificationBadge = "";
     	if (this.state.notificationCount)
@@ -76,7 +94,9 @@ class Navigator extends React.Component {
                     </div>
                     <div id="navbar" className="collapse navbar-collapse">
                         <ul className="nav navbar-nav">
-                            <li><Link to="/">Home</Link></li>
+	                        {User.isAuthenticated() &&   
+	                        	<li><Link to="/">Home</Link></li>
+	                        }
                             {User.isAuthenticated() && UserProfile.isValidForSubmit() &&
                             	<li><Link to="/matcher">Matcher</Link></li>
                             }
@@ -85,17 +105,7 @@ class Navigator extends React.Component {
                             }
                             
                         </ul>
-                        {
-                        	User.isNotAuthenticated() &&
-                        	<Link className="btn btn-success navbar-right navbar-btn" to="/login">Anmelden</Link>
-                        }
-                        {
-                        	User.isAuthenticated() &&
-                        	<div className="navbar-right">
-	                        	<Link className="navbar-text" to="/profile">{User.getUserName()}</Link>
-	                        	<Link className="btn btn-danger navbar-btn" to="/login">Abmelden</Link>
-        					</div>
-                        }
+                        {this.renderLoginArea()}
                         
                         
                     </div>

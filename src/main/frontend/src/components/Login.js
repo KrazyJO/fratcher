@@ -13,13 +13,15 @@ class Login extends React.Component {
         this.state = {
             userName: '',
             password: '',
-            error: undefined
+            error: undefined,
+            stayOnline : false
         };
 
         this.handleuserNameChange = this.handleuserNameChange.bind(this);
         this.handlePasswordChange = this.handlePasswordChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.onLogoutButtonClicked = this.onLogoutButtonClicked.bind(this);
+        this.handleStayOnlineChange = this.handleStayOnlineChange.bind(this);
 //        this.openWebSocket = this.openWebSocket.bind(this);
         
     }
@@ -83,7 +85,14 @@ class Login extends React.Component {
                         this.setState({password : ""});
 
                         // Store authentication values even after refresh.
-                        this.props.cookies.set('auth', data, {path : '/'});
+                        let oCookieData = {path: '/'}
+                        if (this.state.stayOnline)
+                        {
+                        	let oDate = new Date();
+                        	oDate.setFullYear(oDate.getFullYear()+1);
+                        	oCookieData.expires = oDate;
+                        }
+                        this.props.cookies.set('auth', data, oCookieData);
                         
 
                         // Send event of updated login state.
@@ -105,6 +114,10 @@ class Login extends React.Component {
             });
 	}
 	
+    handleStayOnlineChange (event) {
+    	this.setState({stayOnline: event.target.checked});
+    }
+    
 	handleuserNameChange(event) {
 		this.setState({userName: event.target.value});
 	}
@@ -127,6 +140,9 @@ class Login extends React.Component {
     			    <div className="form-group inputPasswd">
     			        <input type="text" className="form-control" type="password" name="password" placeholder={t('password')} value={this.state.password}
     			        onChange={this.handlePasswordChange}></input>
+    			    </div>
+    			    <div className="checkbox">
+    			    	<label><input type="checkbox" value={this.state.stayOnline} onChange={this.handleStayOnlineChange} />{t('stayOnline')}</label>
     			    </div>
     			    <button type="submit" className="btnRight btn btn-success btnSignIn">{t('signIn')}</button>
     			</form>	
