@@ -48,8 +48,6 @@ class Profile extends React.Component {
     	}
     	axios.get("/api/profile/" + iProfileId)
     	.then(({data, status}) => {
-    		console.log(data);
-    		UserProfile.set(data);
     		oThis.state = data;
     		oThis.forceUpdate();
         });
@@ -57,15 +55,15 @@ class Profile extends React.Component {
     
     handleSubmit(event) {
     	event.preventDefault();
-    	axios.post("/api/profile/1", this.state)
+    	axios.post("/api/profile/"+User.getId(), this.state)
     	.then(({data, status}) => {
     		if (status === 200)
     		{
-    			console.log("update profile success");
+//    			console.log("update profile success");
     		}
     		else
     		{
-    			console.log("update profile failed");
+    			console.error("update profile failed");
     		}
         })
     }
