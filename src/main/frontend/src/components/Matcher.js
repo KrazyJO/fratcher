@@ -87,21 +87,35 @@ class Matcher extends React.Component {
     
     render () {
     	const {t} = this.props;
-
+    	let component; 
+    		
+    	if (!this.state.unmatched[0])
+    	{
+    		component = 
+    			<div>
+				 Es gibt aktuell keine User mehr für dich! Warte, bis der Bestand gewachsen ist.
+				</div>
+    	}
+    	else
+    	{
+    		component =
+    		<div className="component">
+				<div>
+					{this.renderActualUnmatchedUser()}
+				</div>
+				<div className="matcherThumbs">
+					<div className="matcherThumbUp">
+						<FaThumbsOUp size={50} onClick={this.onThumbUpClicked} />
+					</div>
+					<div className="matcherThumbDown">
+						<FaThumbsODown size={50} onClick={this.onThumbDownClicked}/>
+					</div>
+				</div>
+			</div>
+    	}
+    	
     	return (
-    			<div className="component">{t('matcherComp')}
-    				<div>
-    					{this.renderActualUnmatchedUser()}
-    				</div>
-    				<div className="matcherThumbs">
-						<div className="matcherThumbUp">
-							<FaThumbsOUp size={50} onClick={this.onThumbUpClicked} />
-						</div>
-						<div className="matcherThumbDown">
-							<FaThumbsODown size={50} onClick={this.onThumbDownClicked}/>
-						</div>
-    				</div>
-    			</div>
+    			component
     	);
     }
 }
