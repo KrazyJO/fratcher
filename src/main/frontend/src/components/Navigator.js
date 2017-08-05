@@ -47,7 +47,7 @@ class Navigator extends React.Component {
 
 	getNotifications () {
 		let userId = User.getId();
-		axios.get("/api/chat/notification/"+userId)
+		axios.get("/api/chat/notification")
 		.then(({data, status}) => {
 			console.log("notification:");
 			console.log(data);

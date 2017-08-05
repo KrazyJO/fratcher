@@ -51,12 +51,14 @@ public class ChatController {
 		
 	}
 	
-	@RequestMapping(value = "/api/chat/notification/{userId}", method = RequestMethod.GET)
-	public ResponseEntity<Iterable<Notification>> getUserNotifications(@PathVariable Long userId) {
+	@RequestMapping(value = "/api/chat/notification", method = RequestMethod.GET)
+	public ResponseEntity<Iterable<Notification>> getUserNotifications() {
 		if (userService.isAnonymous())
 		{
 			return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
 		}
+		
+		Long userId = userService.getCurrentUser().getId();
 		
 		Iterable<Notification> notifications = chatService.getUserNotifications(userId);
 		

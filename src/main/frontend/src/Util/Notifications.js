@@ -13,15 +13,12 @@ class Notifications {
     }
     
     getTotalCount() {
-    	console.log("getTotalCOunt");
     	if (!this.notifications) {
-    		console.log("no notifications");
     		if (User.isAuthenticated())
     		{
     			let userId = User.getId();
-    			axios.get("/api/chat/notification/"+userId)
+    			axios.get("/api/chat/notification")
     			.then(({data, status}) => {
-    				console.log("get new notifications");
     				this.set(data);
     	        });
     		}
