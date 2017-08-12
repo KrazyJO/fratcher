@@ -8,6 +8,11 @@ import UserProfile from './../Util/UserProfile';
 import Notifications from './../Util/Notifications';
 import Login from "./Login";
 
+import FaUser from "react-icons/lib/fa/user"; 
+import FaUserPlus from "react-icons/lib/fa/user-plus";
+import FaGroup from "react-icons/lib/fa/group";
+import FaHome from "react-icons/lib/fa/home";
+
 class Navigator extends React.Component {
 //    updateAuthentication() {
 //        // If we would store the authentication state in the component's state and reset the state,
@@ -63,7 +68,7 @@ class Navigator extends React.Component {
 		{
 			return (
 					<div className="navbar-right">
-                	<Link className="navbar-text" to={"/profile/"+User.getId()}>{User.getUserName()}</Link>
+                	<Link className="navbar-text" to={"/profile/"+User.getId()}><FaUser size="20" />{User.getUserName()}</Link>
                 	<Link className="btn btn-danger navbar-btn" to="/login">Abmelden</Link>
 				</div>		
 			);
@@ -95,13 +100,13 @@ class Navigator extends React.Component {
                     <div id="navbar" className="collapse navbar-collapse">
                         <ul className="nav navbar-nav">
 	                        {User.isAuthenticated() &&   
-	                        	<li><Link to="/">Home</Link></li>
+	                        	<li><Link to="/"><FaHome size="20" />Home</Link></li>
 	                        }
                             {User.isAuthenticated() && UserProfile.isValidForSubmit() &&
-                            	<li><Link to="/matcher">Matcher</Link></li>
+                            	<li><Link to="/matcher"><FaUserPlus size="20" />Matcher</Link></li>
                             }
                             {User.isAuthenticated() && UserProfile.isValidForSubmit() && 
-                            	<li><Link to="/friends">Friends {notificationBadge}</Link></li>	
+                            	<li><Link to="/friends"><FaGroup size="20" />Friends {notificationBadge}</Link></li>	
                             }
                             
                         </ul>
