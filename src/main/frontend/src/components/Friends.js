@@ -23,30 +23,32 @@ class Friends extends React.Component {
         this.setOnlineStatus = this.setOnlineStatus.bind(this);
         this.setChatPartnerOnlineStatusInUser = this.setChatPartnerOnlineStatusInUser.bind(this);
         this.onNewNotifications = this.onNewNotifications.bind(this);
+        this.findAncestorDiv = this.findAncestorDiv.bind(this);
+    }
+    
+    findAncestorDiv(el) {
+    	if (el.tagName.toLowerCase() === 'div')
+    	{
+    		return el;
+    	}
+    	if (el.parentElement)
+    	{
+    		return this.findAncestorDiv(el.parentElement);
+    	}
+    	return null;
     }
     
     onChatClicked (oEvent) {
-    	console.log("onChatClicked");
-    	let chatPartnerId = null;
-    	try
-    	{
-    		chatPartnerId = oEvent.target.parentElement.parentElement.dataset.user;
-    	}
-    	catch (e)
-    	{
-    		chatPartnerId = oEvent.target.dataset.user;
-    	}
-    	let chatPartnerName = null;
-    	try
-    	{
-    		chatPartnerName = oEvent.target.parentElement.parentElement.dataset.userName;
-    	}
-    	catch(e)
-    	{
-    		chatPartnerName = oEvent.target.dataset.userName;
-    	}
-    	this.setChatPartnerOnlineStatusInUser(chatPartnerId);
+		//find the right data
+    	let eContainingDiv = this.findAncestorDiv(oEvent.target);
+    	let chatPartnerName = eContainingDiv.dataset.username;
+		let chatPartnerId= eContainingDiv.dataset.user;
+
+		//remember it for chat
+		this.setChatPartnerOnlineStatusInUser(chatPartnerId);
     	User.setChatPartnerName(chatPartnerName);
+    	
+    	//nav to the chat...
     	this.props.history.push("/chat/"+chatPartnerId);
     }
     
@@ -135,8 +137,13 @@ class Friends extends React.Component {
     		let unreadCount = Notifications.getNotifcationCountForUser(friend.userName);
     		return (
     				<div key={friend.userId}>
-    					<div><Link to={"/profile/"+friend.userId}>{friend.userName}</Link>, {friend.profile.description}, {unreadCount}
-    						<FaThumbsOUp size={24} data-user={friend.userId} data-userName={friend.userName} className={classOnlineStatus} onClick={this.onChatClicked}/>
+    					<div>
+    						<Link to={"/profile/"+friend.userId}>{friend.userName}</Link>, 
+    						{friend.profile.description}, 
+    						{unreadCount}
+    						<div onClick={this.onChatClicked} data-user={friend.userId} data-userName={friend.userName}>
+    							<FaThumbsOUp size={24} className={classOnlineStatus}/>
+    						</div>
     					</div>
 					</div>
     		)
