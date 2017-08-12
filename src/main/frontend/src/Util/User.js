@@ -41,6 +41,7 @@ class User {
     
     //is called by loginbutton
     set(userData) {
+    	axios.defaults.headers.common['Authorization'] = `Bearer ${userData.token}`;
         axios.get("/api/profile/" + userData.user.id)
     	.then(({data, status}) => {
     		if (status === 200)
