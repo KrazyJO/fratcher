@@ -31,6 +31,15 @@ class Friends extends React.Component {
     	{
     		return el;
     	}
+    	
+    	if (el.closest)
+    	{
+    		//not available in ie...
+    		//https://stackoverflow.com/questions/22119673/find-the-closest-ancestor-element-that-has-a-specific-class
+    		return el.closest("div[data-user]");
+    	}
+    	
+    	
     	if (el.parentElement)
     	{
     		return this.findAncestorDiv(el.parentElement);
