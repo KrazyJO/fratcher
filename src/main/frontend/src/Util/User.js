@@ -18,7 +18,7 @@ class User {
     //is called after refresh
     setCookieCredentials(credentials) {
         axios.defaults.headers.common['Authorization'] = `Bearer ${credentials.token}`;
-        axios.get("/api/profile/" + credentials.profileId)
+        axios.get("/api/profile/" + credentials.user.id)
     	.then(({data, status}) => {
     		if (status === 200)
     		{
@@ -41,7 +41,7 @@ class User {
     
     //is called by loginbutton
     set(userData) {
-        axios.get("/api/profile/" + userData.profileId)
+        axios.get("/api/profile/" + userData.user.id)
     	.then(({data, status}) => {
     		if (status === 200)
     		{

@@ -63,7 +63,7 @@ class Navigator extends React.Component {
 		{
 			return (
 					<div className="navbar-right">
-                	<Link className="navbar-text" to={"/profile/"+User.profileId}>{User.getUserName()}</Link>
+                	<Link className="navbar-text" to={"/profile/"+User.getId()}>{User.getUserName()}</Link>
                 	<Link className="btn btn-danger navbar-btn" to="/login">Abmelden</Link>
 				</div>		
 			);

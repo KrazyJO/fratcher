@@ -64,7 +64,7 @@ class Profile extends React.Component {
     	{
     		return;
     	}
-    	if (iProfileId === User.profileId)
+    	if (iProfileId === User.getId())
     	{
     		console.log("my own profile");
     	}
@@ -76,9 +76,9 @@ class Profile extends React.Component {
     	this.fetchProfile(iProfileId);
     }
     
-    fetchProfile(profileId) {
+    fetchProfile(userId) {
     	let oThis = this;
-    	axios.get("/api/profile/" + profileId)
+    	axios.get("/api/profile/" + userId)
     	.then(({data, status}) => {
     		oThis.state = data;
     		oThis.forceUpdate();
