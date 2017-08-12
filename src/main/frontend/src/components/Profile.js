@@ -37,7 +37,7 @@ class Profile extends React.Component {
         		description : "",
         		hobbies : "",
         		gender : "2",
-        		profileId : ""
+        		userId : ""
         };
     }
     
@@ -57,8 +57,6 @@ class Profile extends React.Component {
     componentWillMount() {
     	console.log("mount");
     	this.reset();
-    	let oThis = this; 
-//    	let iProfileId = User.profileId;
     	let iProfileId = this.props.match.params.profileId;
     	if (!iProfileId)
     	{
@@ -68,11 +66,6 @@ class Profile extends React.Component {
     	{
     		console.log("my own profile");
     	}
-//    	axios.get("/api/profile/" + iProfileId)
-//    	.then(({data, status}) => {
-//    		oThis.state = data;
-//    		oThis.forceUpdate();
-//        });
     	this.fetchProfile(iProfileId);
     }
     
@@ -81,7 +74,8 @@ class Profile extends React.Component {
     	axios.get("/api/profile/" + userId)
     	.then(({data, status}) => {
     		oThis.state = data;
-    		oThis.forceUpdate();
+    		oThis.setState({userId : userId});
+//    		oThis.forceUpdate();
         });
     }
     
@@ -128,7 +122,7 @@ class Profile extends React.Component {
 
     render () {
     	const {t} = this.props;
-
+    	let bDisabled = !(User.getId() == this.state.userId); 
     	
     	return (
     			<div className="width500 center">
@@ -140,7 +134,7 @@ class Profile extends React.Component {
     				<form className="form-horizontal" onSubmit={this.handleSubmit}>
 	    				<div className="form-group">
 				        	<label>{t('gender')}*</label>
-					        <select value={this.state.gender} onChange={this.handleGenderChange} className="form-control" type="text">
+					        <select disabled={bDisabled} value={this.state.gender} onChange={this.handleGenderChange} className="form-control" type="text">
 					        	<option value="0">Mann</option>
 					        	<option value="1">Frau</option>
 					        	<option value="2">Ungewiss</option>
@@ -148,32 +142,36 @@ class Profile extends React.Component {
 					    </div>
     					<div className="form-group">
 				        	<label>{t('firstName')}*</label>
-					        <input className="form-control" type="text" value={this.state.firstName}
+					        <input disabled={bDisabled} className="form-control" type="text" value={this.state.firstName}
 					        	onChange={this.handleFirstNameChange}></input>
 					    </div>
 					    <div className="form-group">
 					    	<label>{t('lastName')}*</label>
-					        <input className="form-control" type="text" value={this.state.lastName}
+					        <input disabled={bDisabled} className="form-control" type="text" value={this.state.lastName}
 					        	onChange={this.handleLastNameChange}></input>
 					    </div>
 					    <div className="form-group">
 					    	<label>{t('yearOfBirth')}</label>
-						    <input className="form-control" type="text" value={this.state.yearOfBirth}
+						    <input disabled={bDisabled} className="form-control" type="text" value={this.state.yearOfBirth}
 					        	onChange={this.handleYearChange}></input>
 					    </div>
 					    <div className="form-group">
 				    	<label>{t('overMe')}</label>
-						    <textarea className="textareHobby form-control" type="text" value={this.state.description}
+						    <textarea disabled={bDisabled} className="textareHobby form-control" type="text" value={this.state.description}
 					        	onChange={this.handleOverChange}></textarea>
 					    </div>
 					    <div className="form-group">
 				    	<label>{t('myHobbies')}</label>
-					    <input className="form-control" type="text" value={this.state.hobbies}
+					    <input disabled={bDisabled} className="form-control" type="text" value={this.state.hobbies}
 				        	onChange={this.handleHobbiesChange}></input>
 				    </div>
-					    <button className="btn btn-success btnRight" type="submit" >{t('send')}</button>
+					    { !bDisabled &&
+					    	<button className="btn btn-success btnRight" type="submit" >{t('send')}</button>
+					    }
 			    	</form>	
-			    	<p className="profileStarDescription"><small>{t('profileStars')}</small></p>
+			    	{ !bDisabled &&
+			    		<p className="profileStarDescription"><small>{t('profileStars')}</small></p>
+			    	}
     			</div>
     	);
     }
