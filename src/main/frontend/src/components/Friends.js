@@ -3,6 +3,7 @@ import {translate} from "react-i18next";
 import User from "./../Util/User";
 import Notifications from './../Util/Notifications';
 import axios from "axios";
+import {Link} from "react-router-dom";
 
 import Events from 'pubsub-js';
 
@@ -134,7 +135,7 @@ class Friends extends React.Component {
     		let unreadCount = Notifications.getNotifcationCountForUser(friend.userName);
     		return (
     				<div key={friend.userId}>
-    					<div>{friend.userName}, {friend.profile.description}, {unreadCount}
+    					<div><Link to={"/profile/"+friend.userId}>{friend.userName}</Link>, {friend.profile.description}, {unreadCount}
     						<FaThumbsOUp size={24} data-user={friend.userId} data-userName={friend.userName} className={classOnlineStatus} onClick={this.onChatClicked}/>
     					</div>
 					</div>

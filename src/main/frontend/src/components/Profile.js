@@ -14,7 +14,8 @@ class Profile extends React.Component {
         		yearOfBirth : "",
         		description : "",
         		hobbies : "",
-        		gender : "2"
+        		gender : "2",
+        		profileId : ""
         };
         
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -25,6 +26,7 @@ class Profile extends React.Component {
         this.handleHobbiesChange = this.handleHobbiesChange.bind(this);
         this.handleGenderChange = this.handleGenderChange.bind(this);
         this.reset = this.reset.bind(this);
+        this.fetchProfile = this.fetchProfile.bind(this);
     }
     
     reset () {
@@ -34,19 +36,49 @@ class Profile extends React.Component {
         		yearOfBirth : "",
         		description : "",
         		hobbies : "",
-        		gender : "2"
+        		gender : "2",
+        		profileId : ""
         };
     }
     
+    /**
+     * recognize hash change:
+     * https://stackoverflow.com/questions/38965807/how-to-rerender-a-component-when-hash-change-and-change-the-state 
+     */
+    componentWillReceiveProps(nextProps) {
+    	  const {match: {params: {profileId}}} = nextProps;
+    	  if(profileId !== this.props.match.params.profileId){
+    	    /////////
+    		  console.log("new props");
+    		  this.fetchProfile(profileId);
+    	  }
+    	}
+    
     componentWillMount() {
+    	console.log("mount");
     	this.reset();
     	let oThis = this; 
-    	let iProfileId = User.profileId;
+//    	let iProfileId = User.profileId;
+    	let iProfileId = this.props.match.params.profileId;
     	if (!iProfileId)
     	{
     		return;
     	}
-    	axios.get("/api/profile/" + iProfileId)
+    	if (iProfileId === User.profileId)
+    	{
+    		console.log("my own profile");
+    	}
+//    	axios.get("/api/profile/" + iProfileId)
+//    	.then(({data, status}) => {
+//    		oThis.state = data;
+//    		oThis.forceUpdate();
+//        });
+    	this.fetchProfile(iProfileId);
+    }
+    
+    fetchProfile(profileId) {
+    	let oThis = this;
+    	axios.get("/api/profile/" + profileId)
     	.then(({data, status}) => {
     		oThis.state = data;
     		oThis.forceUpdate();

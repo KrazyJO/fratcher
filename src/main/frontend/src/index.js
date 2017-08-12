@@ -35,7 +35,7 @@ class Root extends React.Component {
 
                     <Route path="/login" component={Login} />
                     <Route path="/register" component={Register}/>
-                    <Route path="/profile" component={Profile}/>
+                    <Route path="/profile/:profileId" component={Profile}/>
                     <Route path="/friends" component={Friends} />
                     <Route path="/chat/:chatPartner" component={Chat} />
                     {/*Default route*/}
