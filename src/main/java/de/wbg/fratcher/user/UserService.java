@@ -11,10 +11,37 @@ public class UserService {
 	@Autowired
 	private UserRepository userRepository;
 	
+	/**
+	 * call this method only internally
+	 * @param userId
+	 * @return
+	 */
+	public Long getProfileIdFromUser(Long userId)
+	{
+		User user = userRepository.findOne(userId);
+		Long id = -1L;
+		if (user != null)
+		{
+			id = user.getProfile().getId();
+		}
+		return id;
+	}
+	
 	public User getUser(String userName, String password)
 	{
 		User user = userRepository.findByUserNameAndPassword(userName, password);
 		return user;
+	}
+	
+	public boolean isUserMatched(Long userId)
+	{
+		Long me = this.getCurrentUser().getId();
+		User user = userRepository.findSpecificMatcheByUser(me, userId);
+		if (user != null)
+		{
+			return true;
+		}
+		return false;
 	}
 	
 	public boolean addUser(User user)
@@ -65,10 +92,13 @@ public class UserService {
      */
     public void setCurrentUser(Long id, String userName) {
 //        LOG.debug("Setting user context. id={}, user={}", id, userName);
-        User user = new User();
-        user.setId(id);
-        user.setUserName(userName);
+//        User user = new User();
+//        user.setId(id);
+//        user.setUserName(userName);
+    	User user = userRepository.findOne(id);
         UsernamePasswordAuthenticationToken secAuth = new UsernamePasswordAuthenticationToken(user, null);
         SecurityContextHolder.getContext().setAuthentication(secAuth);
+        
+        
     }
 }
