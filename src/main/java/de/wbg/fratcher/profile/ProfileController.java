@@ -25,14 +25,14 @@ public class ProfileController {
 //		return profileService.getProfiles();
 //	}
 	
-	@RequestMapping(value = "/api/profile/add", method = RequestMethod.POST)
-	public String addProfile(@RequestBody Profile p)
-	{
-		profileService.addProfile(p);
-//		profileService.getProfile(id)
-		
-		return "localhost:8080/api/profile/"+p.getId();
-	}
+//	@RequestMapping(value = "/api/profile/add", method = RequestMethod.POST)
+//	public String addProfile(@RequestBody Profile p)
+//	{
+//		profileService.addProfile(p);
+////		profileService.getProfile(id)
+//		
+//		return "localhost:8080/api/profile/"+p.getId();
+//	}
 	
 	/**
 	 * here we get user id

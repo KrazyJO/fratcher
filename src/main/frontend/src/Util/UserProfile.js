@@ -48,7 +48,7 @@ class UserProfile {
      * @return true, if all necessary fields are filled
      */
     isValidForSubmit() {
-        return this.id !== -1 && this.yearOfBirth && this.description && this.hobbies;
+        return this.id !== -1 && this.yearOfBirth && this.description/* && this.hobbies*/;
     }
 
     isNotInitial() {

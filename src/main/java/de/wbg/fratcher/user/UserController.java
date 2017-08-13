@@ -49,8 +49,9 @@ public class UserController {
 			//should not happen...
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
         }
-		HttpHeaders headers = new HttpHeaders();
-        headers.add("Set-Cookie", "auth=bearer " + token.token);
-        return new ResponseEntity<>(token,  headers, HttpStatus.OK);
+//		HttpHeaders headers = new HttpHeaders();
+//        headers.add("Set-Cookie", "auth=bearer " + token.token);
+//        return new ResponseEntity<>(token,  headers, HttpStatus.OK);
+		return ResponseEntity.ok(token);
 	}
 }

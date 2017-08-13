@@ -32,7 +32,7 @@ public class ProfileService {
 	{
 		Long myId = userService.getCurrentUser().getId();
 		Long profileId;
-		if (id != myId)
+		if (!id.equals(myId))
 		{
 			if (!userService.isUserMatched(id))
 			{
