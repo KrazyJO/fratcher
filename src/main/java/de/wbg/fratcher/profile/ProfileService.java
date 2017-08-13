@@ -56,6 +56,8 @@ public class ProfileService {
 	
 	public void editProfile(Profile p)
 	{
+		Long profileId = userService.getCurrentUser().getProfile().getId();
+		p.setId(profileId);
 		profileRepository.save(p);
 	}
 }

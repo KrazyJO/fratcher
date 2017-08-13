@@ -40,8 +40,13 @@ public class ProfileController {
 	}
 	
 	@RequestMapping(value = "/api/profile/{id}", method = RequestMethod.POST)
-	public void editProfile(@RequestBody Profile p)
+	public ResponseEntity<Object> editProfile(@RequestBody Profile p)
 	{
+		if (userService.isAnonymous())
+		{
+			return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+		}
 		profileService.editProfile(p);
+		return new ResponseEntity<>(HttpStatus.OK);
 	}
 }
