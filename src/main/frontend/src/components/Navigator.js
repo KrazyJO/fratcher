@@ -2,6 +2,7 @@ import React from "react";
 import {Link} from "react-router-dom";
 import Events from "pubsub-js";
 import axios from 'axios';
+import {translate} from "react-i18next";
 
 import User from "./../Util/User";
 import UserProfile from './../Util/UserProfile';
@@ -64,29 +65,33 @@ class Navigator extends React.Component {
 	}
 	
 	renderLoginArea() {
+		const {t} = this.props;
 		if (User.isAuthenticated())
 		{
 			return (
 					<div className="navbar-right">
                 	<Link className="navbar-text" to={"/profile/"+User.getId()}><FaUser size="20" />{User.getUserName()}</Link>
-                	<Link className="btn btn-danger navbar-btn" to="/login">Abmelden</Link>
+                	<Link className="btn btn-danger navbar-btn" to="/login">{t('logout')}</Link>
 				</div>		
 			);
 		}
 		else
 		{
 			return (
-					<Link className="btn btn-success navbar-right navbar-btn" to="/login">Anmelden</Link>
+					<Link className="btn btn-success navbar-right navbar-btn" to="/login">{t('signIn')}</Link>
 			);
 		}
 	}
 	
     render() {
+    	const {t} = this.props;
+    	
     	let notificationBadge = "";
     	if (this.state.notificationCount)
     	{
     		notificationBadge = <span className="badge badgeRed">{this.state.notificationCount}</span>;
     	}
+    	
         return (
             <nav className="navbar navbar-inverse navbar-fixed-top">
                 <div className="container">
@@ -100,13 +105,13 @@ class Navigator extends React.Component {
                     <div id="navbar" className="collapse navbar-collapse">
                         <ul className="nav navbar-nav">
 	                        {User.isAuthenticated() &&   
-	                        	<li><Link to="/"><FaHome size="20" />Home</Link></li>
+	                        	<li><Link to="/"><FaHome size="20" />{t('home')}</Link></li>
 	                        }
                             {User.isAuthenticated() && UserProfile.isValidForSubmit() &&
-                            	<li><Link to="/matcher"><FaUserPlus size="20" />Matcher</Link></li>
+                            	<li><Link to="/matcher"><FaUserPlus size="20" />{t('matcher')}</Link></li>
                             }
                             {User.isAuthenticated() && UserProfile.isValidForSubmit() && 
-                            	<li><Link to="/friends"><FaGroup size="20" />Friends {notificationBadge}</Link></li>	
+                            	<li><Link to="/friends"><FaGroup size="20" />{t('friends')} {notificationBadge}</Link></li>	
                             }
                             
                         </ul>
@@ -120,4 +125,4 @@ class Navigator extends React.Component {
     }
 }
 
-export default Navigator;
+export default translate()(Navigator);
