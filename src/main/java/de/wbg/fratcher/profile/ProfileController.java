@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import de.wbg.fratcher.user.User;
 import de.wbg.fratcher.user.UserService;
 
 @RestController
@@ -19,20 +18,6 @@ public class ProfileController {
 	private ProfileService profileService;
 	@Autowired
 	private UserService userService;
-	
-//	@RequestMapping(value = "/api/profiles", method=RequestMethod.GET)
-//	public Iterable<Profile> getProfiles() {
-//		return profileService.getProfiles();
-//	}
-	
-//	@RequestMapping(value = "/api/profile/add", method = RequestMethod.POST)
-//	public String addProfile(@RequestBody Profile p)
-//	{
-//		profileService.addProfile(p);
-////		profileService.getProfile(id)
-//		
-//		return "localhost:8080/api/profile/"+p.getId();
-//	}
 	
 	/**
 	 * here we get user id
@@ -46,9 +31,6 @@ public class ProfileController {
 		{
 			return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
 		}
-//		Profile profile = profileService.getProfile(id);
-//		User user = userService.getCurrentUser();
-//		Profile profile2 = user.getProfile();
 		Profile profile = profileService.getProfile(id);
 		if (profile == null)
 		{

@@ -1,10 +1,8 @@
 package de.wbg.fratcher.user;
 
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpServletResponseWrapper;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -49,9 +47,6 @@ public class UserController {
 			//should not happen...
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
         }
-//		HttpHeaders headers = new HttpHeaders();
-//        headers.add("Set-Cookie", "auth=bearer " + token.token);
-//        return new ResponseEntity<>(token,  headers, HttpStatus.OK);
 		return ResponseEntity.ok(token);
 	}
 }
