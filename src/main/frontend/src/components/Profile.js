@@ -151,9 +151,9 @@ class Profile extends React.Component {
 	    				<div className="form-group">
 				        	<label>{t('gender')}*</label>
 					        <select disabled={bDisabled} value={this.state.gender} onChange={this.handleGenderChange} className="form-control" type="text">
-					        	<option value="0">Mann</option>
-					        	<option value="1">Frau</option>
-					        	<option value="2">Ungewiss</option>
+					        	<option value="Male">Mann</option>
+					        	<option value="Female">Frau</option>
+					        	<option value="Uncertain">Ungewiss</option>
 					        </select>
 					    </div>
     					<div className="form-group">
