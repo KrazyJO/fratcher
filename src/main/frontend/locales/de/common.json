@@ -26,5 +26,8 @@
   "yourAnswer" : "Gefällt dir der Text?",
   "howItWorksTitle" : "Wie funktioniert Fratcher?",
   "howItWorksSubtitle" : "Hier ein kleines Beispiel:",
-  "howItWorksDescription" : "Du bekommst im Matcher Texte aus den Profilen anderer User präsentiert. Du musst dann entscheiden, ob dir der Text gefällt. Wenn wie in diesem Beispiel du den Text von Maike magst, und Maike dein Text, findet Ihr beide euch in der Friends-Rubrik wieder. Dort könnt Ihr miteinander chatten und euch kennen lernen."
+  "howItWorksDescription" : "Du bekommst im Matcher Texte aus den Profilen anderer User präsentiert. Du musst dann entscheiden, ob dir der Text gefällt. Wenn wie in diesem Beispiel du den Text von Maike magst, und Maike dein Text, findet Ihr beide euch in der Friends-Rubrik wieder. Dort könnt Ihr miteinander chatten und euch kennen lernen.",
+  "male" : "Mann",
+  "female" : "Frau",
+  "uncertain" : "Ungewiss"
 }
