@@ -44,13 +44,12 @@ public class ChatService implements WebSocketConfigurer {
 	@Autowired
 	private UserService userService;
 	
-	Iterable<Message> getAllChatEntriesForUsers(@PathVariable Long userIdOne, @PathVariable Long userIdTwo) {
+	Iterable<Message> getAllChatEntriesForUsers(Long userIdOne, Long userIdTwo) {
 		
 		ArrayList<Long> userList = new ArrayList<>();
 		userList.add(userIdTwo);
 		userList.add(userIdOne);
 		return messageRepository.findMessagesForUserByList(userList);
-//		return messageRepository.findMessagesForUser(1L, 2L);
 	}
 	
 	public void newMessage(Message message) {
