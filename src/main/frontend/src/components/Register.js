@@ -52,17 +52,17 @@ class Register extends React.Component {
 	        	   	User.set(data);
 	        	   	User.inRegistrationProcess = true;
 	        	   	Events.publish("loggedInFromRegister");
-	        	   	this.props.history.push("/profile");
+	        	   	this.props.history.push("/profile/"+data.user.id);
 	           		break;
 	           case 409:
 	        	   this.setState({error : "user alredy exist"});
+	        	   this.forceUpdate();
 	        	   break;
 	           case 401:
 	        	   this.setState({error : "already logged in as this user"});
+	        	   this.forceUpdate();
 	        	   break;
            }
-           this.forceUpdate();
-            
         });
     }
     

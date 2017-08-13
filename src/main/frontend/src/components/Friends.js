@@ -148,11 +148,11 @@ class Friends extends React.Component {
     				<div key={friend.userId}>
     					<div>
     						<Link to={"/profile/"+friend.userId}>{friend.userName}</Link>, 
-    						{friend.profile.description}, 
-    						{unreadCount}
+    						{friend.profile.description}
     						<div onClick={this.onChatClicked} data-user={friend.userId} data-userName={friend.userName}>
     							<FaThumbsOUp size={24} className={classOnlineStatus}/>
-    						</div>
+    							<span>( {unreadCount} )</span>	
+							</div>
     					</div>
 					</div>
     		)

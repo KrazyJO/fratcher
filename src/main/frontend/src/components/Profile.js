@@ -1,6 +1,6 @@
 import React from "react";
 import {translate} from "react-i18next";
-
+import Events from 'pubsub-js';
 import axios from "axios";
 import User from "./../Util/User";
 import UserProfile from "./../Util/UserProfile";
@@ -85,7 +85,13 @@ class Profile extends React.Component {
     	.then(({data, status}) => {
     		if (status === 200)
     		{
-//    			console.log("update profile success");
+    			if (User.isInRegistrationProcess())
+    			{
+    				//ended with registration process, nav user to home
+    				User.inRegistrationProcess = false;
+    				this.props.history.push("/");
+    				Events.publish("loggedInFromRegister");
+    			}
     		}
     		else
     		{

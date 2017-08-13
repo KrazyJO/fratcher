@@ -42,13 +42,13 @@ class User {
     //is called by loginbutton
     set(userData) {
     	axios.defaults.headers.common['Authorization'] = `Bearer ${userData.token}`;
+    	this.id = userData.user.id;
+    	this.userName = userData.user.userName;
         axios.get("/api/profile/" + userData.user.id)
     	.then(({data, status}) => {
     		if (status === 200)
     		{
-    			this.userName = userData.user.userName;
-    	        this.id = userData.user.id;
-    	        this.profileId = userData.profileId;
+//    	        this.profileId = userData.profileId;
     	        UserProfile.set(data);
     	        this.openWebSocket();
     		}
