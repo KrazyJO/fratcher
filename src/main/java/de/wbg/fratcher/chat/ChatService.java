@@ -52,6 +52,10 @@ public class ChatService implements WebSocketConfigurer {
 		return messageRepository.findMessagesForUserByList(userList);
 	}
 	
+	/**
+	 * receive, persist and distribute new chatmessages
+	 * @param message chatmessage
+	 */
 	public void newMessage(Message message) {
 		this.messageRepository.save(message);
 		
@@ -72,6 +76,12 @@ public class ChatService implements WebSocketConfigurer {
 		}
 	}
 	
+	/**
+	 * Counts all unread messages for a user.
+	 * There will be only notifications entries, if the there are more than zero unread messages
+	 * @param id userId
+	 * @return
+	 */
 	public Iterable<Notification> getUserNotifications(Long id) {
 		Iterable<UserWithProfile> friends = matchService.findUserMatches(id);
 		LinkedList<Notification> notifications = new LinkedList<>();
@@ -92,6 +102,10 @@ public class ChatService implements WebSocketConfigurer {
 		return notifications;
 	}
 	
+	/**
+	 * sets all messages for a chatpartner to read=true
+	 * @param userId
+	 */
 	public void triggerMessagesRead(Long userId) {
 		Long myId = userService.getCurrentUser().getId();
 		Iterable<Message> messages = messageRepository.findUserUnreadMessages(myId, userId);
@@ -101,6 +115,11 @@ public class ChatService implements WebSocketConfigurer {
 		}
 	}
 	
+	/**
+	 * checks if a user is online
+	 * @param user
+	 * @return true if user is online
+	 */
 	public boolean isUserOnline(User user) {
 		return this.chatHandler.isUserOnline(user);
 	}

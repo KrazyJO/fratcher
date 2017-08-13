@@ -18,6 +18,8 @@ Im Chat steckt die wohl meiste Arbeit, da ich denke das im Laufe der Zeit diese 
 	Sichtbar im Reiter 'Friends' am User und im Chat am großen Bubble (rot für nicht angemeldet, grün für angemeldet)
 - Chatnachrichten sind per CSS gestyled und lassen sich eindeutig mir oder meinem Chatpartner zuweisen
 - bei Eingang neuer Nachrichten scrollt der Chat automatisch herunter
+- Nachrichten werden per HTTP-Post an den Server gegeben, von dort aus per WebSockets an Friends verteilt, die ebenfalls online sind
+	So kann der Schritt mit der Authentifizierung über WebSockets gespart werden. 
 
 ### Notifications
 - Über den Endpoint Notifications wird der User über neue Nachrichten benachrichtigt (Anzahl ungelesener Nachrichten).
@@ -25,6 +27,7 @@ Im Chat steckt die wohl meiste Arbeit, da ich denke das im Laufe der Zeit diese 
 	Chatnachrichten werden als gelesen markiert, wenn der Chat zum User im Front geöffnet wird.
 	Dies hat auch zur Folge, das die Badges aktualisiert werden.
 - Ist der Chat geöffnet zu dem neue Nachrichten eintreffen, werden die Notifications hochgezählt. Sie werden mit abschicken einer eigenen Nachricht als gelesen markiert
+- In den Notifications gibt es nur Einträge zu Chatpartnern mit einer Anzahl ungelesener Nachrichten > 0 um den Datenverkehr zu reduzieren.
 	
 ### Matcher
 - Matcher zeigt Text an, dieser kann ge(dis)liked werden
