@@ -56,7 +56,12 @@ public class ChatService implements WebSocketConfigurer {
 	 * receive, persist and distribute new chatmessages
 	 * @param message chatmessage
 	 */
-	public void newMessage(Message message) {
+	public boolean newMessage(Message message) {
+		if (message.getUserIdFrom() != userService.getCurrentUser().getId())
+		{
+			return false;
+		}
+		
 		this.messageRepository.save(message);
 		
 		WebSocketSession session = chatHandler.getSessionForUser(message.getUserIdTo());
@@ -74,6 +79,7 @@ public class ChatService implements WebSocketConfigurer {
 		{
 			System.out.println("no session found");
 		}
+		return true;
 	}
 	
 	/**

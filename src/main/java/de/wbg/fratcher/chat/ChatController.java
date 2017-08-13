@@ -32,7 +32,10 @@ public class ChatController {
 			return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
 		}
 		
-		chatService.newMessage(message);
+		if (!chatService.newMessage(message))
+		{
+			return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+		}
 		
 		return ResponseEntity.ok(message);
 	}
