@@ -59,7 +59,7 @@ class Home extends React.Component {
             		<img style={{display: "block"}} className="center" src="./../resources/fratcher-logo.png" />
     				{
     					this.isInRegistration() && 
-    					<span>Bevor Sie loslegen können, müssen Sie Ihr <Link to="/profile">Profil</Link> einrichten.</span>
+    					<span>Bevor Sie loslegen können, müssen Sie Ihr <Link to={"/profile/"+User.getId()}>Profil</Link> einrichten.</span>
     				}
     				{
     					User.isNotAuthenticated() &&
