@@ -91,7 +91,7 @@ class Profile extends React.Component {
     
     handleSubmit(event) {
     	event.preventDefault();
-    	axios.post("/api/profile/"+User.getId(), this.state)
+    	axios.post("/api/profile", this.state)
     	.then(({data, status}) => {
     		if (status === 200)
     		{

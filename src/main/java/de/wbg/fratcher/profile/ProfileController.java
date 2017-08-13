@@ -39,7 +39,7 @@ public class ProfileController {
 		return ResponseEntity.ok(profile);
 	}
 	
-	@RequestMapping(value = "/api/profile/{id}", method = RequestMethod.POST)
+	@RequestMapping(value = "/api/profile", method = RequestMethod.POST)
 	public ResponseEntity<Object> editProfile(@RequestBody Profile p)
 	{
 		if (userService.isAnonymous())
