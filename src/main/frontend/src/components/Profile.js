@@ -73,9 +73,19 @@ class Profile extends React.Component {
     	let oThis = this;
     	axios.get("/api/profile/" + userId)
     	.then(({data, status}) => {
+    		if (data.gender === null)
+    		{
+    			data.gender = 2;
+    		}
+    		var aKeys = Object.keys(data);
+    		aKeys.forEach(key => {
+    			if (data[key] === null)
+    			{
+    				data[key] = "";
+    			}
+    		});
     		oThis.state = data;
-    		oThis.setState({userId : userId});
-//    		oThis.forceUpdate();
+    		oThis.setState({userId : userId}); //<-- this forces update
         });
     }
     
