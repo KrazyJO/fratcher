@@ -39,7 +39,8 @@ class Login extends React.Component {
     	this.props.cookies.remove("auth");
     }
     
-    onButtonCancelClicked () {
+    onButtonCancelClicked (oEvent) {
+    	oEvent.preventDefault();
     	this.props.history.goBack();
     }
     
