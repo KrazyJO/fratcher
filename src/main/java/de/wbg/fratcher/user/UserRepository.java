@@ -29,6 +29,6 @@ public interface UserRepository extends CrudRepository<User, Long> {
 	@Query("SELECT u from User_ u where u.id = :userId")
 	User findUserById(@Param("userId") Long userId);
 	
-	@Query("SELECT u FROM User_ u WHERE u.id != :userId AND u NOT IN ( :liked ) AND u NOT IN ( :disliked )")
+	@Query("SELECT u FROM User_ u WHERE u NOT IN ( :liked ) AND u NOT IN ( :disliked )")
 	List<User> findUserUnmatched(@Param("userId") Long userId, @Param("liked") ArrayList<User> liked, @Param("disliked") ArrayList<User> disliked);
 }
