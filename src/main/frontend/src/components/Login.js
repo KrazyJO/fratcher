@@ -23,7 +23,6 @@ class Login extends React.Component {
         this.onLogoutButtonClicked = this.onLogoutButtonClicked.bind(this);
         this.handleStayOnlineChange = this.handleStayOnlineChange.bind(this);
         this.onButtonCancelClicked = this.onButtonCancelClicked.bind(this); 
-//        this.openWebSocket = this.openWebSocket.bind(this);
         
     }
     
@@ -38,33 +37,9 @@ class Login extends React.Component {
     	Events.publish("loggedIn");
     	this.props.history.push("/");
     	this.props.cookies.remove("auth");
-//    	this.forceUpdate();
     }
     
-//    openWebSocket() {
-//    	var oSocket = new WebSocket("ws://localhost:8080/api/chat");
-//    	User.setWebSocketConnection(oSocket);
-//    	
-//    	oSocket.onopen = function() {
-//    		console.log("websocket is now open");
-//    		oSocket.send('{"user":"' +User.id+ '"}');
-//    	};
-//    	
-//    	oSocket.onmessage = function(oEvent) {
-//    		Events.publish("socketMessage", oEvent.data)
-//    	}
-//    	
-//    	oSocket.onerror = function(oEvent) {
-//    		console.log("websocket has an error...");
-//    	}
-//    	
-//    	oSocket.onclose = function() {
-//    		console.log("websocket is closed now");
-//    	}
-//    }
-    
     onButtonCancelClicked () {
-//    	this.props.history.push("/");
     	this.props.history.goBack();
     }
     
@@ -85,7 +60,6 @@ class Login extends React.Component {
             .then(({data, status}) => {
                 switch (status) {
                     case 200:
-//                        User.setCookieCredentials(data);
                         this.setState({error: undefined});
                         this.setState({userName : ""});
                         this.setState({password : ""});
@@ -107,13 +81,10 @@ class Login extends React.Component {
                         Events.publish("loggedIn");
                         axios.defaults.headers.common['Authorization'] = `Bearer ${data.token}`;
                         
-//                        this.openWebSocket(); 
-                        
                         this.props.history.push("/");
                         break;
 
                     case 401:
-//                        this.setState({error: true});
                     	console.log("user login failed");
                         break;
                 }
