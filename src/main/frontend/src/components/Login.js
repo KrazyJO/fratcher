@@ -64,7 +64,8 @@ class Login extends React.Component {
 //    }
     
     onButtonCancelClicked () {
-    	this.props.history.push("/");
+//    	this.props.history.push("/");
+    	this.props.history.goBack();
     }
     
     handleSubmit(event) {
