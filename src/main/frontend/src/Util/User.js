@@ -65,7 +65,12 @@ class User {
     	{
     		return;
     	}
-    	let sSocketHost = "ws://"+window.location.host+"/api/chat";
+    	let sSocketProtocol = "ws";
+    	if (window.location.protocol === "https")
+    	{
+    		sSocketProtocol = "wss";
+    	}
+    	let sSocketHost = sSocketProtocol + "://" + window.location.host + "/api/chat";
     	var oSocket = new WebSocket(sSocketHost);
     	this.setWebSocketConnection(oSocket);
     	oSocket.onopen = function() {
