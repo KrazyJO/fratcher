@@ -86,6 +86,7 @@ class Login extends React.Component {
 
                     case 401:
                     	console.log("user login failed");
+                    	this.setState({error: true});
                         break;
                 }
             });
@@ -106,6 +107,7 @@ class Login extends React.Component {
     render () {
     	const {t} = this.props;
     	let component = null;
+    	let bRenderLoginError = Boolean(this.state.error)
     	if (User.isNotAuthenticated())
     	{
     		component = 
@@ -123,7 +125,7 @@ class Login extends React.Component {
     			    </div>
     			    <button type="submit" className="btnRight btn btn-success btnSignIn">{t('signIn')}</button>
     			    <button className="btn btnRight btn-danger" onClick={this.onButtonCancelClicked}>{t('cancel')}</button>
-    			</form>	
+    			</form>
     	}
     	else
     	{
@@ -140,6 +142,10 @@ class Login extends React.Component {
     	return (
     			<div className="center width500">
     				{component}
+    				{
+        				bRenderLoginError &&
+        				<div className="fratcher-login-error">{t('loginError')}</div>
+        			}
     			</div>
     	);
     }

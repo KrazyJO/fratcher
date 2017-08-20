@@ -32,5 +32,6 @@
   "uncertain" : "Ungewiss",
   "home" : "Home",
   "matcher" : "Matcher",
-  "friends" : "Friends"
+  "friends" : "Friends",
+  "loginError" : "Die Anmeldung ist fehlgeschlagen"
 }

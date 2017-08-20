@@ -180,3 +180,8 @@ body {
 	margin-bottom: 40px;
 	border: 1px solid black;
 }
+.fratcher-login-error {
+    margin-top: 60px;
+    text-align: right;
+    color: red;
+}
