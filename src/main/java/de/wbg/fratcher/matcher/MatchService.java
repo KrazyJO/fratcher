@@ -42,6 +42,9 @@ public class MatchService {
 	}
 	
 	/**
+	 * https://stackoverflow.com/questions/2488930/passing-empty-list-as-parameter-to-jpa-query-throws-error
+	 * since no empty lists work with postgresql, the empty liked and disliked array got push the current user 
+	 * 
 	 * Get all Userprofiles, which are not liked or disliked by user
 	 * @param userId
 	 * @return profiles of unseen users
@@ -51,6 +54,15 @@ public class MatchService {
 		User user = userRepository.findUserById(userId);
 		ArrayList<User> liked = new ArrayList<User>(user.getLiked());
 		ArrayList<User> disliked = new ArrayList<User>(user.getDisliked());
+		
+		if (liked.size() == 0)
+		{
+			liked.add(userService.getCurrentUser());
+		}
+		if (disliked.size() == 0)
+		{
+			liked.add(userService.getCurrentUser());
+		}
 		
 		Iterable<User> userUnmatched = userRepository.findUserUnmatched(user.getId(), liked, disliked);
 		
