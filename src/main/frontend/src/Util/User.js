@@ -66,7 +66,7 @@ class User {
     		return;
     	}
     	let sSocketProtocol = "ws";
-    	if (window.location.protocol === "https")
+    	if (window.location.protocol === "https:")
     	{
     		sSocketProtocol = "wss";
     	}
