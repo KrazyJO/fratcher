@@ -61,7 +61,7 @@ public class MatchService {
 		}
 		if (disliked.size() == 0)
 		{
-			liked.add(userService.getCurrentUser());
+			disliked.add(userService.getCurrentUser());
 		}
 		
 		Iterable<User> userUnmatched = userRepository.findUserUnmatched(user.getId(), liked, disliked);
