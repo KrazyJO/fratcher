@@ -52,7 +52,7 @@ public class MatchService {
 		ArrayList<User> liked = new ArrayList<User>(user.getLiked());
 		ArrayList<User> disliked = new ArrayList<User>(user.getDisliked());
 		
-		Iterable<User> userUnmatched = userRepository.findUserUnmatched(user.getId());
+		Iterable<User> userUnmatched = userRepository.findUserUnmatched(user.getId(), liked);
 		
 		return this.createUserWithProfiles(userUnmatched);
 	}
