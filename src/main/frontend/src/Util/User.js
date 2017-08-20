@@ -65,7 +65,8 @@ class User {
     	{
     		return;
     	}
-    	var oSocket = new WebSocket("ws://localhost:8080/api/chat");
+    	let sSocketHost = "ws://"+window.location.host+"/api/chat";
+    	var oSocket = new WebSocket(sSocketHost);
     	this.setWebSocketConnection(oSocket);
     	oSocket.onopen = function() {
     		oSocket.send('{"user":"' +this.id+ '"}');
