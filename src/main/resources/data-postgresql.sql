@@ -12,12 +12,12 @@ DELETE FROM MESSAGE;
 
 
 INSERT INTO PROFILE (id, description, CREATED_AT, gender, YEAR_OF_BIRTH, hobbies, FIRST_NAME, LAST_NAME) VALUES
-  (10, 'Ich bin Bob', parsedatetime('2017-05-20 05:01', 'yyyy-MM-dd HH:mm'), 0, '1982', 'Party Feiern Bechern', 'Bob', 'Bobbius'),
-  (20, 'Ich bin Sally', parsedatetime('2016-05-20 05:01', 'yyyy-MM-dd HH:mm'), 1, '1991', 'Reiten Lesen', 'Sally', 'Sallieus'),
-  (30, 'Ich bin kai', parsedatetime('2016-05-20 05:01', 'yyyy-MM-dd HH:mm'), 2, '', '', 'Kai', ''),
-  (40, 'Ich bin maike', parsedatetime('2016-05-20 05:01', 'yyyy-MM-dd HH:mm'), 2, '', '', '', ''),
-  (50, 'Ich bin Batman', parsedatetime('2016-05-20 05:01', 'yyyy-MM-dd HH:mm'), 2, '', 'Fledermäuse', 'Bruce', 'Wayne'),
-  (60, 'Ich bin Superman', parsedatetime('2016-05-20 05:01', 'yyyy-MM-dd HH:mm'), 2, '', 'Kryptonit essen', 'Clark', 'Kent');
+  (10, 'Ich bin Bob', '2017-05-20T05:01:000Z', 0, '1982', 'Bobbinieren', 'Bob', 'Bobbius'),
+  (20, 'Ich bin Sally', '2016-05-20T05:01:000Z', 1, '1991', 'Reiten Lesen', 'Sally', 'Sallieus'),
+  (30, 'Ich bin kai', '2016-05-20T05:01:000Z', 2, '', '', 'Kai', ''),
+  (40, 'Ich bin maike', '2016-05-20T05:01:000Z', 2, '', '', '', ''),
+  (50, 'Ich bin Batman', '2016-05-20T05:01:000Z', 2, '', 'Fledermäuse', 'Bruce', 'Wayne'),
+  (60, 'Ich bin Superman', '2016-05-20T05:01:000Z', 2, '', 'Kryptonit essen', 'Clark', 'Kent');
 
 -- Insert new users.
 INSERT INTO USER_ (id, USER_NAME, PASSWORD, PROFILE_ID) VALUES
@@ -42,8 +42,8 @@ INSERT INTO USER__DISLIKED (USER__ID, DISLIKED_ID) VALUES
 	(3,1);
 	
 INSERT INTO MESSAGE (ID, CREATED_AT, MESSAGE, READ, USER_ID_FROM, USER_ID_TO) VALUES
-	(1, parsedatetime('2017-05-20 05:01', 'yyyy-MM-dd HH:mm'), 'message from bob to sally', true, 1, 2),
-	(2, parsedatetime('2017-05-20 05:03', 'yyyy-MM-dd HH:mm'), 'message from sally to bob 2', false, 2, 1),
-	(3, parsedatetime('2017-05-20 05:02', 'yyyy-MM-dd HH:mm'), 'message from sally to bob 1', false, 2, 1),
-	(4, parsedatetime('2017-05-20 05:03', 'yyyy-MM-dd HH:mm'), 'message from bob to kai', false, 1, 3),
-	(5, parsedatetime('2017-05-20 05:03', 'yyyy-MM-dd HH:mm'), 'message from kai to sally', false, 3, 2);
+	(1, '2017-05-20T05:01:000Z', 'message from bob to sally', true, 1, 2),
+	(2, '2017-05-20T05:03:000Z', 'message from sally to bob 2', false, 2, 1),
+	(3, '2017-05-20T05:02:000Z', 'message from sally to bob 1', false, 2, 1),
+	(4, '2017-05-20T05:03:000Z', 'message from bob to kai', false, 1, 3),
+	(5, '2017-05-20T05:03:000Z', 'message from kai to sally', false, 3, 2);
