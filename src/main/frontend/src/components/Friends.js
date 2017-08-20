@@ -144,8 +144,8 @@ class Friends extends React.Component {
     	return this.state.friends.map((friend => {
     		let classOnlineStatus = 'chatIcon ';
     		classOnlineStatus += friend.online ? 'isOnline' : 'isOffline';
-    		let unreadCount = Notifications.getNotifcationCountForUser(friend.userName);
-    		let renderUnreadCount = unreadCount && unreadCount > 0; 
+    		let unreadCount = Notifications.getNotifcationCountForUser(friend.userId);
+    		let renderUnreadCount = Boolean(unreadCount && unreadCount > 0); //without boolean it will be 0 (as number), this would be rendered... 
     		return (
     				<div className='list-group-item fratcher-friend' key={friend.userId}>
 						<Link to={"/profile/"+friend.userId} className="fratcher-friend-link" ><FaUser size={24} />{friend.userName}</Link>

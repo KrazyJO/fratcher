@@ -56,13 +56,13 @@ class Notifications {
     	
     }
     
-    getNotifcationCountForUser(userName) {
+    getNotifcationCountForUser(userId) {
     	if (!this.notifications) {
     		return 0;
     	}
     	let count;
     	this.notifications.forEach((notification) => {
-    		if (notification.userName === userName)
+    		if (notification.userId === userId)
     		{
     			count = notification.count;
     			return false; //break
