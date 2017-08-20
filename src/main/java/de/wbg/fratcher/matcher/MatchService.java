@@ -55,6 +55,7 @@ public class MatchService {
 		ArrayList<User> liked = new ArrayList<User>(user.getLiked());
 		ArrayList<User> disliked = new ArrayList<User>(user.getDisliked());
 		
+		//this is the fix for heroku...
 		if (liked.size() == 0)
 		{
 			liked.add(userService.getCurrentUser());
