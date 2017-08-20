@@ -160,6 +160,15 @@ body {
 .chatIcon {
 	cursor: pointer;	
 }
+.fratcher-friend {
+	overflow: hidden;
+}
+.fratcher-friend-link {
+	float: left;
+}
+.fratcher-friend-chat {
+	float: right;
+}
 .badge.badgeRed {
 	background-color: red;
 }

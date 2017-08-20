@@ -9,6 +9,7 @@ import Events from 'pubsub-js';
 
 //icons
 import FaThumbsOUp from "react-icons/lib/fa/wechat";
+import FaUser from "react-icons/lib/fa/user";
 
 class Friends extends React.Component {
     constructor(props) {
@@ -144,16 +145,17 @@ class Friends extends React.Component {
     		let classOnlineStatus = 'chatIcon ';
     		classOnlineStatus += friend.online ? 'isOnline' : 'isOffline';
     		let unreadCount = Notifications.getNotifcationCountForUser(friend.userName);
+    		let renderUnreadCount = unreadCount && unreadCount > 0; 
     		return (
-    				<div key={friend.userId}>
-    					<div>
-    						<Link to={"/profile/"+friend.userId}>{friend.userName}</Link>, 
-    						{friend.profile.description}
-    						<div onClick={this.onChatClicked} data-user={friend.userId} data-userName={friend.userName}>
-    							<FaThumbsOUp size={24} className={classOnlineStatus}/>
-    							<span>( {unreadCount} )</span>	
-							</div>
-    					</div>
+    				<div className='list-group-item fratcher-friend' key={friend.userId}>
+						<Link to={"/profile/"+friend.userId} className="fratcher-friend-link" ><FaUser size={24} />{friend.userName}</Link>
+						<div onClick={this.onChatClicked} data-user={friend.userId} data-userName={friend.userName} className="fratcher-friend-chat">
+							<FaThumbsOUp size={24} className={classOnlineStatus}/>
+							{ renderUnreadCount &&
+								<span>( {unreadCount} )</span>
+							}
+								
+						</div>
 					</div>
     		)
     	}));
@@ -164,7 +166,7 @@ class Friends extends React.Component {
 
     	
     	return (
-    			<div className="width500 center">
+    			<div className="width500 center list-group"> 
     				{this.renderFriends()}
     			</div>
     	);
