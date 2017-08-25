@@ -174,7 +174,7 @@ class Register extends React.Component {
 		this.setState({wrongYearFormat : false});
     }
     
-    render () {
+    render() {
     	const {t} = this.props;
 
     	let btnSubmitClasses = "width500 btn center";
