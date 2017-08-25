@@ -15,11 +15,6 @@ import FaGroup from "react-icons/lib/fa/group";
 import FaHome from "react-icons/lib/fa/home";
 
 class Navigator extends React.Component {
-//    updateAuthentication() {
-//        // If we would store the authentication state in the component's state and reset the state,
-//        // we would not have to do this.
-//        this.forceUpdate();
-//    }
 	
 	constructor(props) {
         super(props);
@@ -107,10 +102,10 @@ class Navigator extends React.Component {
 	                        {User.isAuthenticated() &&   
 	                        	<li><Link to="/"><FaHome size="20" />{t('home')}</Link></li>
 	                        }
-                            {User.isAuthenticated() && UserProfile.isValidForSubmit() &&
+                            {User.isAuthenticated() &&
                             	<li><Link to="/matcher"><FaUserPlus size="20" />{t('matcher')}</Link></li>
                             }
-                            {User.isAuthenticated() && UserProfile.isValidForSubmit() && 
+                            {User.isAuthenticated() && 
                             	<li><Link to="/friends"><FaGroup size="20" />{t('friends')} {notificationBadge}</Link></li>	
                             }
                             

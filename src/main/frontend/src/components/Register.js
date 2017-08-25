@@ -47,7 +47,6 @@ class Register extends React.Component {
     	{
     		return;
     	}
-    	console.log("handleSubmit register");
     	
     	let userData = {
     		userName : this.state.userName,
@@ -99,7 +98,6 @@ class Register extends React.Component {
     
     handleGenderChange (event) {
     	this.setState({gender : event.target.value});
-    	console.log("handle gender");
     }
     
     handleHobbiesChange (event) {

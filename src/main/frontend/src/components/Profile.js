@@ -48,14 +48,11 @@ class Profile extends React.Component {
     componentWillReceiveProps(nextProps) {
     	  const {match: {params: {profileId}}} = nextProps;
     	  if(profileId !== this.props.match.params.profileId){
-    	    /////////
-    		  console.log("new props");
     		  this.fetchProfile(profileId);
     	  }
     	}
     
     componentWillMount() {
-    	console.log("mount");
     	this.reset();
     	let iProfileId = this.props.match.params.profileId;
     	if (!iProfileId)
