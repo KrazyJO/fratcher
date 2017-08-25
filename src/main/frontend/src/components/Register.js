@@ -51,7 +51,13 @@ class Register extends React.Component {
     	
     	let userData = {
     		userName : this.state.userName,
-    		password : this.state.password 
+    		password : this.state.password,
+    		firstName : this.state.firstName,
+    		lastName : this.state.lastName,
+    		yearOfBirth : this.state.yearOfBirth,
+    		description : this.state.description,
+    		hobbies : this.state.hobbies,
+    		gender : this.state.gender
     	};
     	
     	axios.post("/api/user/create", userData, {
@@ -65,16 +71,15 @@ class Register extends React.Component {
 	        	   	this.reset();
 	        	   	User.set(data);
 	        	   	User.inRegistrationProcess = true;
-	        	   	Events.publish("loggedInFromRegister");
-	        	   	this.props.history.push("/profile/"+data.user.id);
+//	        	   	Events.publish("loggedInFromRegister");
+//	        	   	this.props.history.push("/profile/"+data.user.id);
+	        	   	this.props.history.push("/");
 	           		break;
 	           case 409:
 	        	   this.setState({error : "user alredy exist"});
-	        	   this.forceUpdate();
 	        	   break;
 	           case 401:
 	        	   this.setState({error : "already logged in as this user"});
-	        	   this.forceUpdate();
 	        	   break;
            }
         });
