@@ -13,6 +13,7 @@ class Register extends React.Component {
         		password : "",
         		passwordRepeat : "",
         		error : undefined,
+        		wrongYearFormat : false,
         		firstName : "",
         		lastName : "",
         		yearOfBirth : "",
@@ -34,6 +35,8 @@ class Register extends React.Component {
         this.handleOverChange = this.handleOverChange.bind(this);
         this.handleHobbiesChange = this.handleHobbiesChange.bind(this);
         this.handleGenderChange = this.handleGenderChange.bind(this);
+        
+        this.checkYear = this.checkYear.bind(this);
     }
 
     
@@ -41,8 +44,31 @@ class Register extends React.Component {
     	this.props.history.push("/");
     }
     
+    checkYear(year) {
+    	if (!year)
+    	{
+    		year = this.state.yearOfBirth;
+    	}
+    	if (year)
+    	{
+    		year = parseInt(year);
+    		if (isNaN(year) || year < 1900 || year > 2017)
+    		{
+    			this.setState({wrongYearFormat : true, error : "invalidYear"});
+    			return false;
+    		}
+    	}
+    	return true;
+    }
+    
     handleSubmit(event) {
     	event.preventDefault();
+    	
+    	if (!this.checkYear())
+    	{
+    		return;
+    	}
+    	
     	if (!this.isSubmitActivated())
     	{
     		return;
@@ -88,12 +114,10 @@ class Register extends React.Component {
     
     handlePasswordChange(event) {
     	this.setState({password: event.target.value});
-		this.forceUpdate();
     }
     
     handlePasswordRepeatChange(event) {
     	this.setState({passwordRepeat: event.target.value});
-		this.forceUpdate();
     }
     
     handleGenderChange (event) {
@@ -110,6 +134,13 @@ class Register extends React.Component {
     
     handleYearChange(event) {
     	this.setState({yearOfBirth : event.target.value});
+    	if (this.state.error === "invalidYear")
+    	{
+    		if(this.checkYear(event.target.value))
+    		{
+    			this.setState({error : "", wrongYearFormat : false});
+    		}
+    	}
     }
     
     handleLastNameChange (event) {
@@ -120,14 +151,27 @@ class Register extends React.Component {
     	this.setState({firstName : event.target.value});
     }
     
+    /***
+     * check if required fields are filled out
+     */
     isSubmitActivated () {
-    	return this.state.password && this.state.password === this.state.passwordRepeat && this.state.userName;
+    	return this.state.password 
+    		&& this.state.password === this.state.passwordRepeat 
+    		&& this.state.userName 
+    		&& this.state.description;
     }
     
     reset() {
     	this.setState({userName: ""});
     	this.setState({password: ""});
     	this.setState({passwordRepeat: ""});
+    	this.setState({firstName : ""});
+		this.setState({lastName : ""});
+		this.setState({yearOfBirth : ""});
+		this.setState({description : ""});
+		this.setState({hobbies : ""});
+		this.setState({gender : "Uncertain"});
+		this.setState({wrongYearFormat : false});
     }
     
     render () {
@@ -137,6 +181,12 @@ class Register extends React.Component {
     	if (this.isSubmitActivated())
     	{
     		btnSubmitClasses += " btn-success";
+    	}
+    	
+    	let yearError = "";
+    	if (this.state.wrongYearFormat)
+    	{
+    		yearError = "has-error ";
     	}
     	
     	const errorStyle = {
@@ -176,12 +226,12 @@ class Register extends React.Component {
 					        <input placeholder={t('lastName')} className="form-control" type="text" value={this.state.lastName}
 					        	onChange={this.handleLastNameChange}></input>
 					    </div>
-					    <div className="form-group">
+					    <div className={yearError + "form-group"}>
 						    <input placeholder={t('yearOfBirth')} className="form-control" type="text" value={this.state.yearOfBirth}
 					        	onChange={this.handleYearChange}></input>
 					    </div>
 					    <div className="form-group">
-						    <textarea placeholder={t('overMe')} className="textareHobby form-control" type="text" value={this.state.description}
+						    <textarea placeholder={t('overMe')+"*"} className="textareHobby form-control" type="text" value={this.state.description}
 					        	onChange={this.handleOverChange}></textarea>
 					    </div>
 					    <div className="form-group">

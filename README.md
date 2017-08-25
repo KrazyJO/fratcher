@@ -44,8 +44,8 @@ https://stackoverflow.com/questions/2488930/passing-empty-list-as-parameter-to-j
 Die Anwendung hätte auch andere Methoden im Repository aufrufen können, welche ohne die leeren Listen arbeiten. Ich denke aber bei dieser kleinen Anwendung ist der Workaround ok.
 
 ## Registrierung
-- Bei der Registrierung wird zuerst ein neuer User angelegt, die Funktionen Friends(inkl. Chat) und Matcher sind erst verfügbar, nachdem ein Profil angelegt wurde (mit Pflichfeldern)
-- Hat der User sich nicht komplett registriert, kann er sich an und abmelden. Wenn der sich anmeldet ist auf der Startseite ein Vermerk, dass das Profil aktualisiert werden muss
+- In der Registrierung schickt der User seine Anmeldedaten und sein Profil, wenn der Vorgang erfolgreich vom Server abgeschlossen wurde ist der User direkt eigeloggt. Die Cookies werden wie beim Login gespeichert, allerdings ohne die Möglichkeit angemeldet zu bleiben (für 1 Jahr)
+- Meldet der Server einen Fehler, wird dieser unter dem Formular rot angezeigt.
 
 ## Login/Logout
 - Bei Login ist die Möglichkeit "angemeldet bleiben" vorhanden. Diese setzt die Cookie Gültigkeit auf ein Jahr
