@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import de.wbg.fratcher.authentication.AuthenticationService;
+import de.wbg.fratcher.util.Gender;
 import de.wbg.fratcher.util.Util;
 
 @RestController
@@ -48,6 +49,7 @@ public class UserController {
 			//should not happen...
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
         }
+		
 		return ResponseEntity.ok(token);
 	}
 }

@@ -27,9 +27,9 @@ class Login extends React.Component {
     }
     
     componentDidMount() {
-    	Events.subscribe("loggedInFromRegister", function() {
+    	/*Events.subscribe("loggedInFromRegister", function() {
     		this.forceUpdate();
-    	}.bind(this));
+    	}.bind(this));*/
     }
     
     onLogoutButtonClicked() {
