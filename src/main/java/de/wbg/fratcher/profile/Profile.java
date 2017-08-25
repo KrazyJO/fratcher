@@ -19,8 +19,6 @@ public class Profile {
 	@Column(length = DESCRIPTION_LENGTH)
 	private String description;
 	
-	private Date createdAt;
-	
 	private Gender gender;
 	
 	private String yearOfBirth;
@@ -30,10 +28,6 @@ public class Profile {
 	private String firstName;
 	
 	private String lastName;
-	
-	public Date getCreatedAt() {
-		return createdAt;
-	}
 	
 	public String getYearOfBirth() {
 		return yearOfBirth;
@@ -61,10 +55,6 @@ public class Profile {
 	
 	public String getLastName() {
 		return lastName;
-	}
-	
-	public void setCreatedAt(Date createdAt) {
-		this.createdAt = createdAt;
 	}
 	
 	public void setYearOfBirth(String dateOfBirth) {
