@@ -1,6 +1,11 @@
 # Fratcher
 In der Entwicklung habe ich gerne Backend und Frontend nebenher entwickelt. Die Entwicklung fällt mir einfacher wenn das Ergebnis direkt sichtbar ist, häufig fallen mir dabei auch direkt Designentscheidungen auf die auf andere Weise besser gelöst werden können.
 
+Entwickelt wurde unter Windows 10 mit Google Chrome als Browser.
+
+Anbord ist eine zweite Applikation, PasswortGenerator.java. In dieser habe ich anfangs die gehashten Passwörter für die Datenbank generiert.
+Prinipiell könnte diese Datei gelöscht werden.
+
 ## Profil
 - User kann sein eigenes Profil bearbeiten
 - User kann Profil seiner Matches begutachten, aber nicht bearbeiten (Reiter 'Friends')
