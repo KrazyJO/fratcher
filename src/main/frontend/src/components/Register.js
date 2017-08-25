@@ -12,7 +12,13 @@ class Register extends React.Component {
         		userName : "",
         		password : "",
         		passwordRepeat : "",
-        		error : undefined
+        		error : undefined,
+        		firstName : "",
+        		lastName : "",
+        		yearOfBirth : "",
+        		description : "",
+        		hobbies : "",
+        		gender : "Uncertain"
         };
         
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -20,6 +26,14 @@ class Register extends React.Component {
         this.handlePasswordChange = this.handlePasswordChange.bind(this);
         this.handlePasswordRepeatChange = this.handlePasswordRepeatChange.bind(this);
         this.onButtonCancelClicked = this.onButtonCancelClicked.bind(this);
+        
+        //profile
+        this.handleFirstNameChange = this.handleFirstNameChange.bind(this);
+        this.handleLastNameChange = this.handleLastNameChange.bind(this);
+        this.handleYearChange = this.handleYearChange.bind(this);
+        this.handleOverChange = this.handleOverChange.bind(this);
+        this.handleHobbiesChange = this.handleHobbiesChange.bind(this);
+        this.handleGenderChange = this.handleGenderChange.bind(this);
     }
 
     
@@ -80,6 +94,31 @@ class Register extends React.Component {
 		this.forceUpdate();
     }
     
+    handleGenderChange (event) {
+    	this.setState({gender : event.target.value});
+    	console.log("handle gender");
+    }
+    
+    handleHobbiesChange (event) {
+    	this.setState({hobbies : event.target.value});
+    }
+    
+    handleOverChange (event) {
+    	this.setState({description : event.target.value});
+    }
+    
+    handleYearChange(event) {
+    	this.setState({yearOfBirth : event.target.value});
+    }
+    
+    handleLastNameChange (event) {
+    	this.setState({lastName : event.target.value});
+    }
+    
+    handleFirstNameChange (event) {
+    	this.setState({firstName : event.target.value});
+    }
+    
     isSubmitActivated () {
     	return this.state.password && this.state.password === this.state.passwordRepeat && this.state.userName;
     }
@@ -93,7 +132,7 @@ class Register extends React.Component {
     render () {
     	const {t} = this.props;
 
-    	let btnSubmitClasses = "width500 btn";
+    	let btnSubmitClasses = "width500 btn center";
     	if (this.isSubmitActivated())
     	{
     		btnSubmitClasses += " btn-success";
@@ -118,8 +157,42 @@ class Register extends React.Component {
 						    <input className="form-control" type="text" type="password" placeholder={t('passwordRepeat')} value={this.state.passwordRepeat}
 					        	onChange={this.handlePasswordRepeatChange}></input>
 					    </div>
-					    <button id="btnSendRegister" type="submit" className={btnSubmitClasses} >{t('sendSignIn')}</button>
-					    <button className="btn btn-danger width500" onClick={this.onButtonCancelClicked}>{t('cancel')}</button> 
+					    <span>Profildaten:</span>
+					    <div className="form-group">
+						    <label>{t('gender')}*</label>
+					        <select placeholder={t('gender')} value={this.state.gender} onChange={this.handleGenderChange} className="form-control" type="text">
+					        	<option value="Male">{t('male')}</option>
+					        	<option value="Female">{t('female')}</option>
+					        	<option value="Uncertain">{t('uncertain')}</option>
+					        </select>
+					    </div>
+					    
+					    <div className="form-group">
+					        <input placeholder={t('firstName')} className="form-control" type="text" value={this.state.firstName}
+					        	onChange={this.handleFirstNameChange}></input>
+					    </div>
+					    <div className="form-group">
+					        <input placeholder={t('lastName')} className="form-control" type="text" value={this.state.lastName}
+					        	onChange={this.handleLastNameChange}></input>
+					    </div>
+					    <div className="form-group">
+						    <input placeholder={t('yearOfBirth')} className="form-control" type="text" value={this.state.yearOfBirth}
+					        	onChange={this.handleYearChange}></input>
+					    </div>
+					    <div className="form-group">
+						    <textarea placeholder={t('overMe')} className="textareHobby form-control" type="text" value={this.state.description}
+					        	onChange={this.handleOverChange}></textarea>
+					    </div>
+					    <div className="form-group">
+						    <input placeholder={t('myHobbies')} className="form-control" type="text" value={this.state.hobbies}
+					        	onChange={this.handleHobbiesChange}></input>
+					    </div>
+					    <div className="form-group">
+					    	<button id="btnSendRegister" type="submit" className={btnSubmitClasses} >{t('sendSignIn')}</button>
+					    </div>
+					    <div className="form-group">
+					    	<button className="btn btn-danger width500 center" onClick={this.onButtonCancelClicked}>{t('cancel')}</button>
+					    </div>
 			    	</form>	
 			    	{	this.state.error &&
 			    		<div style={errorStyle}>{this.state.error}</div>

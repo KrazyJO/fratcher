@@ -177,10 +177,10 @@ class Profile extends React.Component {
 					        	onChange={this.handleOverChange}></textarea>
 					    </div>
 					    <div className="form-group">
-				    	<label>{t('myHobbies')}</label>
-					    <input disabled={bDisabled} className="form-control" type="text" value={this.state.hobbies}
-				        	onChange={this.handleHobbiesChange}></input>
-				    </div>
+					    	<label>{t('myHobbies')}</label>
+						    <input disabled={bDisabled} className="form-control" type="text" value={this.state.hobbies}
+					        	onChange={this.handleHobbiesChange}></input>
+					    </div>
 					    { !bDisabled &&
 					    	<button className="btn btn-success btnRight" type="submit" >{t('send')}</button>
 					    }
