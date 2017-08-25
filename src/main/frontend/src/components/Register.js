@@ -1,6 +1,6 @@
 import React from "react";
 import {translate} from "react-i18next";
-
+import {withCookies} from "react-cookie";
 import axios from "axios";
 import User from "./../Util/User";
 import Events from "pubsub-js";
@@ -70,9 +70,7 @@ class Register extends React.Component {
 	        	   	this.setState({error : undefined});
 	        	   	this.reset();
 	        	   	User.set(data);
-	        	   	User.inRegistrationProcess = true;
-//	        	   	Events.publish("loggedInFromRegister");
-//	        	   	this.props.history.push("/profile/"+data.user.id);
+	        	   	this.props.cookies.set('auth', data);
 	        	   	this.props.history.push("/");
 	           		break;
 	           case 409:
@@ -208,4 +206,4 @@ class Register extends React.Component {
     }
 }
 
-export default translate()(Register);
+export default withCookies(translate()(Register));
