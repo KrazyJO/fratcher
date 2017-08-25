@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,6 +17,7 @@ import org.springframework.web.socket.config.annotation.WebSocketHandlerRegistry
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import de.wbg.fratcher.App;
 import de.wbg.fratcher.matcher.MatchService;
 import de.wbg.fratcher.matcher.MatchService.UserWithProfile;
 import de.wbg.fratcher.user.User;
@@ -44,6 +47,8 @@ public class ChatService implements WebSocketConfigurer {
 	@Autowired
 	private UserService userService;
 	
+	private static final Logger LOG = LoggerFactory.getLogger(App.class);
+	
 	Iterable<Message> getAllChatEntriesForUsers(Long userIdOne, Long userIdTwo) {
 		
 		ArrayList<Long> userList = new ArrayList<>();
@@ -57,8 +62,9 @@ public class ChatService implements WebSocketConfigurer {
 	 * @param message chatmessage
 	 */
 	public boolean newMessage(Message message) {
-		if (message.getUserIdFrom() != userService.getCurrentUser().getId())
+		if (!message.getUserIdFrom().equals(userService.getCurrentUser().getId()))
 		{
+			LOG.error("Message send from wrong User (message user id, loggedin user id): " + message.getUserIdFrom() +", " + userService.getCurrentUser().getId());
 			return false;
 		}
 		
@@ -77,7 +83,7 @@ public class ChatService implements WebSocketConfigurer {
 		}
 		else
 		{
-			System.out.println("no session found");
+			LOG.error("User has no Session: " + userService.getCurrentUser().getId());
 		}
 		return true;
 	}
