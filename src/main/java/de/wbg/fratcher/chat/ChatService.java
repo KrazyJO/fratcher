@@ -66,7 +66,9 @@ public class ChatService implements WebSocketConfigurer {
 		}
 		LOG.info("new Message from userId={} to userId={} with message={}", message.getUserIdFrom(), message.getUserIdTo(), message.getMessage());
 		
+		message.setUserNameFrom(userService.getCurrentUser().getUserName());
 		this.messageRepository.save(message);
+		
 		
 		WebSocketSession session = chatHandler.getSessionForUser(message.getUserIdTo());
 		if (session != null)

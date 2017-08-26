@@ -26,6 +26,8 @@ import Login from './components/Login';
 import Friends from './components/Friends';
 import Chat from './components/Chat';
 
+import User from './Util/User';
+
 class Root extends React.Component {
     constructor(props) {
         super(props);
@@ -56,6 +58,19 @@ class Root extends React.Component {
     	if (oParsedMessage.newMatch)
     	{
     		NotificationManager.info("Du hast einen neuen Freund gefunden");
+    	}
+    	if (oParsedMessage.id && oParsedMessage.message)
+    	{
+    		console.log("User.getChatPartnerId(): " + User.getChatPartnerId() + ", oParsedMessage.id: " + oParsedMessage.userIdFrom);
+    		if (User.getChatPartnerId() != oParsedMessage.userIdFrom) //do not use typecast here ;)
+    		{
+    			NotificationManager.info(oParsedMessage.message, "Nachricht von " + oParsedMessage.userNameFrom, 3000, () => {
+    				//router is not available here... use good old location.hash
+    				User.setChatPartnerId(oParsedMessage.userIdFrom);
+    				User.setChatPartnerName(oParsedMessage.userNameFrom);
+    				location.hash = '#/chat/'+oParsedMessage.userIdFrom;
+    			});
+    		}
     	}
     }
 

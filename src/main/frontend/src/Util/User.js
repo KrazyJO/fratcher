@@ -33,12 +33,6 @@ class User {
         });
     }
     
-    fetchProfile() {
-    	
-    }
-
-    
-    
     //is called by loginbutton
     set(userData) {
     	axios.defaults.headers.common['Authorization'] = `Bearer ${userData.token}`;
@@ -120,6 +114,14 @@ class User {
     
     getChatPartnerName() {
     	return this.chatPartnerName;
+    }
+    
+    setChatPartnerId(value) {
+    	this.chatPartnerId = value;
+    }
+    
+    getChatPartnerId() {
+    	return this.chatPartnerId;
     }
     
     reset() {

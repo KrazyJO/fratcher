@@ -81,6 +81,7 @@ Es gibt einige Elemente die mit CSS bearbeitet wurden.
 	Wird zur Verteilung der WebSocket Nachrichten benutzt. Die Components registrieren sich mit componentDidMount am Event-System und 
 	entfernen sich von diesem wieder bei componentWillUnmount.
 	Auch die Navigationsbar erhält Events um zu erfahren ob der User angemeldet ist oder nicht.
+	Daten werden im JSON-Format übertragen, da diese von Java und Javascript relativ leicht eingelesen werden können. Außerdem sind diese Art von Objekten native Javascript Objekte.
 - react-icons: Icons für react
 - react-notifications (https://www.npmjs.com/package/react-notifications)
 	Wird zur zusätzlichen Anzeige von neuen Nachrichten oder Online/Offline-Status benutzt. 

@@ -26,7 +26,8 @@ class Chat extends React.Component {
     	{
     		Events.unsubscribe(this.subscription);	
     	}
-    	
+    	User.setChatPartnerName("");
+    	User.setChatPartnerId(-1);
     }
     
     componentDidMount() {
@@ -40,7 +41,7 @@ class Chat extends React.Component {
     	
     	this.setState({chatHistory : [], submitMessage : ""});
     	let sChatPartnerId = this.props.match.params.chatPartner;
-    	User.id
+    	User.setChatPartnerId(sChatPartnerId);
     	let sUrl = "/api/chat/"+sChatPartnerId; 
     	axios.get(sUrl)
     	.then(({data, status}) => {

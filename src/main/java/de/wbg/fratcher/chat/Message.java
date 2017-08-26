@@ -21,7 +21,16 @@ public class Message {
 	private Date createdAt;
 	private Long userIdFrom;
 	private Long userIdTo;
+	private String userNameFrom;
 	private boolean read;
+	
+	public void setUserNameFrom(String userNameFrom) {
+		this.userNameFrom = userNameFrom;
+	}
+	
+	public String getUserNameFrom() {
+		return userNameFrom;
+	}
 	
 	public void setCreatedAt(Date createdAt) {
 		this.createdAt = createdAt;
