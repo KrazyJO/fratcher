@@ -34,7 +34,7 @@ Im Chat steckt die wohl meiste Arbeit, da ich denke das im Laufe der Zeit diese 
 - Es können keine Nachrichten ohne Inhalt verschickt werden.
 - Beim öffnen des Chats wird das Input-Feld direkt fokusiert, damit der User gleich anfangen kann zu schreiben
 	(https://stackoverflow.com/questions/28889826/react-set-focus-on-input-after-render)
-
+- Neue Chatnachrichten werden auch von einem Event-Handler abgefangen, der react-Notifications anzeigt. Dazu wird im Backend zu den Nachrichten der WebSockets der Username generiert (war nicht vorgesehen, aber die react-notificaitons wollte ich noch unbedingt ausprobieren). Die Nachrichten enthalten den Usernamen des Absenders sowie die Nachricht, welche nicht unbedingt komplett angezeigt wird. Man kann auf die blaue Notificatin klicken und wird in den Chat navigiert. Es werden keine Notifications angezeigt, wenn der Chat des Absenders gerade geöffnet ist. 
 
 ## Notifications
 - Über den Endpoint Notifications wird der User über neue Nachrichten benachrichtigt (Anzahl ungelesener Nachrichten).
@@ -52,7 +52,7 @@ Im Chat steckt die wohl meiste Arbeit, da ich denke das im Laufe der Zeit diese 
 - Im Backend wird für den Fall das die Listen liked und/oder disliked des Users leer sind, der User selbst hinzugefügt. Für die H2 Datenbank hat es auch ohne Funktioniert, Postgresql meldet allerdings einen Syntaxfehler mit leeren Listen. 
 https://stackoverflow.com/questions/2488930/passing-empty-list-as-parameter-to-jpa-query-throws-error hat mich auf die Lösung gebracht.
 Die Anwendung hätte auch andere Methoden im Repository aufrufen können, welche ohne die leeren Listen arbeiten. Ich denke aber bei dieser kleinen Anwendung ist der Workaround ok.
-- neue Matches werden bei like registriert und dem 'gematchten' User bei WebSocket mitgeteilt. Hat der gematchte User die Friends ansicht auf, updated sich die View automatisch.  
+- neue Matches werden bei like registriert und dem 'gematchten' User bei WebSocket mitgeteilt. Hat der gematchte User die Friends ansicht auf, updated sich die View automatisch. Zusätzlich wird eine react-notification oben rechts angezeigt.
 
 ## Registrierung
 - In der Registrierung schickt der User seine Anmeldedaten und sein Profil, wenn der Vorgang erfolgreich vom Server abgeschlossen wurde ist der User direkt eigeloggt. Die Cookies werden wie beim Login gespeichert, allerdings ohne die Möglichkeit angemeldet zu bleiben (für 1 Jahr)
@@ -84,4 +84,4 @@ Es gibt einige Elemente die mit CSS bearbeitet wurden.
 	Daten werden im JSON-Format übertragen, da diese von Java und Javascript relativ leicht eingelesen werden können. Außerdem sind diese Art von Objekten native Javascript Objekte.
 - react-icons: Icons für react
 - react-notifications (https://www.npmjs.com/package/react-notifications)
-	Wird zur zusätzlichen Anzeige von neuen Nachrichten oder Online/Offline-Status benutzt. 
+	Wird zur zusätzlichen Anzeige von neuen Nachrichten oder neue Matches benutzt.
