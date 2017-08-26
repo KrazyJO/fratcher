@@ -26,6 +26,7 @@ Im Chat steckt die wohl meiste Arbeit, da ich denke das im Laufe der Zeit diese 
 	So kann der Schritt mit der Authentifizierung über WebSockets gespart werden.
 - die Initialisierung der WebSockets liest die URL aus dem Window-Object location. Zur Unterscheidung ob "ws://..." oder "wss://..." benutzt werden muss, wird unterschieden ob die Seite per "http://..." oder "https://..." aufgerufen wurde.  
 - Nachrichten der WebSockets werden generell über das Event-System verteilt.
+- Es können keine Nachrichten ohne Inhalt verschickt werden.
 
 ## Notifications
 - Über den Endpoint Notifications wird der User über neue Nachrichten benachrichtigt (Anzahl ungelesener Nachrichten).
