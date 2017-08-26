@@ -114,13 +114,11 @@ class Friends extends React.Component {
     	{
     		let userId = wsmessage.online;
     		this.setOnlineStatus(userId, true);
-    		NotificationManager.info("user is online");
     	}
     	if (wsmessage && wsmessage.offline)
     	{
     		let userId = wsmessage.offline;
     		this.setOnlineStatus(userId, false);
-    		NotificationManager.info("user is offline");
     	}
     	if (wsmessage && wsmessage.newMatch)
     	{

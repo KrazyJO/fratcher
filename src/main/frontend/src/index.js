@@ -13,6 +13,9 @@ import {Link} from "react-router-dom";
 //Notifications
 import {NotificationContainer, NotificationManager} from 'react-notifications';
 
+//Events
+import Events from 'pubsub-js';
+
 //own component
 import Home from './components/Home';
 import Matcher from './components/Matcher';
@@ -27,6 +30,33 @@ class Root extends React.Component {
     constructor(props) {
         super(props);
         // Force initialization of the object.
+        
+        this.socketMessageReceived = this.socketMessageReceived.bind(this);
+    }
+    
+    componentDidMount() {
+    	Events.subscribe("socketMessage", this.socketMessageReceived);
+    }
+    
+    socketMessageReceived(message, data) {
+    	let oParsedMessage = false;
+    	try{
+    		oParsedMessage = JSON.parse(data);
+    	}
+    	catch (e)
+    	{
+    		oParsedMessage = false;
+    		console.error(data);
+    		console.error(e);
+    	}
+    	if (!oParsedMessage)
+    	{
+    		return;
+    	}
+    	if (oParsedMessage.newMatch)
+    	{
+    		NotificationManager.info("Du hast einen neuen Freund gefunden");
+    	}
     }
 
     render() {
