@@ -32,6 +32,7 @@ Im Chat steckt die wohl meiste Arbeit, da ich denke das im Laufe der Zeit diese 
 - Beim öffnen des Chats wird das Input-Feld direkt fokusiert, damit der User gleich anfangen kann zu schreiben
 	(https://stackoverflow.com/questions/28889826/react-set-focus-on-input-after-render)
 
+
 ## Notifications
 - Über den Endpoint Notifications wird der User über neue Nachrichten benachrichtigt (Anzahl ungelesener Nachrichten).
 	Dieser wird einmalig bei Login abgerufen, danach wird der Status der Notifications über Websockets aktualisiert.
