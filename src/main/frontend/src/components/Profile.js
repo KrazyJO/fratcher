@@ -53,6 +53,11 @@ class Profile extends React.Component {
     	}
     
     componentWillMount() {
+    	if (User.isNotAuthenticated())
+    	{
+    		this.props.history.push("/");
+    		return;
+    	}
     	this.reset();
     	let iProfileId = this.props.match.params.profileId;
     	if (!iProfileId)
@@ -65,6 +70,7 @@ class Profile extends React.Component {
     	}
     	this.fetchProfile(iProfileId);
     }
+    
     
     fetchProfile(userId) {
     	let oThis = this;
