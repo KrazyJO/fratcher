@@ -31,7 +31,6 @@ class Chat extends React.Component {
     }
     
     componentDidMount() {
-    	console.log("id: " + User.getChatPartnerId());
     	if (User.isNotAuthenticated())
     	{
     		this.props.history.push("/");
