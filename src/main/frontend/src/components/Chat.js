@@ -27,10 +27,11 @@ class Chat extends React.Component {
     		Events.unsubscribe(this.subscription);	
     	}
     	User.setChatPartnerName("");
-    	User.setChatPartnerId(-1);
+    	User.setChatPartnerId(false);
     }
     
     componentDidMount() {
+    	console.log("id: " + User.getChatPartnerId());
     	if (User.isNotAuthenticated())
     	{
     		this.props.history.push("/");
@@ -69,7 +70,6 @@ class Chat extends React.Component {
     
     onSocketMessageReceived (message, data) {
     	let wsmessage = JSON.parse(data);
-    	console.log(wsmessage);
     	if (wsmessage && wsmessage.id && wsmessage.message)
     	{
     		//this is surely a message object
