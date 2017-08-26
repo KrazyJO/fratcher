@@ -29,6 +29,8 @@ Im Chat steckt die wohl meiste Arbeit, da ich denke das im Laufe der Zeit diese 
 - die Initialisierung der WebSockets liest die URL aus dem Window-Object location. Zur Unterscheidung ob "ws://..." oder "wss://..." benutzt werden muss, wird unterschieden ob die Seite per "http://..." oder "https://..." aufgerufen wurde.  
 - Nachrichten der WebSockets werden generell über das Event-System verteilt.
 - Es können keine Nachrichten ohne Inhalt verschickt werden.
+- Beim öffnen des Chats wird das Input-Feld direkt fokusiert, damit der User gleich anfangen kann zu schreiben
+	(https://stackoverflow.com/questions/28889826/react-set-focus-on-input-after-render)
 
 ## Notifications
 - Über den Endpoint Notifications wird der User über neue Nachrichten benachrichtigt (Anzahl ungelesener Nachrichten).
@@ -53,8 +55,10 @@ Die Anwendung hätte auch andere Methoden im Repository aufrufen können, welche
 - Damit der User kein falsches Jahr verschickt, gibt es eine Validierung im Frontend. Ein Fehler wird erst angezeigt, wenn der User seine Registrierung abschickt (Fehlermeldung am Ende des Formulars, sowie Input-Feld mit roter Umrandung). Per Live-Update verliert das Input-Feld den Roten Rahmen, wenn der User eine korrekte Jahreszahl eingegeben hat. 
 
 ## Login/Logout
+- Bei Login wird ein Cookie in den Browser geschrieben
 - Bei Login ist die Möglichkeit "angemeldet bleiben" vorhanden. Diese setzt die Cookie Gültigkeit auf ein Jahr
 - Bei Logout wird der Cookie gelöscht
+- Fehlerhafte Anmeldung wird durch einen roten Text unter dem Login-Bereich angezeigt
 
 ## CSS
 Zum Positionieren und Stylen habe ich teilweise selbst CSS geschrieben ohne mich an Bootstrap zu bedienen,

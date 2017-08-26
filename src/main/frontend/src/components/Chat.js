@@ -52,6 +52,7 @@ class Chat extends React.Component {
     	this.state.partnerIsOnline = User.getChatPartnerOnlineStatus();
     	Notifications.setMessagesRead(sChatPartnerId);
     	
+    	//https://stackoverflow.com/questions/28889826/react-set-focus-on-input-after-render
     	this.sendInput.focus();
     }
     
