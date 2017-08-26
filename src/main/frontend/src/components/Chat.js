@@ -51,6 +51,8 @@ class Chat extends React.Component {
     	
     	this.state.partnerIsOnline = User.getChatPartnerOnlineStatus();
     	Notifications.setMessagesRead(sChatPartnerId);
+    	
+    	this.sendInput.focus();
     }
     
     /**
@@ -161,7 +163,7 @@ class Chat extends React.Component {
     				</div>
     				<div className="chatSend">
     					<form className="form-horizontal center chatSubmitContainer" onSubmit={this.submitMessage}>
-    						<input className="form-control" type="text" name="message" value={this.state.submitMessage} onChange={this.onSubmitMessageChange}></input>
+    						<input className="form-control" ref={(input) => {this.sendInput = input;}} type="text" name="message" value={this.state.submitMessage} onChange={this.onSubmitMessageChange}></input>
     						<button className="btnRight btn btn-success btnSignIn" type="submit">Abschicken</button>
     					</form>
     				</div>
