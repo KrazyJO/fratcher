@@ -82,3 +82,5 @@ Es gibt einige Elemente die mit CSS bearbeitet wurden.
 	entfernen sich von diesem wieder bei componentWillUnmount.
 	Auch die Navigationsbar erhält Events um zu erfahren ob der User angemeldet ist oder nicht.
 - react-icons: Icons für react
+- react-notifications (https://www.npmjs.com/package/react-notifications)
+	Wird zur zusätzlichen Anzeige von neuen Nachrichten oder Online/Offline-Status benutzt. 
