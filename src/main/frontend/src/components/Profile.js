@@ -133,11 +133,9 @@ class Profile extends React.Component {
 
     render () {
     	const {t} = this.props;
-    	let bDisabled = !(User.getId() == this.state.userId); 
-    	
+    	let bDisabled = !(User.getId() == this.state.userId); //means is not own user profile
     	return (
     			<div className="width500 center">
-    				<span>{User.getUserName()}</span>
     				<form className="form-horizontal" onSubmit={this.handleSubmit}>
 	    				<div className="form-group">
 				        	<label>{t('gender')}*</label>

@@ -29,6 +29,14 @@ class Notifications {
     	this.notifications.forEach((notification) => {
 			count += notification.count;
     	});
+    	if (count > 0)
+    	{
+    		document.title = "fratcher (" + count + ")";
+    	}
+    	else
+    	{
+    		document.title = "fratcher";
+    	}
     	return count;
     }
     
