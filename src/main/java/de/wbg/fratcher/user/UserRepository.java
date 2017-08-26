@@ -6,9 +6,6 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 
-import de.wbg.fratcher.profile.Profile;
-
-
 public interface UserRepository extends CrudRepository<User, Long> {
 
 	@Query("SELECT u from User_ u WHERE u.userName = :userName AND u.password = :password")
@@ -32,3 +29,4 @@ public interface UserRepository extends CrudRepository<User, Long> {
 	@Query("SELECT u FROM User_ u WHERE u.id != :userId and u not in (:liked) and u not in (:disliked)")
 	List<User> findUserUnmatched(@Param("userId") Long userId,  @Param("liked") ArrayList<User> liked, @Param("disliked") ArrayList<User> disliked);
 }
+ 

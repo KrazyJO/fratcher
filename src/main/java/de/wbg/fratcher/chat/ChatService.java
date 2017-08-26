@@ -75,7 +75,7 @@ public class ChatService implements WebSocketConfigurer {
 				ObjectMapper mapper = new ObjectMapper();
 				session.sendMessage(new TextMessage(mapper.writeValueAsString(message)));
 			} catch (IOException e) {
-				System.out.println("error in sendMessage");
+				LOG.error("error in sendMessage for message {}", message.toString());
 				e.printStackTrace();
 			}
 		}

@@ -60,7 +60,7 @@ public class UserController {
         }
 		
 		//profile data
-		Profile p = u.getProfile();
+		Profile p = u.getProfile(); 
 		
 		p.setDescription(user.description);
 		p.setFirstName(user.firstName);

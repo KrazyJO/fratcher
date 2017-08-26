@@ -1,7 +1,5 @@
 package de.wbg.fratcher.matcher;
 
-import java.util.LinkedList;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import de.wbg.fratcher.matcher.MatchService.UserWithProfile;
-import de.wbg.fratcher.profile.Profile;
 import de.wbg.fratcher.user.UserService;
 
 @RestController
