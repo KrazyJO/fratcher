@@ -44,7 +44,6 @@ class Chat extends React.Component {
     	let sUrl = "/api/chat/"+sChatPartnerId; 
     	axios.get(sUrl)
     	.then(({data, status}) => {
-    		console.log(data);
     		this.setState({chatHistory : data});
     		this.setState({submitted : true});
         });
