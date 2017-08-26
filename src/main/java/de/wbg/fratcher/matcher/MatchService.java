@@ -38,11 +38,16 @@ public class MatchService {
 	
 	public Iterable<UserWithProfile> findUserMatches(Long userId)	{
 		User user = userRepository.findUserById(userId);
-		ArrayList<User> liked = new ArrayList<User>(user.getLiked());
-		
-		Iterable<User> userMatches = userRepository.findMatchesByUser(user.getId(), liked);
-		
-		return this.createUserWithProfiles(userMatches);
+		if (user.getLiked().size() == 0)
+		{
+			return new ArrayList<UserWithProfile>();
+		}
+		else
+		{
+			ArrayList<User> liked = new ArrayList<User>(user.getLiked());
+			Iterable<User> userMatches = userRepository.findMatchesByUser(user.getId(), liked);
+			return this.createUserWithProfiles(userMatches);
+		}
 	}
 	
 	/**
