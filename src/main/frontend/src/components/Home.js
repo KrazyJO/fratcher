@@ -20,10 +20,6 @@ class Home extends React.Component {
     	this.props.history.push("/register");
     }
     
-    isInRegistration() {
-    	return User.isAuthenticated() && !UserProfile.isValidForSubmit();
-    }
-    
     componentWillUnmount () {
     	if (this.subscription)
     	{
@@ -59,10 +55,6 @@ class Home extends React.Component {
 
             		<img style={{display: "block"}} className="center" src="./../resources/fratcher-logo.png" />
     				{
-    					this.isInRegistration() && 
-    					<span>Bevor Sie loslegen können, müssen Sie Ihr <Link to={"/profile/"+User.getId()}>Profil</Link> einrichten.</span>
-    				}
-    				{
     					User.isNotAuthenticated() &&
     					<div>
 	    					<span className="teaser">{t('teaser')}</span>
@@ -70,7 +62,7 @@ class Home extends React.Component {
     					</div>
     				}
     				{
-    					User.isAuthenticated() && UserProfile.isValidForSubmit() &&
+    					User.isAuthenticated() &&
     					<span>leg los und finde neue Freunde...</span>
     				}
     				{this.renderHowItWorks()}
