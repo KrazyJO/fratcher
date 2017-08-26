@@ -37,6 +37,7 @@ Im Chat steckt die wohl meiste Arbeit, da ich denke das im Laufe der Zeit diese 
 	Dies hat auch zur Folge, das die Badges aktualisiert werden.
 - Ist der Chat geöffnet zu dem neue Nachrichten eintreffen, werden die Notifications hochgezählt. Sie werden mit abschicken einer eigenen Nachricht als gelesen markiert
 - In den Notifications gibt es nur Einträge zu Chatpartnern mit einer Anzahl ungelesener Nachrichten > 0 um den Datenverkehr zu reduzieren.
+- Bei Abruf der Gesamtanzahl an neuen Nachrichten wird die Eigenschaft document.title aktualisiert. Dadurch wird die Anzahl auch in der Browser-Tab-Bar angezeigt.
 	
 ## Matcher
 - Matcher zeigt Text an, dieser kann ge(dis)liked werden
