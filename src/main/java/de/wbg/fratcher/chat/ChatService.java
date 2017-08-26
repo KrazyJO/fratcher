@@ -3,13 +3,11 @@ package de.wbg.fratcher.chat;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.LinkedList;
-import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.config.annotation.WebSocketConfigurer;
@@ -17,7 +15,6 @@ import org.springframework.web.socket.config.annotation.WebSocketHandlerRegistry
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import de.wbg.fratcher.App;
 import de.wbg.fratcher.matcher.MatchService;
 import de.wbg.fratcher.matcher.MatchService.UserWithProfile;
 import de.wbg.fratcher.user.User;
@@ -26,6 +23,8 @@ import de.wbg.fratcher.user.UserService;
 @Service
 public class ChatService implements WebSocketConfigurer {
 
+	private static final Logger LOG = LoggerFactory.getLogger(ChatService.class);
+	
 	public static class Notification {
 		public String userName;
 		public int count;
@@ -47,10 +46,8 @@ public class ChatService implements WebSocketConfigurer {
 	@Autowired
 	private UserService userService;
 	
-	private static final Logger LOG = LoggerFactory.getLogger(App.class);
-	
 	Iterable<Message> getAllChatEntriesForUsers(Long userIdOne, Long userIdTwo) {
-		
+		LOG.info("user fetches chat messages: user={} for user={}", userIdOne, userIdTwo);
 		ArrayList<Long> userList = new ArrayList<>();
 		userList.add(userIdTwo);
 		userList.add(userIdOne);
@@ -67,6 +64,7 @@ public class ChatService implements WebSocketConfigurer {
 			LOG.error("Message send from wrong User (message user id, loggedin user id): " + message.getUserIdFrom() +", " + userService.getCurrentUser().getId());
 			return false;
 		}
+		LOG.info("new Message from userId={} to userId={} with message={}", message.getUserIdFrom(), message.getUserIdTo(), message.getMessage());
 		
 		this.messageRepository.save(message);
 		
@@ -110,7 +108,7 @@ public class ChatService implements WebSocketConfigurer {
 				notifications.add(notification);
 			}
 		}
-		
+		LOG.info("user fetches notifications userId={}", id);
 		return notifications;
 	}
 	
@@ -125,6 +123,7 @@ public class ChatService implements WebSocketConfigurer {
 			m.setRead(true);
 			messageRepository.save(m);
 		}
+		LOG.debug("user {} has read all messages for {}", myId, userId);
 	}
 	
 	/**

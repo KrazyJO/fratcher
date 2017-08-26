@@ -1,5 +1,7 @@
 package de.wbg.fratcher.profile;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -8,6 +10,8 @@ import de.wbg.fratcher.user.UserService;
 @Service
 public class ProfileService {
 
+	private static final Logger LOG = LoggerFactory.getLogger(ProfileService.class);
+	
 	@Autowired 
 	private ProfileRepository profileRepository;
 	@Autowired
@@ -31,11 +35,13 @@ public class ProfileService {
 	public Profile getProfile(Long id)
 	{
 		Long myId = userService.getCurrentUser().getId();
+		LOG.info("user {} fetches profile for user {}", myId, id);
 		Long profileId;
 		if (!id.equals(myId))
 		{
 			if (!userService.isUserMatched(id))
 			{
+				LOG.error("user {} tryed to fetch unmatched profile for user {}", myId, id);
 				return null;
 			}
 			else
@@ -43,6 +49,7 @@ public class ProfileService {
 				profileId = userService.getProfileIdFromUser(id);
 				if (profileId == -1L)
 				{
+					LOG.error("no profile for user {}", id);
 					return null;
 				}
 			}
@@ -51,6 +58,7 @@ public class ProfileService {
 		{
 			profileId = userService.getCurrentUser().getProfile().getId();
 		}
+		
 		return profileRepository.findOne(profileId);
 	}
 	
@@ -59,5 +67,6 @@ public class ProfileService {
 		Long profileId = userService.getCurrentUser().getProfile().getId();
 		p.setId(profileId);
 		profileRepository.save(p);
+		LOG.info("user {} edited profil", userService.getCurrentUser().getId());
 	}
 }

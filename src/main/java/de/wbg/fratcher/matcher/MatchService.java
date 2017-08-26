@@ -3,10 +3,11 @@ package de.wbg.fratcher.matcher;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import de.wbg.fratcher.chat.ChatHandler;
 import de.wbg.fratcher.chat.ChatService;
 import de.wbg.fratcher.profile.Profile;
 import de.wbg.fratcher.user.User;
@@ -16,6 +17,8 @@ import de.wbg.fratcher.user.UserService;
 @Service
 public class MatchService {
 
+	private static final Logger LOG = LoggerFactory.getLogger(MatchService.class);
+	
 	public class UserWithProfile {
 		public Long userId;
 		public String userName;
@@ -67,6 +70,8 @@ public class MatchService {
 		
 		Iterable<User> userUnmatched = userRepository.findUserUnmatched(user.getId(), liked, disliked);
 		
+		LOG.info("user {} fetches unmatched list", userId);
+		
 		return this.createUserWithProfiles(userUnmatched);
 	}
 	
@@ -76,6 +81,7 @@ public class MatchService {
 		User currentUser = userRepository.findUserById(userService.getCurrentUser().getId());
 		currentUser.getLiked().add(user);
 		userRepository.save(currentUser);
+		LOG.info("user {} liked user {}", currentUser.getId(), id);
 	}
 	
 	public void dislikeUser(Long id)
@@ -84,6 +90,7 @@ public class MatchService {
 		User currentUser = userRepository.findUserById(userService.getCurrentUser().getId());
 		currentUser.getDisliked().add(user);
 		userRepository.save(currentUser);
+		LOG.info("user {} disliked user {}", currentUser.getId(), id);
 	}
 	
 	private LinkedList<UserWithProfile> createUserWithProfiles(Iterable<User> users)
