@@ -46,6 +46,7 @@ class Home extends React.Component {
     				<h3 style={{textAlign: "center"}}>{t('howItWorksSubtitle')}</h3>
     				<img className="boxShadow" src="./../../resources/matcher-shot.png" />
     				<span style={{textAlign: "center"}}>{t('howItWorksDescription')}</span>
+    				<span style={{textAlign: "center"}}>{t('hobbiesNotShown')}</span>
     			</div>
     	)
     }

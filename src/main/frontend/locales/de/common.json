@@ -33,5 +33,6 @@
   "home" : "Home",
   "matcher" : "Matcher",
   "friends" : "Friends",
-  "loginError" : "Die Anmeldung ist fehlgeschlagen"
+  "loginError" : "Die Anmeldung ist fehlgeschlagen",
+  "hobbiesNotShown" : "WICHTIG: Deine Hobbies sind NUR für deine Freunde sichtbar!"
 }

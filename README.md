@@ -6,6 +6,8 @@ In der Entwicklung habe ich gerne Backend und Frontend nebenher entwickelt. Die 
 Anbord ist eine zweite Applikation, PasswortGenerator.java. In dieser habe ich anfangs die gehashten Passwörter für die Datenbank generiert.
 Prinipiell könnte diese Datei gelöscht werden.
 
+Der User wird auf alles Seiten, außer Login und Registrieren, zurück auf Home geschickt, wenn er nicht angemeldet ist. Das verhindert irreführendes Verhalten für den User, wenn er zum Beispiel Lesezeichen im Browser speichert. Außerdem werden nicht automatisch Requests an den Server geschickt, ohne das der User angemeldet ist.
+
 ## Profil
 - User kann sein eigenes Profil bearbeiten
 - User kann Profil seiner Matches begutachten, aber nicht bearbeiten (Reiter 'Friends')
@@ -47,6 +49,7 @@ Die Anwendung hätte auch andere Methoden im Repository aufrufen können, welche
 ## Registrierung
 - In der Registrierung schickt der User seine Anmeldedaten und sein Profil, wenn der Vorgang erfolgreich vom Server abgeschlossen wurde ist der User direkt eigeloggt. Die Cookies werden wie beim Login gespeichert, allerdings ohne die Möglichkeit angemeldet zu bleiben (für 1 Jahr)
 - Meldet der Server einen Fehler, wird dieser unter dem Formular rot angezeigt.
+- Damit der User kein falsches Jahr verschickt, gibt es eine Validierung im Frontend. Ein Fehler wird erst angezeigt, wenn der User seine Registrierung abschickt (Fehlermeldung am Ende des Formulars, sowie Input-Feld mit roter Umrandung). Per Live-Update verliert das Input-Feld den Roten Rahmen, wenn der User eine korrekte Jahreszahl eingegeben hat. 
 
 ## Login/Logout
 - Bei Login ist die Möglichkeit "angemeldet bleiben" vorhanden. Diese setzt die Cookie Gültigkeit auf ein Jahr
