@@ -20,7 +20,7 @@ Der User wird auf alles Seiten, außer Login und Registrieren, zurück auf Home 
 Im Chat steckt die wohl meiste Arbeit, da ich denke das im Laufe der Zeit diese Komponente die am meisten genutzte werden würde.
 - Chat funktioniert über WebSockets
 - neue Nachrichten werden über ein Bubble in der Navigationsbar angezeigt (am Reiter Friends) mit der entsprechenden Anzahl an ungelesenen 	Nachrichten.
-- Online- und Offline-Status der Friends wird in Real-Time angezeigt und aktualisiert
+- Online- und Offline-Status der Friends wird in Real-Time angezeigt und aktualisiert (einfach mit bob anmelden und auf die Seite Friends wechseln, dann mit Sally an- und abmelden).
 	Sichtbar im Reiter 'Friends' am User und im Chat am großen Icon (rot für nicht angemeldet, grün für angemeldet)
 - Chatnachrichten sind per CSS gestyled und lassen sich eindeutig 'mir' oder meinem Chatpartner zuweisen
 - bei Eingang neuer Nachrichten scrollt der Chat automatisch herunter (und bei eigenen Nachrichten)
