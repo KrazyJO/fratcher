@@ -7,7 +7,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.filter.GenericFilterBean;
 
+import de.wbg.fratcher.chat.ChatService;
 import de.wbg.fratcher.matcher.MatchService;
+import de.wbg.fratcher.profile.ProfileService;
 import de.wbg.fratcher.user.UserService;
 
 import javax.servlet.FilterChain;
@@ -24,11 +26,17 @@ public class JWTFilter extends GenericFilterBean {
     private AuthenticationService authenticationService;
     private UserService userService;
     private MatchService matchService;
-
-    public JWTFilter(AuthenticationService authenticationService, UserService userService, MatchService matchService) {
+    private ProfileService profileService;
+    private ChatService chatService;
+    
+    public JWTFilter(AuthenticationService authenticationService, UserService userService, 
+    		MatchService matchService, ProfileService profileService,
+    		ChatService chatService) {
         this.authenticationService = authenticationService;
         this.userService = userService;
         this.matchService = matchService;
+        this.profileService = profileService;
+        this.chatService = chatService;
     }
 
     @Override
