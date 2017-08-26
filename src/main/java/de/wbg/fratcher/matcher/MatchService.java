@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import de.wbg.fratcher.chat.ChatHandler;
 import de.wbg.fratcher.chat.ChatService;
 import de.wbg.fratcher.profile.Profile;
 import de.wbg.fratcher.user.User;
@@ -82,6 +83,16 @@ public class MatchService {
 		currentUser.getLiked().add(user);
 		userRepository.save(currentUser);
 		LOG.info("user {} liked user {}", currentUser.getId(), id);
+		
+		//match?
+		User u = userRepository.findSpecificMatcheByUser(currentUser.getId(), id);
+		if (u != null)
+		{
+			chatService.notifyNewMatch(currentUser.getId(), u.getId());
+			LOG.info("new match registered for user {} with user {}", currentUser.getId(), id);
+		}
+		
+		
 	}
 	
 	public void dislikeUser(Long id)

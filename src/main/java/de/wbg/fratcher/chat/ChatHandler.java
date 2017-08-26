@@ -1,9 +1,12 @@
 package de.wbg.fratcher.chat;
 
+import java.io.IOException;
 import java.util.Iterator;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
@@ -15,6 +18,7 @@ import de.wbg.fratcher.user.User;
 
 public class ChatHandler extends TextWebSocketHandler {
 	
+	private static final Logger LOG = LoggerFactory.getLogger(ChatHandler.class);
 	
 	private static class UserId {
 		public String user;
@@ -51,6 +55,29 @@ public class ChatHandler extends TextWebSocketHandler {
     		}
     	}
     	return session;
+    }
+    
+    public void notifyNewMatch(Long userIdFrom, Long toUserId)
+    {
+    	if (userToSession.containsKey(toUserId))
+    	{
+    		String sessionId = userToSession.get(toUserId);
+    		for (WebSocketSession c : clients)
+    		{
+    			if (c.getId() == sessionId)
+    			{
+    				String messageToSend = "{\"newMatch\" : \"" + userIdFrom + "\"}";
+    				try {
+						c.sendMessage(new TextMessage(messageToSend));
+						LOG.info("user {} notified to new match from {}", toUserId, userIdFrom);
+					} catch (IOException e) {
+						LOG.error("error in sending newMatch notification from {} to {}", userIdFrom, toUserId);
+						e.printStackTrace();
+					}
+    				break;
+    			}
+    		}
+    	}
     }
     
     @Override

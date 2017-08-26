@@ -126,6 +126,11 @@ public class ChatService implements WebSocketConfigurer {
 		LOG.debug("user {} has read all messages for {}", myId, userId);
 	}
 	
+	public void notifyNewMatch(Long userIdFrom, Long userIdTo)
+	{
+		this.chatHandler.notifyNewMatch(userIdFrom, userIdTo);
+	}
+	
 	/**
 	 * checks if a user is online
 	 * @param user

@@ -119,6 +119,13 @@ class Friends extends React.Component {
     		let userId = wsmessage.offline;
     		this.setOnlineStatus(userId, false);
     	}
+    	if (wsmessage && wsmessage.newMatch)
+    	{
+    		axios.get("/api/matches")
+        	.then(({data, status}) => {
+        		this.setState({friends : data});
+            });
+    	}
     } 
     
     setOnlineStatus(userId, bOnline) {
