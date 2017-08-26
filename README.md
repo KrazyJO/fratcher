@@ -8,6 +8,9 @@ Prinipiell könnte diese Datei gelöscht werden.
 
 Der User wird auf alles Seiten, außer Login und Registrieren, zurück auf Home geschickt, wenn er nicht angemeldet ist. Das verhindert irreführendes Verhalten für den User, wenn er zum Beispiel Lesezeichen im Browser speichert. Außerdem werden nicht automatisch Requests an den Server geschickt, ohne das der User angemeldet ist.
 
+Wie in https://github.com/micromata/webengineering-2017/issues/30 verlangt, werden die Daten auf Heroku bei jedem Neustart der App in den initialzen Zustand gesetzt.
+
+
 ## Profil
 - User kann sein eigenes Profil bearbeiten
 - User kann Profil seiner Matches begutachten, aber nicht bearbeiten (Reiter 'Friends')
