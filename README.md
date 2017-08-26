@@ -52,6 +52,7 @@ Im Chat steckt die wohl meiste Arbeit, da ich denke das im Laufe der Zeit diese 
 - Im Backend wird für den Fall das die Listen liked und/oder disliked des Users leer sind, der User selbst hinzugefügt. Für die H2 Datenbank hat es auch ohne Funktioniert, Postgresql meldet allerdings einen Syntaxfehler mit leeren Listen. 
 https://stackoverflow.com/questions/2488930/passing-empty-list-as-parameter-to-jpa-query-throws-error hat mich auf die Lösung gebracht.
 Die Anwendung hätte auch andere Methoden im Repository aufrufen können, welche ohne die leeren Listen arbeiten. Ich denke aber bei dieser kleinen Anwendung ist der Workaround ok.
+- neue Matches werden bei like registriert und dem 'gematchten' User bei WebSocket mitgeteilt. Hat der gematchte User die Friends ansicht auf, updated sich die View automatisch.  
 
 ## Registrierung
 - In der Registrierung schickt der User seine Anmeldedaten und sein Profil, wenn der Vorgang erfolgreich vom Server abgeschlossen wurde ist der User direkt eigeloggt. Die Cookies werden wie beim Login gespeichert, allerdings ohne die Möglichkeit angemeldet zu bleiben (für 1 Jahr)

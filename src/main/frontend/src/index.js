@@ -10,6 +10,9 @@ import i18n from "./i18n";
 import {HashRouter as Router, Route, Switch} from "react-router-dom";
 import {Link} from "react-router-dom";
 
+//Notifications
+import {NotificationContainer, NotificationManager} from 'react-notifications';
+
 //own component
 import Home from './components/Home';
 import Matcher from './components/Matcher';
@@ -41,6 +44,7 @@ class Root extends React.Component {
                     {/*Default route*/}
                     <Route path="/" component={Home}/>
                 </Switch>
+                <NotificationContainer/>
             </div>
         );
     }

@@ -4,6 +4,7 @@ import User from "./../Util/User";
 import Notifications from './../Util/Notifications';
 import axios from "axios";
 import {Link} from "react-router-dom";
+import {NotificationManager} from 'react-notifications';
 
 import Events from 'pubsub-js';
 
@@ -113,19 +114,22 @@ class Friends extends React.Component {
     	{
     		let userId = wsmessage.online;
     		this.setOnlineStatus(userId, true);
+    		NotificationManager.info("user is online");
     	}
     	if (wsmessage && wsmessage.offline)
     	{
     		let userId = wsmessage.offline;
     		this.setOnlineStatus(userId, false);
+    		NotificationManager.info("user is offline");
     	}
     	if (wsmessage && wsmessage.newMatch)
     	{
     		axios.get("/api/matches")
         	.then(({data, status}) => {
         		this.setState({friends : data});
-            });
+            }); 
     	}
+    	
     } 
     
     setOnlineStatus(userId, bOnline) {

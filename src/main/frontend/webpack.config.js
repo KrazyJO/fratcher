@@ -1,6 +1,5 @@
 var CopyWebpackPlugin = require('copy-webpack-plugin');
 
-
 module.exports = {
     entry: [
         './src/index.js'
@@ -25,6 +24,14 @@ module.exports = {
             query: {
                 presets: ['react', 'es2015', 'stage-1']
             }
+        },
+        {
+            test: /\.css$/,
+            loader: 'style-loader!css-loader'
+        },
+        {
+        	test: /\.(eot|woff|woff2|svg|ttf)([\?]?.*)$/, 
+        	loader: "file-loader"
         }]
     },
     resolve: {
