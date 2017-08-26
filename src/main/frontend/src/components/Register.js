@@ -99,10 +99,10 @@ class Register extends React.Component {
 	        	   	this.props.history.push("/");
 	           		break;
 	           case 409:
-	        	   this.setState({error : "user alredy exist"});
+	        	   this.setState({error : "userAlredyExist"});
 	        	   break;
 	           case 401:
-	        	   this.setState({error : "already logged in as this user"});
+	        	   this.setState({error : "alreadyLoggedInAsThisUser"});
 	        	   break;
            }
         });
@@ -246,7 +246,7 @@ class Register extends React.Component {
 					    </div>
 			    	</form>	
 			    	{	this.state.error &&
-			    		<div style={errorStyle}>{this.state.error}</div>
+			    		<div style={errorStyle}>{t(this.state.error)}</div>
 			    	}
 			    	
 			    </div>

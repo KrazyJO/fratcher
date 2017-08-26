@@ -36,5 +36,9 @@
   "loginError" : "Die Anmeldung ist fehlgeschlagen",
   "hobbiesNotShown" : "WICHTIG: Deine Hobbies sind NUR für deine Freunde sichtbar!",
   "newFriend" : "Du hast einen neuen Freund gefunden",
-  "messageFrom" : "Nachricht von "
+  "messageFrom" : "Nachricht von ",
+  "userAlredyExist" : "Dieser Benutzername ist bereits vergeben",
+  "alreadyLoggedInAsThisUser" : "Du bist bereits eingeloggt",
+  "invalidYear" : "Ungültige Jahreszahl. Bitte im Format YYYY (z.B. 1999)"
+  
 }
