@@ -57,6 +57,7 @@ Die Anwendung hätte auch andere Methoden im Repository aufrufen können, welche
 - In der Registrierung schickt der User seine Anmeldedaten und sein Profil, wenn der Vorgang erfolgreich vom Server abgeschlossen wurde ist der User direkt eigeloggt. Die Cookies werden wie beim Login gespeichert, allerdings ohne die Möglichkeit angemeldet zu bleiben (für 1 Jahr)
 - Meldet der Server einen Fehler, wird dieser unter dem Formular rot angezeigt.
 - Damit der User kein falsches Jahr verschickt, gibt es eine Validierung im Frontend. Ein Fehler wird erst angezeigt, wenn der User seine Registrierung abschickt (Fehlermeldung am Ende des Formulars, sowie Input-Feld mit roter Umrandung). Per Live-Update verliert das Input-Feld den Roten Rahmen, wenn der User eine korrekte Jahreszahl eingegeben hat. 
+- Auf der Seite 'Home' wird der Registrier-Button und ein Text angezeigt, wenn der User nicht angemeldet ist. Wenn der User angemeldet ist, verschwindet dieser Bereich. 
 
 ## Login/Logout
 - Bei Login wird ein Cookie in den Browser geschrieben
