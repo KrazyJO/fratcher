@@ -22,7 +22,6 @@ class Chat extends React.Component {
     }
     
     componentWillUnmount () {
-    	console.log("leaving chat");
     	if (this.subscription)
     	{
     		Events.unsubscribe(this.subscription);	
@@ -103,6 +102,10 @@ class Chat extends React.Component {
     submitMessage (oEvent) {
     	oEvent.preventDefault();
     	let message = this.state.submitMessage;
+    	if (!message)
+    	{
+    		return;
+    	}
     	let oMessage = {
     		message : message,
     		read : false,
