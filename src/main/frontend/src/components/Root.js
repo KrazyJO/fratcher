@@ -1,4 +1,8 @@
+import React from "react";
+
+import {Route, Switch} from "react-router-dom";
 import {translate} from "react-i18next";
+import {Link} from "react-router-dom";
 
 //Notifications
 import {NotificationContainer, NotificationManager} from 'react-notifications';
@@ -6,19 +10,17 @@ import {NotificationContainer, NotificationManager} from 'react-notifications';
 //Events
 import Events from 'pubsub-js';
 
-import {Link} from "react-router-dom";
-import {CookiesProvider} from 'react-cookie';
 //own component
-import Home from './components/Home';
-import Matcher from './components/Matcher';
-import Navigator from './components/Navigator';
-import Register from './components/Register';
-import Profile from './components/Profile';
-import Login from './components/Login';
-import Friends from './components/Friends';
-import Chat from './components/Chat';
+import Home from './Home';
+import Matcher from './Matcher';
+import Navigator from './Navigator';
+import Register from './Register';
+import Profile from './Profile';
+import Login from './Login';
+import Friends from './Friends';
+import Chat from './Chat';
 
-import User from './Util/User';
+import User from './../Util/User';
 
 class Root extends React.Component {
     constructor(props) {
@@ -47,15 +49,16 @@ class Root extends React.Component {
     	{
     		return;
     	}
+    	const {t} = this.props;
     	if (oParsedMessage.newMatch)
     	{
-    		NotificationManager.info("Du hast einen neuen Freund gefunden");
+    		NotificationManager.info(t('newFriend'));
     	}
     	if (oParsedMessage.id && oParsedMessage.message)
     	{
     		if (User.getChatPartnerId() != oParsedMessage.userIdFrom) //do not use typecast here ;)
     		{
-    			NotificationManager.info(oParsedMessage.message, "Nachricht von " + oParsedMessage.userNameFrom, 3000, () => {
+    			NotificationManager.info(oParsedMessage.message, t('messageFrom') + oParsedMessage.userNameFrom, 3000, () => {
     				//router is not available here... use good old location.hash
     				User.setChatPartnerId(oParsedMessage.userIdFrom);
     				User.setChatPartnerName(oParsedMessage.userNameFrom);

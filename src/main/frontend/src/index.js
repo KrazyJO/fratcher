@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-
+import {CookiesProvider} from 'react-cookie';
 
 //Internatiolalisation
 import {I18nextProvider} from "react-i18next";

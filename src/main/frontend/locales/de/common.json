@@ -34,5 +34,7 @@
   "matcher" : "Matcher",
   "friends" : "Friends",
   "loginError" : "Die Anmeldung ist fehlgeschlagen",
-  "hobbiesNotShown" : "WICHTIG: Deine Hobbies sind NUR für deine Freunde sichtbar!"
+  "hobbiesNotShown" : "WICHTIG: Deine Hobbies sind NUR für deine Freunde sichtbar!",
+  "newFriend" : "Du hast einen neuen Freund gefunden",
+  "messageFrom" : "Nachricht von "
 }
