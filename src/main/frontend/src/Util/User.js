@@ -126,7 +126,6 @@ class User {
     	axios.defaults.headers.common['Authorization'] = ``;
         this.userName = undefined;
         this.id = -1;
-        this.inRegistrationProcess = false;
         var oWs = this.getWebSocketConnection();
         if (oWs)
         {
@@ -136,10 +135,6 @@ class User {
         UserProfile.reset();
     }
     
-    isInRegistrationProcess () {
-    	return this.inRegistrationProcess;
-    }
-
     isAuthenticated() {
         return this.userName && this.id != -1;
     }

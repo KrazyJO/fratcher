@@ -98,13 +98,6 @@ class Profile extends React.Component {
     	.then(({data, status}) => {
     		if (status === 200)
     		{
-    			if (User.isInRegistrationProcess())
-    			{
-    				//ended with registration process, nav user to home
-    				User.inRegistrationProcess = false;
-    				this.props.history.push("/");
-    				Events.publish("loggedInFromRegister");
-    			}
     		}
     		else
     		{
@@ -115,7 +108,6 @@ class Profile extends React.Component {
     
     handleGenderChange (event) {
     	this.setState({gender : event.target.value});
-    	console.log("handle gender");
     }
     
     handleHobbiesChange (event) {
@@ -145,10 +137,6 @@ class Profile extends React.Component {
     	
     	return (
     			<div className="width500 center">
-    				{
-    					User.isInRegistrationProcess() &&
-    					<span>Nur noch ein Schritt...</span>
-    				}
     				<span>{User.getUserName()}</span>
     				<form className="form-horizontal" onSubmit={this.handleSubmit}>
 	    				<div className="form-group">
