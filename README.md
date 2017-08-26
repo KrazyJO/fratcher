@@ -10,6 +10,8 @@ Der User wird auf allen Seiten, außer Login und Registrieren, zurück auf Home 
 
 Wie in https://github.com/micromata/webengineering-2017/issues/30 verlangt, werden die Daten auf Heroku bei jedem Neustart der App in den initialen Zustand gesetzt.
 
+## Build
+Benötigt wird JDK 1.8. Maven install führt alle nötigen Operationen aus. Gestartet wird die Anwendung mit der Datei App.java.
 
 ## Profil
 - User kann sein eigenes Profil bearbeiten
